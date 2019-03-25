@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:11:11 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/25 15:56:44 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/25 18:48:05 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,25 @@ int		room_is_valid(char *str)
 {
 	int	i;
 
-	i = 0;
-	if (!(str))
+	if (!(str) || str[0] == 'L' || str[0] == '#')
 		return (0);
-	if (!(str[0] != 'L' && str[0] != '#' && ft_isprint(str[0]) && str[0] != ' ')
+	i = (int)(ft_strlen(str)) - 1;
+	while (i >= 0 && ft_isdigit(str[i]))
+		i--;
+	if (i >= 0 && (str[i] == '+' || str[i] == '-'))
+		i--;
+	if (i < 3 || str[i] != ' ' || !(ft_isdigit(str[i - 1])))
 		return (0);
-	while (ft_isprint(str[i]) && str[i] != ' ')
-		i++;
-	if (!(str[i]) || str[i] != ' ')
+	i--;
+	while(i >= 0 && ft_isdigit(str[i]))
+		i--;
+	if (i >= 0 && (str[i] == '+' || str[i] == '-'))
+		i--;
+	if (i < 1 || str[i] != ' ' || !(ft_isprint(str[i - 1])))
 		return (0);
-	i++;
-	if (str[i] && (str[i] == '+' || str[i] == '-'))
-		i++;
-	while (str[i] && ft_isdigit(str[i]))
-		i++;
-	if (!(str[i]) || str[i] != ' ' || !(ft_isdigit(str[i - 1])))
+	while (i >= 0 && ft_isprint(str[i]))
+		i--;
+	if (i != -1)
 		return (0);
-	i++;
-	if (str[i] && (str[i] == '+' || str[i] == '-'))
-		i++;
-	while (str[i] && ft_isdigit(str[i]))
-		i++;
-	if (!(str[i]) && ft_isdigit(str[i - 1]))
-		return (1);
-	return (0);
+	return (1);
 }

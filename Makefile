@@ -6,28 +6,46 @@
 #    By: floblanc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/21 10:33:32 by floblanc          #+#    #+#              #
-#    Updated: 2019/03/25 16:20:03 by maginist         ###   ########.fr        #
+#    Updated: 2019/03/26 23:28:40 by floblanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem_in
-SRC_NAME =
+
+SRC_NAME =	already_exist.c\
+		extract_room.c\
+		free_lst.c\
+		is_valid.c\
+		stock_data.c\
+
 SRC_PATH = ./src
+
 OBJ_PATH = ./obj
+
 INC = -I./include
+
 LIB = libft/
+
 CC = gcc
+
 CFLAGS = -Wall -Werror -Wextra
 
 _UNDER=$'\x1b[4m$'
+
 _GREEN=$'\x1b[32m$'
+
 _YELLOW=$'\x1b[33m$'
+
 _RED=$'\x1b[31m$'
+
 _WHITE=$'\x1b[37m$'
+
 _END=$'\x1b[0m$'
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
+
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
+
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
 all : lib $(NAME)

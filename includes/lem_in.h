@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/26 19:16:41 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/26 23:33:53 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,21 @@ typedef	struct		s_link
 	struct s_stock	*next;
 }					t_link;
 
-int					room_form_is_valid(char *str);
-int					link_form_is_valid(char *str);
-int					command_is_valid(char *str);
-void				read_n_stock(t_room **roombeg, t_link **linkbeg);
-void				stock_room(char *line, t_room **begin, int *startend, int *error);
-void				stock_link(char *line, t_link **begin, t_room **roombeg, int *error);
-void				check_command(char *line, int *startend, int *error);
-int				only_digit(char *line);
-char				extract_room_name(char *str);
-int				extract_room_x(char *str);
-int				extract_room_y(char *str);
+int	room_already_exist(t_room **begin, t_room *new);
+int	link_already_exist(t_link **begin, t_link *new);
+int		room_form_is_valid(char *str);
+int		link_form_is_valid(char *str);
+int	link_is_valid(t_link *new, t_room **begin);
+int		command_is_valid(char *str);
+int	only_digit(char *line);
+char	extract_room_name(char *str);
+int	extract_room_x(char *str);
+int	extract_room_y(char *str);
+void	free_lst_room(t_room **begin);
+void	free_lst_link(t_link **begin);
+void		stock_room(char *line, t_room **begin, int *startend, int *error);
+void		new_link_maker(t_link *new, char *line, int i);
+void		stock_link(char *line, t_link **begin, t_room **roombeg, int *error);
+void	set_startend(char *line, int *startend);
+void		read_n_stock(int *ant_n, t_room **roombeg, t_link **linkbeg);
 #endif

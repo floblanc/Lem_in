@@ -6,7 +6,7 @@
 #    By: floblanc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/12 10:09:35 by floblanc          #+#    #+#              #
-#    Updated: 2019/02/13 16:20:11 by floblanc         ###   ########.fr        #
+#    Updated: 2019/03/26 13:46:20 by floblanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS = ft_memset.c\
 	   ft_memcmp.c\
 	   ft_strlen.c\
 	   ft_strdup.c\
+	   ft_strndup.c\
 	   ft_strcpy.c\
 	   ft_strncpy.c\
 	   ft_strcat.c\

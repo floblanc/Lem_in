@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 15:36:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/26 12:49:39 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/26 16:05:12 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void		stock_room(char *line, t_room **begin, int *startend, int *error)
 	new->name = extract_room_name(line);
 	new->x = extract_room_x(line);
 	new->y = extract_room_y(line);
-	new->start = *start;
-	new->end = *end;
+	new->startend = *startend;
+	*startend = 0;
 	new->next = 0;
 	//verif not already exist
 	if (!(*begin))
 		*begin = new;
-	else
+	else if (new)
 	{
 		current = *begin;
 		while (current->next)
@@ -37,7 +37,7 @@ void		stock_room(char *line, t_room **begin, int *startend, int *error)
 	}
 }
 
-void		read_n_stock(t_room **roombeg, t_link **linkbeg)
+void		read_n_stock(float *ant_n, t_room **roombeg, t_link **linkbeg)
 {
 	char	*line;
 	int		startend;
@@ -48,10 +48,10 @@ void		read_n_stock(t_room **roombeg, t_link **linkbeg)
 	error = 0;
 	while (get_next_line(0, &line) > 0)
 	{
-		if (room_form_is_valid(line, linkbeg))
+		if (room_form_is_valid(line, linkbeg) && *ant_n)
 			stock_room(line, roombeg, &startend, &error);
-		else if (link_form_is_valid(line))
-			stock_link(line, linkbeg, &startend, &error);
+		else if (link_form_is_valid(line) && (*ant_n > 0.0))
+			stock_link(line, linkbeg, &error);
 		else if (command_is_valid(line, linkbeg))
 			check_command(line, &startend, &error);
 		else if (line[0] != '#')

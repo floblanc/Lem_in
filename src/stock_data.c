@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 15:36:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/26 16:05:12 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/26 19:26:59 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void		stock_room(char *line, t_room **begin, int *startend, int *error)
 {
-	t_stock	*new;
-	t_stock	*current;
+	t_room	*new;
+	t_room	*current;
 
 	if (!(new = (t_room*)malloc(sizeof(t_room) * 1)))
 		exit(0);
@@ -25,7 +25,11 @@ void		stock_room(char *line, t_room **begin, int *startend, int *error)
 	new->startend = *startend;
 	*startend = 0;
 	new->next = 0;
-	//verif not already exist
+	if (room_already_exist(new))
+	{
+		free_lst_room(&new);
+		*error = 1;
+	}
 	if (!(*begin))
 		*begin = new;
 	else if (new)
@@ -37,7 +41,42 @@ void		stock_room(char *line, t_room **begin, int *startend, int *error)
 	}
 }
 
-void		read_n_stock(float *ant_n, t_room **roombeg, t_link **linkbeg)
+void		new_link_maker(t_link *new, char *line, int i)
+{
+	new->name1 = ft_strndup(line, (size_t)i);
+	new->name2 = ft_strdup(line + i + 1);
+	new->next = 0;
+}
+
+void		stock_link(char *line, t_link **begin, t_room **roombeg, int *error)
+{
+	t_link	*new;
+	t_link	*current;
+	int	i;
+
+	i = 0;
+	while (ft_isalnum(line[i]))
+		i++;
+	if (!(new = (t_link*)malloc(sizeof(t_link) * 1)))
+		exit(0);
+	new_link_maker(new, line, i);
+	if (!(link_is_valid(new, roombeg)) || !(ft_strcmp(name1, name2)))
+	{
+		free_lst_link(&new);
+		*error = 1;
+	}
+	if (!(*begin))
+		*begin = new;
+	else if (new)
+	{
+		current = *begin;
+		while (current->next)
+			current = current->next;
+		current->next = new;
+	}
+}
+
+void		read_n_stock(int *ant_n, t_room **roombeg, t_link **linkbeg)
 {
 	char	*line;
 	int		startend;
@@ -48,13 +87,15 @@ void		read_n_stock(float *ant_n, t_room **roombeg, t_link **linkbeg)
 	error = 0;
 	while (get_next_line(0, &line) > 0)
 	{
-		if (room_form_is_valid(line, linkbeg) && *ant_n)
+		if (only_digit(line) && (*ant_n < 0) && !(*roombeg) && !(*linkbeg))
+			*ant_n = ft_atoi(line);
+		else if (room_form_is_valid(line) && !(*linkbeg) && (*ant_n > -1))
 			stock_room(line, roombeg, &startend, &error);
-		else if (link_form_is_valid(line) && (*ant_n > 0.0))
-			stock_link(line, linkbeg, &error);
-		else if (command_is_valid(line, linkbeg))
+		else if (link_form_is_valid(line) && (*ant_n > - 1))
+			stock_link(line, linkbeg, &error, 0);
+		else if (command_is_valid(line) && !(*linkbeg) && (*ant_n > -1))
 			check_command(line, &startend, &error);
-		else if (line[0] != '#')
+		else if (line[0] != '#' || line[1] == '#')
 			error = 1;
 		ft_strdel(&line);
 		if (error)

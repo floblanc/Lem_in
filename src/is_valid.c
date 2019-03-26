@@ -6,17 +6,17 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:11:11 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/26 14:03:52 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/26 19:27:12 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-int		room_form_is_valid(char *str, t_link **begin)
+int		room_form_is_valid(char *str)
 {
 	int	i;
 
-	if (!(str && str[0]) || str[0] == 'L' || str[0] == '#' || *begin)
+	if (!(str && str[0]) || str[0] == 'L' || str[0] == '#')
 		return (0);
 	i = (int)(ft_strlen(str)) - 1;
 	while (i >= 0 && ft_isdigit(str[i]))
@@ -59,13 +59,29 @@ int		link_form_is_valid(char *str)
 	return (1);
 }
 
-int		command_is_valid(char *str, t_link **begin)
+
+
+int		command_is_valid(char *str)
 {
-	if (!(str) || !(str[0] == '#' && str[1] == '#') || *begin)
+	if (!(str) || !(str[0] == '#' && str[1] == '#'))
 		return (0);
 	if (!(ft_strcmp("start", str + 2)) || !(ft_strcmp("end", str + 2)))
 		return (1);
 	return (0);
+}
+
+int	only_digit(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (!(ft_isdigit(line[i])))
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 int		main(int ac, char **av)

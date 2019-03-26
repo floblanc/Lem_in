@@ -6,52 +6,68 @@
 #    By: floblanc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/21 10:33:32 by floblanc          #+#    #+#              #
-#    Updated: 2019/03/25 11:42:58 by floblanc         ###   ########.fr        #
+#    Updated: 2019/03/25 16:20:03 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem_in
-
 SRC_NAME =
-
 SRC_PATH = ./src
+OBJ_PATH = ./obj
+INC = -I./include
+LIB = libft/
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra
 
-SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
+_UNDER=$'\x1b[4m$'
+_GREEN=$'\x1b[32m$'
+_YELLOW=$'\x1b[33m$'
+_RED=$'\x1b[31m$'
+_WHITE=$'\x1b[37m$'
+_END=$'\x1b[0m$'
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
-
-OBJ_PATH = ./obj
-
+SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
-
-INC = -I./includes
-
-LIB = libft/
-
-CC = gcc
-
-CFLAGS = -Wall -Werror -Wextra
 
 all : lib $(NAME)
 
 lib :
-	make -C $(LIB) -j
+	@echo "\n\n"
+	@echo "$(_GREEN)|_-_-_-_-_-_-_-_-_-_-_-_-|$(_END)"
+	@echo "$(YELLOW)|     COMPILING LIBFT    |$(_END)"
+	@echo "$(_GREEN)|_-_-_-_-_-_-_-_-_-_-_-_-|$(_END)"
+	@echo "\n\n"
+	@make -C $(LIB) -j
+	@cp libft/libft.a .
+	@echo "$(_RED)[ LIBFT DONE ] $(_END)"
 
 $(NAME) : lib $(INC) $(SRC) $(OBJ_PATH) $(OBJ)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) libft/libft.a
+	@echo "\n\n"
+	@echo "$(_GREEN)|_-_-_-_-_-_-_-_-_-_-_-_-|$(_END)"
+	@echo "$(YELLOW)|    COMPILING LEM_IN    |$(_END)"
+	@echo "$(_GREEN)|_-_-_-_-_-_-_-_-_-_-_-_-|$(_END)"
+	@echo "\n\n"
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) libft/libft.a
+	@echo "$(_RED)[ LEM_IN DONE ]$(_END)"
 
 $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
-	$(CC) $(CFLAGS) -c $? $(INC) -o $@
+	@$(CC) $(CFLAGS) -c $? $(INC) -o $@
 
 $(OBJ_PATH):
-		mkdir -p $(OBJ_PATH)
+	@mkdir -p $(OBJ_PATH)
 
 clean :
-	make clean -C $(LIB)
-	rm -rf ./obj
+	@make clean -C $(LIB)
+	@rm -rf $(OBJ_PATH)
+	@echo "$(_RED)======< CLEAN PROJECT & LIBFT DONE >======$(_END)"
+	@rm libft.a
 
 fclean : clean
-	make fclean -C $(LIB)
-	rm -f $(NAME)
+	@make fclean -C $(LIB)
+	@rm -f $(NAME)
+	@echo "$(_RED)======< FCLEAN PROJECT & LIBFT DONE >======$(_END)"
 
 re : fclean all
+
+.PHONY = clean all $(NAME) $(OBJ) fclean re lib

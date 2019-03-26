@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 12:19:34 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/26 14:43:43 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/26 16:39:48 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ char	extract_room_name(char *str)
 	return (name);
 }
 
-float	extract_room_x(char *str)
+int	extract_room_x(char *str)
 {
-	float	x;
+	int	x;
 	char	*x_str;
 	size_t	i;
 	size_t	len;
@@ -45,14 +45,14 @@ float	extract_room_x(char *str)
 		len++;
 	if (!(x_str = ft_strndup(str + i, (size_t)len)))
 		exit(0);
-	x = ft_atof(x_str);//
+	x = ft_atoi(x_str);
 	free(x_str);
 	return (x);
 }
 
-float	extract_room_y(char *str)
+int	extract_room_y(char *str)
 {
-	float	y;
+	int	y;
 	char	*y_str;
 	size_t	i;
 	size_t	len;
@@ -70,7 +70,7 @@ float	extract_room_y(char *str)
 		len++;
 	if (!(y_str = ft_strndup(str + i, (size_t)len)))
 		exit(0);
-	y = ft_atof(y_str);//
+	y = ft_atoi(y_str);
 	free(y_str);
 	return (y);
 }

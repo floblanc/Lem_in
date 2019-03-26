@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:11:11 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/26 19:47:11 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/26 20:35:35 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,7 @@ int	link_is_valid(t_link *new, t_room **begin)
 
 int		command_is_valid(char *str)
 {
-	if (!(str) || !(str[0] == '#' && str[1] == '#'))
-		return (0);
-	if (!(ft_strcmp("start", str + 2)) || !(ft_strcmp("end", str + 2)))
+	if (!(ft_strcmp("##start", str)) || !(ft_strcmp("##end", str)))
 		return (1);
 	return (0);
 }

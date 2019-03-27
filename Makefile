@@ -6,7 +6,7 @@
 #    By: floblanc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/21 10:33:32 by floblanc          #+#    #+#              #
-#    Updated: 2019/03/27 12:14:09 by floblanc         ###   ########.fr        #
+#    Updated: 2019/03/27 14:14:18 by floblanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,7 @@ clean :
 	@make clean -C $(LIB)
 	@rm -rf $(OBJ_PATH)
 	@echo "$(_RED)======< CLEAN PROJECT & LIBFT DONE >======$(_END)"
-	@rm libft.a
+	@rm -f ./libft.a
 
 fclean : clean
 	@make fclean -C $(LIB)

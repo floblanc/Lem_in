@@ -6,13 +6,13 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 19:56:06 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/27 14:29:46 by maginist         ###   ########.fr       */
+/*   Updated: 2019/03/27 15:53:59 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-int	room_already_exist(t_room **begin, t_room *new)
+int		room_already_exist(t_room **begin, t_room *new)
 {
 	t_room *current;
 
@@ -32,7 +32,7 @@ int	room_already_exist(t_room **begin, t_room *new)
 	return (0);
 }
 
-int	link_already_exist(t_link **begin, t_link *new)
+int		link_already_exist(t_link **begin, t_link *new)
 {
 	t_link *current;
 
@@ -49,5 +49,29 @@ int	link_already_exist(t_link **begin, t_link *new)
 			return (1);
 		current = current->next;
 	}
+	return (0);
+}
+
+int		check_startend(t_room **begin)
+{
+	int		start;
+	int		end;
+	t_room	*current;
+
+	start = 0;
+	end = 0;
+	if (!(begin && *begin && (*begin)->next))
+		return (0);
+	current = *begin;
+	while (current)
+	{
+		if (current->startend == 1)
+			start++;
+		else if (current->startend == 2)
+			end++;
+		current = current->next;
+	}
+	if (start == 1 && end == 1)
+		return (1);
 	return (0);
 }

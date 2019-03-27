@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/27 14:04:35 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/27 15:54:24 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,5 @@ void				set_startend(char *line, int *startend, int *error);
 void				read_n_stock(int *ant_n, t_room **roombeg,
 		t_link **linkbeg);
 void				coord_is_valid(char *coord, int *error);
+int					check_startend(t_room **begin);
 #endif

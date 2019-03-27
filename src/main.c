@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/27 14:30:07 by maginist         ###   ########.fr       */
+/*   Updated: 2019/03/27 15:37:24 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		main(void)
 	t_room	*roombeg;
 	t_link	*linkbeg;
 
-	ant_n = -1;
+	ant_n = 0;
 	roombeg = 0;
 	linkbeg = 0;
 	read_n_stock(&ant_n, &roombeg, &linkbeg);

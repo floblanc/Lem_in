@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:11:11 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/27 15:27:02 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/27 15:54:31 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		link_is_valid(t_link *new, t_room **begin)
 			name2 = 1;
 		current = current->next;
 	}
-	if (name1 == 1 && name2 == 1)
+	if (name1 == 1 && name2 == 1 && check_startend(begin))
 		return (1);
 	return (0);
 }
@@ -95,16 +95,16 @@ int		valid_digit(char *line)
 	int	i;
 
 	i = 0;
-	if (ft_atol(line) > 2147483647 || ft_atol(line) <= 0 || ft_strlen(line) > 11)
-	{
-		write(2, "Unvalid number of ants\nUsage : <int > 0>\n", 46);
-		return (0);
-	}
 	while (line[i])
 	{
 		if (!(ft_isdigit(line[i])))
 			return (0);
 		i++;
+	}
+	if (ft_atol(line) > 2147483647 || ft_atol(line) <= 0 || ft_strlen(line) > 11)
+	{
+		write(2, "Unvalid number of ants\nUsage : <int > 0>\n", 41);
+		return (0);
 	}
 	return (1);
 }

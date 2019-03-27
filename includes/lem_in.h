@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/27 12:34:33 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/27 14:04:35 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ int					room_form_is_valid(char *str);
 int					link_form_is_valid(char *str);
 int					link_is_valid(t_link *new, t_room **begin);
 int					command_is_valid(char *str);
-int					only_digit(char *line);
+int					valid_digit(char *line);
 char				*extract_room_name(char *str);
-int					extract_room_x(char *str);
-int					extract_room_y(char *str);
+int					extract_room_x(char *str, int *error);
+int					extract_room_y(char *str, int *error);
 void				free_lst_room(t_room **begin);
 void				free_lst_link(t_link **begin);
 void				stock_room(char *line, t_room **begin, int *startend,
@@ -55,4 +55,5 @@ void				stock_link(char *line, t_link **begin, t_room **roombeg,
 void				set_startend(char *line, int *startend, int *error);
 void				read_n_stock(int *ant_n, t_room **roombeg,
 		t_link **linkbeg);
+void				coord_is_valid(char *coord, int *error);
 #endif

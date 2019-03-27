@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 15:36:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/27 12:34:09 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/27 13:50:33 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void	stock_room(char *line, t_room **begin, int *startend, int *error)
 	if (!(new = (t_room*)malloc(sizeof(t_room) * 1)))
 		exit(0);
 	new->name = extract_room_name(line);
-	new->x = extract_room_x(line);
-	new->y = extract_room_y(line);
+	new->x = extract_room_x(line, error);
+	new->y = extract_room_y(line, error);
 	new->startend = *startend;
 	*startend = 0;
 	new->next = 0;
-	if (room_already_exist(begin, new))
+	if (room_already_exist(begin, new) || *error == 1)
 	{
 		free_lst_room(&new);
 		*error = 1;
@@ -97,11 +97,11 @@ void	read_n_stock(int *ant_n, t_room **roombeg, t_link **linkbeg)
 	error = 0;
 	while (get_next_line(0, &line) > 0)
 	{
-		if (only_digit(line) && (*ant_n < 0) && !(*roombeg) && !(*linkbeg))
+		if (valid_digit(line) && (*ant_n < 0) && !(*roombeg) && !(*linkbeg))
 			*ant_n = ft_atoi(line);
 		else if (room_form_is_valid(line) && !(*linkbeg) && (*ant_n > -1))
 			stock_room(line, roombeg, &startend, &error);
-		else if (link_form_is_valid(line) && (*ant_n > -1))
+		else if (link_form_is_valid(line) && (*ant_n > -1) && startend == 0)
 			stock_link(line, linkbeg, roombeg, &error);
 		else if (command_is_valid(line) && !(*linkbeg) && (*ant_n > -1))
 			set_startend(line, &startend, &error);

@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 12:19:34 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/27 11:52:30 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/27 14:05:11 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*extract_room_name(char *str)
 	return (name);
 }
 
-int		extract_room_x(char *str)
+int		extract_room_x(char *str, int *error)
 {
 	int		x;
 	char	*x_str;
@@ -46,12 +46,13 @@ int		extract_room_x(char *str)
 		len++;
 	if (!(x_str = ft_strndup(str + i, (size_t)len)))
 		exit(0);
+	coord_is_valid(x_str, error);
 	x = ft_atoi(x_str);
 	free(x_str);
 	return (x);
 }
 
-int		extract_room_y(char *str)
+int		extract_room_y(char *str, int *error)
 {
 	int		y;
 	char	*y_str;
@@ -72,7 +73,18 @@ int		extract_room_y(char *str)
 		len++;
 	if (!(y_str = ft_strndup(str + i, (size_t)len)))
 		exit(0);
+	coord_is_valid(y_str, error);
 	y = ft_atoi(y_str);
 	free(y_str);
 	return (y);
+}
+
+void	coord_is_valid(char *coord, int *error)
+{
+	if (ft_atol(coord) > 2147483647 || ft_atol(coord) < -2147483648
+			|| ft_strlen(coord) > 11)
+	{
+		*error = 1;
+		write(2, "Invalid Room\nUsage : <name> <int> <int>\n", 40);
+	}
 }

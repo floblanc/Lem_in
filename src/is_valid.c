@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:11:11 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/27 10:02:38 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/27 14:10:53 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,16 @@ int		command_is_valid(char *str)
 	return (0);
 }
 
-int		only_digit(char *line)
+int		valid_digit(char *line)
 {
 	int	i;
 
 	i = 0;
+	if (ft_atol(line) > 2147483647 || ft_atol(line) < 0 || ft_strlen(line) > 11)
+	{
+		write(2, "Unvalid number of ants\nUsage : <positive int>\n", 46);
+		return (0);
+	}
 	while (line[i])
 	{
 		if (!(ft_isdigit(line[i])))

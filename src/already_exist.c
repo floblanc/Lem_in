@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 19:56:06 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/27 11:57:44 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/27 14:29:46 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ int	link_already_exist(t_link **begin, t_link *new)
 	current = *begin;
 	while (current)
 	{
-		if (!(ft_strcmp(current->name1,new->name1))
-				&& !(ft_strcmp(current->name2,new->name2)))
+		if (!(ft_strcmp(current->name1, new->name1))
+				&& !(ft_strcmp(current->name2, new->name2)))
 			return (1);
-		if (!(ft_strcmp(current->name2,new->name1))
-				&& !(ft_strcmp(current->name1,new->name2)))
+		if (!(ft_strcmp(current->name2, new->name1))
+				&& !(ft_strcmp(current->name1, new->name2)))
 			return (1);
 		current = current->next;
 	}

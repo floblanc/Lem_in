@@ -6,7 +6,7 @@
 #    By: floblanc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/21 10:33:32 by floblanc          #+#    #+#              #
-#    Updated: 2019/03/27 14:14:18 by floblanc         ###   ########.fr        #
+#    Updated: 2019/03/27 14:25:15 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ lib :
 	@echo "$(YELLOW)|     COMPILING LIBFT    |$(_END)"
 	@echo "$(_GREEN)|_-_-_-_-_-_-_-_-_-_-_-_-|$(_END)"
 	@echo "\n\n"
-	@make -sC $(LIB) -j
+	@make -C $(LIB) -j
 	@cp libft/libft.a .
 	@echo "$(_RED)[ LIBFT DONE ] $(_END)"
 

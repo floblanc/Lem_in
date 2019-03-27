@@ -6,13 +6,13 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/27 11:44:01 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/27 14:30:07 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-int		main()
+int		main(void)
 {
 	int		ant_n;
 	t_room	*roombeg;

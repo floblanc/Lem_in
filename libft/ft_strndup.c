@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 11:43:52 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/26 13:45:55 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/27 10:10:16 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strndup(const char *s, size_t n)
 {
-	size_t		i;
+	size_t	i;
 	char	*dst;
 
 	i = 0;

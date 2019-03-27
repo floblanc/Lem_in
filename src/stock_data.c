@@ -6,13 +6,13 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 15:36:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/26 20:42:47 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/27 10:00:28 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void		stock_room(char *line, t_room **begin, int *startend, int *error)
+void	stock_room(char *line, t_room **begin, int *startend, int *error)
 {
 	t_room	*new;
 	t_room	*current;
@@ -41,18 +41,18 @@ void		stock_room(char *line, t_room **begin, int *startend, int *error)
 	}
 }
 
-void		new_link_maker(t_link *new, char *line, int i)
+void	new_link_maker(t_link *new, char *line, int i)
 {
 	new->name1 = ft_strndup(line, (size_t)i);
 	new->name2 = ft_strdup(line + i + 1);
 	new->next = 0;
 }
 
-void		stock_link(char *line, t_link **begin, t_room **roombeg, int *error)
+void	stock_link(char *line, t_link **begin, t_room **roombeg, int *error)
 {
 	t_link	*new;
 	t_link	*current;
-	int	i;
+	int		i;
 
 	i = 0;
 	while (ft_isalnum(line[i]))
@@ -84,7 +84,7 @@ void	set_startend(char *line, int *startend)
 		*startend = 2;
 }
 
-void		read_n_stock(int *ant_n, t_room **roombeg, t_link **linkbeg)
+void	read_n_stock(int *ant_n, t_room **roombeg, t_link **linkbeg)
 {
 	char	*line;
 	int		startend;
@@ -99,7 +99,7 @@ void		read_n_stock(int *ant_n, t_room **roombeg, t_link **linkbeg)
 			*ant_n = ft_atoi(line);
 		else if (room_form_is_valid(line) && !(*linkbeg) && (*ant_n > -1))
 			stock_room(line, roombeg, &startend, &error);
-		else if (link_form_is_valid(line) && (*ant_n > - 1))
+		else if (link_form_is_valid(line) && (*ant_n > -1))
 			stock_link(line, linkbeg, &error, 0);
 		else if (command_is_valid(line) && !(*linkbeg) && (*ant_n > -1))
 			set_startend(line, &startend);

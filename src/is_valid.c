@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:11:11 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/26 20:35:35 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/27 10:02:38 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ int		link_form_is_valid(char *str)
 	return (1);
 }
 
-int	link_is_valid(t_link *new, t_room **begin)
+int		link_is_valid(t_link *new, t_room **begin)
 {
 	t_room	*current;
-	int	name1;
-	int	name2;
+	int		name1;
+	int		name2;
 
 	name1 = 0;
 	name2 = 0;
@@ -90,7 +90,7 @@ int		command_is_valid(char *str)
 	return (0);
 }
 
-int	only_digit(char *line)
+int		only_digit(char *line)
 {
 	int	i;
 
@@ -102,19 +102,4 @@ int	only_digit(char *line)
 		i++;
 	}
 	return (1);
-}
-
-int		main(int ac, char **av)
-{
-	t_link	*begin;
-	t_link	test;
-
-	begin = 0;
-	if (av[4])
-		begin = &test;
-	(void)ac;
-	printf("%d\n", room_form_is_valid(av[1], &begin));
-	printf("%d\n", link_form_is_valid(av[2]));
-	printf("%d\n", command_is_valid(av[3], &begin));
-	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: floblanc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/21 10:33:32 by floblanc          #+#    #+#              #
-#    Updated: 2019/03/26 23:28:40 by floblanc         ###   ########.fr        #
+#    Updated: 2019/03/27 11:18:46 by floblanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,13 @@ SRC_NAME =	already_exist.c\
 		free_lst.c\
 		is_valid.c\
 		stock_data.c\
+		main.c\
 
 SRC_PATH = ./src
 
 OBJ_PATH = ./obj
 
-INC = -I./include
+INC = -I./includes
 
 LIB = libft/
 
@@ -60,7 +61,7 @@ lib :
 	@cp libft/libft.a .
 	@echo "$(_RED)[ LIBFT DONE ] $(_END)"
 
-$(NAME) : lib $(INC) $(SRC) $(OBJ_PATH) $(OBJ)
+$(NAME) : lib $(SRC) $(OBJ_PATH) $(OBJ)
 	@echo "\n\n"
 	@echo "$(_GREEN)|_-_-_-_-_-_-_-_-_-_-_-_-|$(_END)"
 	@echo "$(YELLOW)|    COMPILING LEM_IN    |$(_END)"

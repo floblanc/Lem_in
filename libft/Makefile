@@ -6,13 +6,17 @@
 #    By: floblanc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/12 10:09:35 by floblanc          #+#    #+#              #
-#    Updated: 2019/03/26 13:46:20 by floblanc         ###   ########.fr        #
+#    Updated: 2019/03/27 11:15:46 by floblanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-SRCS = ft_memset.c\
+OBJ_PATH = ./obj
+
+SRC_PATH = ./src
+
+SRC_NAME = ft_memset.c\
 	   ft_bzero.c\
 	   ft_memcpy.c\
 	   ft_memccpy.c\
@@ -79,24 +83,35 @@ SRCS = ft_memset.c\
 	   ft_abs.c\
 	   get_next_line.c
 
-OBJS = $(SRCS:.c=.o)
+OBJ_NAME = $(SRC_NAME:.c=.o)
 
 CFLAGS = -Wall -Werror -Wextra
 
+CC = gcc
+
 INC = libft.h
 
-CC = gcc
+SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
+
+OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
 all : $(NAME)
 
-$(NAME) : $(INC) $(OBJS) $(SRCS)
-	$(CC) $(CFLAGS) -c $(SRCS) -I$(INC)
-	ar rcs $(NAME) $(OBJS)
+$(NAME) : $(OBJ_PATH) $(OBJ)
+	@ar rcs $(NAME) $(OBJ)
+
+$(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
+	@$(CC) $(CFLAGS) -c $? -o $@ -I.
 
 clean :
-	rm -f $(OBJS)
+	@rm -rf $(OBJ_PATH)
+
+$(OBJ_PATH):
+	@mkdir -p $(OBJ_PATH)
 
 fclean : clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re : fclean all
+
+.PHONY = all $(NAME) clean fclean re

@@ -6,13 +6,13 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 12:19:34 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/27 10:01:18 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/27 11:52:30 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lem_in.h"
+#include "../includes/lem_in.h"
 
-char	extract_room_name(char *str)
+char	*extract_room_name(char *str)
 {
 	char	*name;
 	int		i;
@@ -38,10 +38,11 @@ int		extract_room_x(char *str)
 	x = 0;
 	i = 0;
 	len = 0;
-	while (!(ft_isalnum(str[i])))
+	while (ft_isalnum(str[i]))
 		i++;
 	i++;
-	while (ft_isdigit(str[i + len]))
+	while (ft_isdigit(str[i + len]) || str[i + len] == '+'
+			|| str[i + len] == '-')
 		len++;
 	if (!(x_str = ft_strndup(str + i, (size_t)len)))
 		exit(0);
@@ -60,13 +61,14 @@ int		extract_room_y(char *str)
 	y = 0;
 	i = 0;
 	len = 0;
-	while (!(ft_isalnum(str[i])))
+	while (ft_isalnum(str[i]))
 		i++;
 	i++;
-	while ((ft_isdigit(str[i])))
+	while (ft_isdigit(str[i]) || str[i] == '+' || str[i] == '-')
 		i++;
 	i++;
-	while (ft_isdigit(str[i + len]))
+	while (ft_isdigit(str[i + len]) || str[i + len] == '+'
+			|| str[i + len] == '-')
 		len++;
 	if (!(y_str = ft_strndup(str + i, (size_t)len)))
 		exit(0);

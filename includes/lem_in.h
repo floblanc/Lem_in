@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/27 09:58:38 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/27 11:21:24 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef	struct		s_link
 {
 	char			*name1;
 	char			*name2;
-	struct s_stock	*next;
+	struct s_link	*next;
 }					t_link;
 
 int					room_already_exist(t_room **begin, t_room *new);
@@ -42,7 +42,7 @@ int					link_form_is_valid(char *str);
 int					link_is_valid(t_link *new, t_room **begin);
 int					command_is_valid(char *str);
 int					only_digit(char *line);
-char				extract_room_name(char *str);
+char				*extract_room_name(char *str);
 int					extract_room_x(char *str);
 int					extract_room_y(char *str);
 void				free_lst_room(t_room **begin);

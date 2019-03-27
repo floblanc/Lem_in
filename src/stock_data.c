@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 15:36:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/27 10:00:28 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/27 11:28:52 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	read_n_stock(int *ant_n, t_room **roombeg, t_link **linkbeg)
 		else if (room_form_is_valid(line) && !(*linkbeg) && (*ant_n > -1))
 			stock_room(line, roombeg, &startend, &error);
 		else if (link_form_is_valid(line) && (*ant_n > -1))
-			stock_link(line, linkbeg, &error, 0);
+			stock_link(line, linkbeg, roombeg, &error);
 		else if (command_is_valid(line) && !(*linkbeg) && (*ant_n > -1))
 			set_startend(line, &startend);
 		else if (line[0] != '#' || line[1] == '#')

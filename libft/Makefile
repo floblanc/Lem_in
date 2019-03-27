@@ -6,7 +6,7 @@
 #    By: floblanc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/12 10:09:35 by floblanc          #+#    #+#              #
-#    Updated: 2019/03/27 11:15:46 by floblanc         ###   ########.fr        #
+#    Updated: 2019/03/27 12:10:09 by floblanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -114,4 +114,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY = all $(NAME) clean fclean re
+.PHONY : all $(NAME) clean fclean re

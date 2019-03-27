@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 15:36:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/27 11:28:52 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/27 12:34:09 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,14 @@ void	stock_link(char *line, t_link **begin, t_room **roombeg, int *error)
 	}
 }
 
-void	set_startend(char *line, int *startend)
+void	set_startend(char *line, int *startend, int *error)
 {
-	if (!(ft_strcmp("##start", line)))
+	if (!(ft_strcmp("##start", line)) && *startend == 0)
 		*startend = 1;
-	else
+	else if (!(ft_strcmp("##end", line)) && *startend == 0)
 		*startend = 2;
+	else
+		*error = 1;
 }
 
 void	read_n_stock(int *ant_n, t_room **roombeg, t_link **linkbeg)
@@ -102,7 +104,7 @@ void	read_n_stock(int *ant_n, t_room **roombeg, t_link **linkbeg)
 		else if (link_form_is_valid(line) && (*ant_n > -1))
 			stock_link(line, linkbeg, roombeg, &error);
 		else if (command_is_valid(line) && !(*linkbeg) && (*ant_n > -1))
-			set_startend(line, &startend);
+			set_startend(line, &startend, &error);
 		else if (line[0] != '#' || line[1] == '#')
 			error = 1;
 		ft_strdel(&line);

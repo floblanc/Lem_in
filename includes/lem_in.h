@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/27 11:21:24 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/27 12:34:33 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void				stock_room(char *line, t_room **begin, int *startend,
 void				new_link_maker(t_link *new, char *line, int i);
 void				stock_link(char *line, t_link **begin, t_room **roombeg,
 		int *error);
-void				set_startend(char *line, int *startend);
+void				set_startend(char *line, int *startend, int *error);
 void				read_n_stock(int *ant_n, t_room **roombeg,
 		t_link **linkbeg);
 #endif

@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 15:36:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/27 13:50:33 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/27 15:23:49 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,13 @@ void	read_n_stock(int *ant_n, t_room **roombeg, t_link **linkbeg)
 	error = 0;
 	while (get_next_line(0, &line) > 0)
 	{
-		if (valid_digit(line) && (*ant_n < 0) && !(*roombeg) && !(*linkbeg))
+		if (valid_digit(line) && (*ant_n <= 0) && !(*roombeg) && !(*linkbeg))
 			*ant_n = ft_atoi(line);
-		else if (room_form_is_valid(line) && !(*linkbeg) && (*ant_n > -1))
+		else if (room_form_is_valid(line) && !(*linkbeg) && (*ant_n > 0))
 			stock_room(line, roombeg, &startend, &error);
-		else if (link_form_is_valid(line) && (*ant_n > -1) && startend == 0)
+		else if (link_form_is_valid(line) && (*ant_n > 0) && startend == 0)
 			stock_link(line, linkbeg, roombeg, &error);
-		else if (command_is_valid(line) && !(*linkbeg) && (*ant_n > -1))
+		else if (command_is_valid(line) && !(*linkbeg) && (*ant_n > 0))
 			set_startend(line, &startend, &error);
 		else if (line[0] != '#' || line[1] == '#')
 			error = 1;

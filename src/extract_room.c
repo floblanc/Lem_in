@@ -6,11 +6,21 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 12:19:34 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/27 14:05:11 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/29 13:42:26 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+void	coord_is_valid(char *coord, int *error)
+{
+	if (ft_atol(coord) > 2147483647 || ft_atol(coord) < -2147483648
+			|| ft_strlen(coord) > 11)
+	{
+		*error = 1;
+		write(2, "Invalid Room\nUsage : <name> <int> <int>\n", 40);
+	}
+}
 
 char	*extract_room_name(char *str)
 {
@@ -77,14 +87,4 @@ int		extract_room_y(char *str, int *error)
 	y = ft_atoi(y_str);
 	free(y_str);
 	return (y);
-}
-
-void	coord_is_valid(char *coord, int *error)
-{
-	if (ft_atol(coord) > 2147483647 || ft_atol(coord) < -2147483648
-			|| ft_strlen(coord) > 11)
-	{
-		*error = 1;
-		write(2, "Invalid Room\nUsage : <name> <int> <int>\n", 40);
-	}
 }

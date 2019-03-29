@@ -6,7 +6,7 @@
 #    By: floblanc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/21 10:33:32 by floblanc          #+#    #+#              #
-#    Updated: 2019/03/27 15:30:40 by maginist         ###   ########.fr        #
+#    Updated: 2019/03/29 13:59:13 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,9 @@ SRC_NAME =	already_exist.c\
 		is_valid.c\
 		stock_data.c\
 		main.c\
+		make_matrix.c\
+		write_data.c\
+		ft_lstlen.c
 
 SRC_PATH = ./src
 

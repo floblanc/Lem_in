@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 16:12:20 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/29 20:02:07 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/29 20:11:20 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int		all_wth_done(t_room *tab, int **matrix, int size)
 	i = 0;
 	while (i < size)
 	{/*
-		si start-end only et le reste est lie appart c'est la merde
+		si fourmillere coupe en 2 avec start-end (avec ou sans autres salles)d'un cote 
+		et le reste qui est lie le l'autre sans lien en les 2 cote c'est la merde
 		mais si on parse en bloquant quand start est atteint, ca nique d'autre cas
 		dans lesquels si on a 2 chemins distincts avec un beaucoup plus long que
 		l'autre ca stop trop tot et certaines salles du chemin plus long sont mise

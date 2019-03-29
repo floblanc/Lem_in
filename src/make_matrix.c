@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 18:16:42 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/29 14:27:37 by maginist         ###   ########.fr       */
+/*   Updated: 2019/03/29 16:57:40 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,18 @@ void	order_tabroom(t_room **tab)
 		i++;
 	tmp = (*tab)[0];
 	(*tab)[0] = (*tab)[i];
-	(*tab)[0].next = (*tab)[i].next;
 	(*tab)[i] = tmp;
-	(*tab)[i].next = tmp.next;
+	(*tab)[i].next = (*tab)[0].next;
+	(*tab)[0].next = tmp.next;
 	i = 0;
 	while ((*tab)[i].startend != 2)
 		i++;
 	tmp = (*tab)[1];
 	(*tab)[1] = (*tab)[i];
-	(*tab)[1].next = (*tab)[i].next;
 	(*tab)[i] = tmp;
-	(*tab)[i].next = tmp.next;
+	tmp.next = (*tab)[i].next;
+	(*tab)[i].next = (*tab)[1].next;
+	(*tab)[1].next = tmp.next;
 }
 
 void	rooms_in_tab(t_room **tab, t_room **begin)

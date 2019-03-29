@@ -6,7 +6,7 @@
 #    By: floblanc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/21 10:33:32 by floblanc          #+#    #+#              #
-#    Updated: 2019/03/29 13:59:13 by maginist         ###   ########.fr        #
+#    Updated: 2019/03/29 17:15:34 by floblanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ SRC_NAME =	already_exist.c\
 		main.c\
 		make_matrix.c\
 		write_data.c\
-		ft_lstlen.c
+		ft_lstlen.c\
+		put_weigth.c
 
 SRC_PATH = ./src
 
@@ -32,7 +33,7 @@ LIB = libft/
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g3
 
 # Colors
 _BLACK = $'\033[30m$'

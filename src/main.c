@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/29 17:40:27 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/29 19:07:27 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		main(void)
 	matrix = set_matrix(tab, &clink, size);
 	int		i = 0;
 	int		j;
-	printf("\n\n\n");
+	printf("\n");
 	while (i < size)
 	{
 		j = 0;

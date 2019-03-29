@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/27 17:00:24 by maginist         ###   ########.fr       */
+/*   Updated: 2019/03/29 12:36:13 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef	struct		s_room
 	int				x;
 	int				y;
 	int				startend;
+	int				taken;
 	struct s_room	*next;
 }					t_room;
 

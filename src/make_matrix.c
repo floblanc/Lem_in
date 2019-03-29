@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 18:16:42 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/29 12:29:03 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/29 12:35:49 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	rooms_in_tab(t_room **tab, t_room **begin)
 	int		size;
 
 	size = ft_lstlen(begin);
-	if (!(tab = (t_room*)malloc(sizeof(t_room) * size)))
+	if (!(*tab = (t_room*)malloc(sizeof(t_room) * size)))
 		exit(0);
 	if (!(begin && *begin))
 		return ;
@@ -68,13 +68,14 @@ int		**set_matrix(t_room *tab, int size)
 {
 	int 	**matrix;
 	int		i;
+	int		j;
 
 	i = 0;
 	if (!(matrix = (int**)malloc(sizeof(int*) * size)))
 		exit(0);
 	while (i < size)
 	{
-		if (!(matrix = (int*)malloc(sizeof(int) * size)))
+		if (!(matrix[i] = (int*)malloc(sizeof(int) * size)))
 			exit(0);
 		j = 0;
 		while (j < size)
@@ -87,7 +88,7 @@ int		**set_matrix(t_room *tab, int size)
 	return (matrix);
 }
 
-void	asssign_value(int **matrix, int i, int j)
+void	assign_value(int **matrix, int i, int j)
 {	
 	matrix[i][i] += 1;
 	matrix[j][j] += 1;
@@ -115,7 +116,7 @@ int		**fill_matrix(t_room *tab, t_link **begin, int **matrix, int size)
 						|| (!(ft_strcmp(tab[i].name, c->name2))
 							&& !(ft_strcmp(tab[j].name, c->name1))))
 					assign_value(matrix, i, j);
-				c = c->next
+				c = c->next;
 			}
 			j++;
 		}

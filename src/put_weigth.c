@@ -6,55 +6,55 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 16:12:20 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/29 17:18:30 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/29 19:01:26 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-int		all_wth_done(t_room *tab)
+int		all_wth_done(t_room *tab, int **matrix, int size)
 {
 	int	i;
 
 	i = 0;
-	while (tab[i].next)
+	while (i < size)
 	{
+		if (matrix[i][i] == 0 && tab[i].wth == 0)
+			tab[i].wth = -1;
 		if (tab[i].wth == 0 && i != 1)
 			return (0);
 		i++;
 	}
-/*	if (tab[i].wth == 0 && i != 1)
-		return (0);*/
 	return (1);
 }
 
-void	put_weigth(t_room *tab, int **matrix)
+void	put_weigth(t_room *tab, int **matrix, int size)
 {
 	int	i;
 	int	j;
 
 	j = 0;
-	while (matrix[1][j])
+	while (j < size)
 	{
-		if (matrix[1][j] == -1 && (matrix[j][j] > 1 || j == 0))
+		if (matrix[1][j] == -1 && matrix[j][j] > 1)
 			tab[j].wth = 1;
-		else if (matrix[1][j] == -1 && !(matrix[j][j] > 1 || j == 0))
+		else if (matrix[1][j] == -1 && matrix[j][j] <= 1 && j != 0)
 			tab[j].wth = -1;
 		j++;
 	}
-	while (!(all_wth_done(tab)))
+	while (!(all_wth_done(tab, matrix, size)))
 	{
 		i = 0;
-		while (matrix[i])
+		while (i < size)
 		{
 			j = 0;
-			while (matrix[i][j])
+			while (j < size)
 			{
-				if (matrix[i][j] == -1 && j != 1 
-						&& (matrix[j][j] > 1 || j == 0))
+				if (matrix[i][j] == -1 && j != 1 && tab[j].wth == 0 
+						&& tab[i].wth > 0 && matrix[j][j] > 1)
 					tab[j].wth = tab[i].wth + 1;
-				else if (matrix[1][j] == -1 && j != 1 
-						&& !(matrix[j][j] > 1 || j == 0))
+				else if (matrix[i][j] == -1 && j != 1 
+						&& tab[j].wth == 0 && matrix[j][j] <= 1)
 					tab[j].wth = -1;
 				j++;
 			}
@@ -62,11 +62,9 @@ void	put_weigth(t_room *tab, int **matrix)
 		}
 	}
 	i = 0;
-	printf("j = %d\n", j);
-	while (tab[i].next)
+	while (i < size)
 	{
-		printf("room[%d] : wth = %d\n", i, tab[i].wth);
+		printf("room[%s] : wth = %d, degre: %d\n", tab[i].name, tab[i].wth, matrix[i][i]);
 		i++;
 	}
-//	printf("room[%d] : wth = %d\n", i, tab[i].wth);
 }

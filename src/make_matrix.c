@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 18:16:42 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/29 16:57:40 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/29 17:34:48 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	rooms_in_tab(t_room **tab, t_room **begin)
 	int		size;
 
 	size = ft_lstlen(begin);
-	if (!(*tab = (t_room*)malloc(sizeof(t_room) * size)))
+	if (!(*tab = (t_room*)malloc(sizeof(t_room) * (size))))
 		exit(0);
 	if (!(begin && *begin))
 		return ;
@@ -56,6 +56,7 @@ void	rooms_in_tab(t_room **tab, t_room **begin)
 		(*tab)[i].y = current->y;
 		(*tab)[i].startend = current->startend;
 		(*tab)[i].taken = 0;
+		(*tab)[i].wth = 0;
 		(*tab)[i].next = current->next;
 		current = current->next;
 		i++;

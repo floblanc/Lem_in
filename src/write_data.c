@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 16:50:34 by maginist          #+#    #+#             */
-/*   Updated: 2019/03/30 14:37:58 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/30 20:54:38 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,8 @@ void	write_data(t_write **begin)
 	current = *begin;
 	while (current)
 	{
-		ft_putstr(current->str);
-		ft_putchar('\n');
-		current= current->next;
+		ft_putendl(current->str);
+		current = current->next;
 	}
 	free_lst_write(begin);
-}	
+}

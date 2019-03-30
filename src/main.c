@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/30 18:25:09 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/30 18:51:15 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		main(void)
 	rooms_in_tab(&tab, &croom);
 	matrix = set_matrix(tab, &clink, size);
 	put_weigth(tab, &str, matrix, size);
-/*	int		i = 0;
+	int		i = 0;
 	int		j;
 	while (i < size)
 	{
@@ -52,7 +52,7 @@ int		main(void)
 		i++;
 		printf("\n");
 	}
-	i = 0;
+/*	i = 0;
 	while (i < size)
 	{
 		printf("name = %s, x = %d, y = %d, startend = %d, taken = %d, p= %p\n", tab[i].name, tab[i].x, tab[i].y, tab[i].startend, tab[i].taken, tab[i].next);

@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 18:16:42 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/29 17:34:48 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/30 18:23:10 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,10 @@ void	rooms_in_tab(t_room **tab, t_room **begin)
 
 void	assign_value(int **matrix, int i, int j)
 {
-	matrix[j][j] += 1;
+	(matrix[i][i])++;
+	(matrix[j][j])++;
 	matrix[j][i] = -1;
+	matrix[i][j] = -1;
 }
 
 void	fill_matrix(t_room *tab, t_link **begin, int **matrix, int size)
@@ -80,20 +82,20 @@ void	fill_matrix(t_room *tab, t_link **begin, int **matrix, int size)
 	i = 0;
 	while (i < size)
 	{
-		j = 0;
-		while (j < size)
+		c = *begin;
+		while (c)
 		{
-			c = *begin;
-			while (c)
+			j = i;
+			while (j < size)
 			{
-				if ((!(ft_strcmp(tab[i].name, c->name1))
-							&& !ft_strcmp(tab[j].name, c->name2))
-						|| (!(ft_strcmp(tab[i].name, c->name2))
-							&& !(ft_strcmp(tab[j].name, c->name1))))
+				if ((ft_strcmp(tab[i].name, c->name1) == 0 
+							&& ft_strcmp(tab[j].name, c->name2) == 0) 
+						|| (ft_strcmp(tab[i].name, c->name2) == 0 
+							&& ft_strcmp(tab[j].name, c->name1) == 0))
 					assign_value(matrix, i, j);
-				c = c->next;
+				j++;
 			}
-			j++;
+			c = c->next;
 		}
 		i++;
 	}

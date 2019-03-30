@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/30 14:58:56 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/30 18:25:09 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,12 @@ int		main(void)
 	read_n_stock(&ant_n, &roombeg, &linkbeg, &str);
 	croom = roombeg;
 	clink = linkbeg;
-	printf("%d\n", ant_n);
-	while (roombeg)
-	{
-		if (roombeg->startend == 1)
-			printf("##start\n");
-		else if (roombeg->startend == 2)
-			printf("##end\n");
-		printf("%s %d %d, %p\n", roombeg->name, roombeg->x, roombeg->y, roombeg->next);
-		roombeg = roombeg->next;
-	}
-	while (linkbeg)
-	{
-		printf("%s-%s\n", linkbeg->name1, linkbeg->name2);
-		linkbeg = linkbeg->next;
-	}
 	size = ft_lstlen(&croom);
 	rooms_in_tab(&tab, &croom);
 	matrix = set_matrix(tab, &clink, size);
-	int		i = 0;
+	put_weigth(tab, &str, matrix, size);
+/*	int		i = 0;
 	int		j;
-	printf("\n");
 	while (i < size)
 	{
 		j = 0;
@@ -72,7 +57,6 @@ int		main(void)
 	{
 		printf("name = %s, x = %d, y = %d, startend = %d, taken = %d, p= %p\n", tab[i].name, tab[i].x, tab[i].y, tab[i].startend, tab[i].taken, tab[i].next);
 		i++;
-	}
-	put_weigth(tab, &str, matrix, size);
+	}*/
 	return (0);
 }

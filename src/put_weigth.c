@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 16:12:20 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/30 14:13:50 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/30 15:41:25 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,12 @@ void	recurtest(t_room *tab, int **matrix, int size, int max)
 		recurtest(tab, matrix, size, max + 1);
 }
 /* 
- Si les poids sont useless a l'algo, alors soit on garde quand meme mais
- on stop quand start est trouve, sinon on vire tout car l'algo peut
- aussi check ca (il y a un chemin entre start et end)
- */
-void	put_weigth(t_room *tab, int **matrix, int size)
+   Si les poids sont useless a l'algo, alors soit on garde quand meme mais
+   on stop quand start est trouve, sinon on vire tout car l'algo peut
+   aussi check ca (il y a un chemin entre start et end)
+   */
+void	put_weigth(t_room *tab, t_write **begin, int **matrix, int size)
 {
-	int	i;
 	int	j;
 
 	j = 0;
@@ -87,8 +86,14 @@ void	put_weigth(t_room *tab, int **matrix, int size)
 	}
 	if (!(all_wth_done(tab, matrix, size)))
 		recurtest(tab, matrix, size, 1);
-	if (tab[0].wth == -1)
-		on free tout et ERROR;
+	if (tab[0].wth > 0)
+	{
+		write_data(begin);
+		//ON LANCE L'ALGO ICI OU DANS WRITE_DATA;
+	}
 	else
-		ON PRINT CE QUI EST STOCK ET ON LANCE L'ALGO
+		write(1, "ERROR\n", 6);
+	free_room_tab(&tab, size);
+	free_matrix(&matrix, size);
+	free_lst_write(begin);
 }

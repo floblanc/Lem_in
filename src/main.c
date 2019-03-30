@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/30 13:28:18 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/30 14:58:56 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,6 @@ int		main(void)
 		printf("name = %s, x = %d, y = %d, startend = %d, taken = %d, p= %p\n", tab[i].name, tab[i].x, tab[i].y, tab[i].startend, tab[i].taken, tab[i].next);
 		i++;
 	}
-	put_weigth(tab, matrix, size);
+	put_weigth(tab, &str, matrix, size);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 15:36:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/29 13:28:40 by maginist         ###   ########.fr       */
+/*   Updated: 2019/03/30 14:21:04 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	read_n_stock(int *ant_n, t_room **room, t_link **link, t_write **str)
 			error = 1;
 		if (error)
 			break ;
-		stock_to_right(line, str);
+		stock_to_write(line, str);
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);

@@ -6,7 +6,7 @@
 #    By: floblanc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/03/21 10:33:32 by floblanc          #+#    #+#              #
-#    Updated: 2019/03/29 17:15:34 by floblanc         ###   ########.fr        #
+#    Updated: 2019/03/30 15:49:35 by floblanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ LIB = libft/
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -g3
+CFLAGS = -Wall -Werror -Wextra -g3 #\\\\\\\\\\\\\\\\\\G3////////////////////////
 
 # Colors
 _BLACK = $'\033[30m$'

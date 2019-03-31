@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:56:29 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/31 16:31:00 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/03/31 17:05:50 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,33 +32,23 @@ int		room_already_use(int room_to_test, int **path_tab, int path_n, int size)
 	return (0);
 }
 
-void	init_path_tab(int **tab, int path_n, int size)
+int     **set_paths(int path_n, t_room *tab, int **matrix, int size)
 {
-	int	i;
-
-	i = 0;
-	while (i < path_n)
-	{
-		j = 0;
-		while (j < size)
-			path[i][j++] = 0;
-		i++;
-	}
-}
-
-int     **set_paths(int ant_n, t_room *tab, int **matrix, int size)
-{
-	int path_n;
 	int **path_tab;
 	int	i;
 	int j;
 
 	i = 0;
-	path_n = (matrix[0][0] > matrix[1][1] ? matrix[1][1] : matrix[0][0]);
+	//path_n = (matrix[0][0] > matrix[1][1] ? matrix[1][1] : matrix[0][0]);
 	if (!(path_tab = (int**)malloc(sizeof(int*) * path_n)))
 		exit(0);
 	while (i < path_n)
+	{
 		if (!(path_tab[i++] = (int*)malloc(sizeof(int) * tab[0].wth)))
 			exit(0);
-	init_path_tab(path_tab, path_n, size);
+		j = 0;
+		while (j < size)
+			path[i][j++] = 0;
+		i++;
+	}
 }

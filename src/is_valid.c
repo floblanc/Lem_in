@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:11:11 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/27 16:04:27 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/01 16:37:36 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int		room_form_is_valid(char *str)
 		i--;
 	if (i >= 0 && (str[i] == '+' || str[i] == '-'))
 		i--;
-	if (i < 1 || str[i] != ' ' || !(ft_isalnum(str[i - 1])))
+	if (i < 1 || str[i] != ' ')
 		return (0);
 	i--;
-	while (i >= 0 && ft_isalnum(str[i]))
+	while (i >= 0 && (ft_isalnum(str[i]) || str[i] == '_'))
 		i--;
 	if (i != -1)
 		return (0);
@@ -47,12 +47,12 @@ int		link_form_is_valid(char *str)
 	if (!(str && str[0]) || str[0] == 'L' || str[0] == '#')
 		return (0);
 	i = (int)(ft_strlen(str)) - 1;
-	while (i >= 0 && ft_isalnum(str[i]))
+	while (i >= 0 && (ft_isalnum(str[i]) || str[i] == '_'))
 		i--;
 	if (i < 1 || str[i] != '-' || (str[i + 1] && str[i + 1] == 'L'))
 		return (0);
 	i--;
-	while (i >= 0 && ft_isalnum(str[i]))
+	while (i >= 0 && (ft_isalnum(str[i]) || str[i] == '_'))
 		i--;
 	if (i != -1)
 		return (0);

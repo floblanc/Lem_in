@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 15:36:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/30 14:21:04 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/01 16:37:58 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	stock_link(char *line, t_link **begin, t_room **roombeg, int *error)
 	int		i;
 
 	i = 0;
-	while (ft_isalnum(line[i]))
+	while (ft_isalnum(line[i]) || line[i] == '_')
 		i++;
 	if (!(new = (t_link*)malloc(sizeof(t_link) * 1)))
 		exit(0);

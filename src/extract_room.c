@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 12:19:34 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/29 13:42:26 by maginist         ###   ########.fr       */
+/*   Updated: 2019/04/01 16:34:08 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*extract_room_name(char *str)
 	i = 0;
 	if (!(str))
 		return (0);
-	while (ft_isalnum(str[i]))
+	while (ft_isalnum(str[i]) || str[i] == '_')
 		i++;
 	if (!(name = ft_strndup(str, (size_t)i)))
 		exit(0);
@@ -48,7 +48,7 @@ int		extract_room_x(char *str, int *error)
 	x = 0;
 	i = 0;
 	len = 0;
-	while (ft_isalnum(str[i]))
+	while (ft_isalnum(str[i]) || str[i] == '_')
 		i++;
 	i++;
 	while (ft_isdigit(str[i + len]) || str[i + len] == '+'
@@ -72,7 +72,7 @@ int		extract_room_y(char *str, int *error)
 	y = 0;
 	i = 0;
 	len = 0;
-	while (ft_isalnum(str[i]))
+	while (ft_isalnum(str[i]) || str[i] == '_')
 		i++;
 	i++;
 	while (ft_isdigit(str[i]) || str[i] == '+' || str[i] == '-')

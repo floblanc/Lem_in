@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 16:12:20 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/31 20:00:37 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/01 16:23:23 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,6 @@ void	put_weigth(t_room *tab, t_write **begin, int **matrix, int size)
 	}
 	else
 		write(1, "ERROR\n", 6);
-	printf("start : degre = %d poids = %d\n", matrix[0][0], tab[0].wth);
 	free_room_tab(&tab, size);
 	free_matrix(&matrix, size);
 	free_lst_write(begin);

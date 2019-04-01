@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/30 15:39:11 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/01 17:10:27 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef	struct		s_room
 	int				y;
 	int				startend;
 	int				taken;
-	int				wth;
 	struct s_room	*next;
 }					t_room;
 
@@ -65,7 +64,5 @@ void				read_n_stock(int *ant_n, t_room **room, t_link **link,
 		t_write **str);
 void				stock_to_write(char *line, t_write **begin);
 void				rooms_in_tab(t_room **tab, t_room **begin);
-void				put_weigth(t_room *tab, t_write **begin, int **matrix,
-		int size);
 void				write_data(t_write **begin);
 #endif

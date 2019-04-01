@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 18:16:42 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/01 16:08:45 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/01 17:10:54 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ void	rooms_in_tab(t_room **tab, t_room **begin)
 		(*tab)[i].y = current->y;
 		(*tab)[i].startend = current->startend;
 		(*tab)[i].taken = 0;
-		(*tab)[i].wth = 0;
 		(*tab)[i].next = current->next;
 		current = current->next;
 		i++;
 	}
+	if (check_startend(begin))
+		order_tabroom(tab);
 	free_lst_room(begin);
-	order_tabroom(tab);
 }
 
 void	fill_matrix2(t_room *tab, t_link **c, int **matrix, int i)

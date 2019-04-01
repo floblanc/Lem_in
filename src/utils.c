@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:56:29 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/01 15:58:19 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/01 17:35:57 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		room_already_use(int room_to_test, int **path_tab, int path_n, int size)
 	return (0);
 }
 
-int		how_many_steps(t_room *tab, int ant_n, int **path_tab, int path_n)
+int		how_many_steps(int ant_n, int **path_tab, int path_n)
 {
 	int	step_min;
 
@@ -49,7 +49,7 @@ int		how_many_steps(t_room *tab, int ant_n, int **path_tab, int path_n)
 	return (path_n);
 }
 
-int		**set_paths(t_room *tab, int **matrix, int size, int path_n)
+int		**set_paths(int **matrix, int size, int path_n)
 {
 	int **path_tab;
 	int	i;
@@ -68,32 +68,4 @@ int		**set_paths(t_room *tab, int **matrix, int size, int path_n)
 		i++;
 	}
 	return (path_tab);
-}
-
-void	recurtest(t_room *tab, int **matrix, int size)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < size)
-	{
-		if (max == tab[i].wth)
-		{
-			j = 0;
-			while (j < size)
-			{
-				if (matrix[i][j] == -1 && i != 0 && j != 1 && tab[j].wth == 0
-						&& (matrix[j][j] > 1 || j == 0))
-					tab[j].wth = max + 1;
-				else if (matrix[i][j] == -1 && j != 1 && tab[j].wth == 0
-						&& matrix[j][j] <= 1)
-					tab[j].wth = -1;
-				j++;
-			}
-		}
-		i++;
-	}
-	if (!(all_wth_done(tab, matrix, size)))
-		recurtest(tab, matrix, size, max + 1);
 }

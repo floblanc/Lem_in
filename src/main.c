@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/02 13:41:21 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/02 15:15:24 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int		main(void)
 	int		**matrix;
 	t_room	*tab;
 	int		size;
-	int		i;
 
 	tab = 0;
 	matrix = 0;
@@ -33,7 +32,8 @@ int		main(void)
 	size = ft_lstlen(&roombeg);
 	rooms_in_tab(&tab, &roombeg);
 	matrix = set_matrix(tab, &linkbeg, size);
-/*	int		i = 0;
+	bfs(matrix, 1, 0, tab);
+	int		i = 0;
 	int		j;
 	while (i < size)
 	{
@@ -45,8 +45,7 @@ int		main(void)
 		}
 		i++;
 		printf("\n");
-	}*/
-	bfs(matrix, 0, 0, tab);
+	}
 	i = 0;
 	while (i < size)
 	{

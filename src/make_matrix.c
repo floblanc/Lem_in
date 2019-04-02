@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 18:16:42 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/02 13:40:28 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/02 13:58:51 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	order_tabroom(t_room **tab)
 	t_room	tmp;
 	int		i;
 
+	if (!(tab && *tab))
+		return ;
 	i = 0;
 	while ((*tab)[i].startend != 1)
 		i++;

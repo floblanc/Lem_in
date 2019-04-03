@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/03 13:47:25 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/03 16:59:29 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ int		main(void)
 	size = ft_lstlen(&roombeg);
 	rooms_in_tab(&tab, &roombeg);
 	matrix = set_matrix(tab, &linkbeg, size);
+	printf("check\n");
 	bfs(matrix, 1, 0, tab);
+//	write_data(&str);
 	int		i = 0;
 /*	int		j;
 	while (i < size)
@@ -49,6 +51,7 @@ int		main(void)
 	i = 0;*/
 	while (i < 2)
 	{
+		printf("matrix[%d][%d] = %d\n", i, i, matrix[i][i]);
 		printf("name = %s, x = %d, y = %d, startend = %d, wth = %d, taken = %d, p= %p\n", tab[i].name, tab[i].x, tab[i].y, tab[i].startend, tab[i].wth, tab[i].taken, tab[i].next);
 		i++;
 	}

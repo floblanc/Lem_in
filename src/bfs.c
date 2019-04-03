@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 12:01:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/03 13:39:39 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/03 17:11:30 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int		calc_size(t_room *tab)
 	while (tab[size].next)
 		size++;
 	size++;
+	printf("size tab %d\n", size);
 	return (size);
 }
 
@@ -40,8 +41,9 @@ void	bfs(int **matrix, int i, int j, t_room *tab)
 	while (j < size && (j == 1 || matrix[i][j] != -1 || (tab[j].wth != 0
 					&& tab[j].wth <= tab[i].wth + 1)))
 		j++;
+	if (j == size)
+		return ;
 	tab[j].wth = tab[i].wth + 1;
-	if (j < size)
-		bfs(matrix, i, j + 1, tab);
+	bfs(matrix, i, j + 1, tab);
 	bfs(matrix, j, 0, tab);
 }

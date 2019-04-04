@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 12:01:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/03 17:56:45 by maginist         ###   ########.fr       */
+/*   Updated: 2019/04/04 14:47:53 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	bfs(int **matrix, int i, int j, t_room *tab)
 	bfs(matrix, j, 0, tab);
 }
 
-void	algosamere(t_room *tab, int **matrix)
+void	algo(t_room *tab, int **matrix)
 {
 	t_path	*path;
 

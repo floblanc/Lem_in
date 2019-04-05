@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 12:01:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/04 17:10:38 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/05 16:14:57 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,30 @@ void	bfs(int **matrix, int i, int j, t_room *tab)
 	bfs(matrix, j, 0, tab);
 }
 
+void	init_t_path(t_path *struc, int size; int path_n)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	if (!(struc = (t_path*)malloc(sizeof(t_path) * 1)))
+		exit(0);
+	if (!(struc->path= (int**)malloc(sizeof(int*) * path_n)))
+		exit(0);
+	while (i < path_n)
+	{
+		if (!(struc->path= (int*)malloc(sizeof(int) * size)))
+			exit(0);
+		j = 0;
+		while (j < size)
+		{
+			struc->path[i][j] = 0;
+			j++;
+		}
+		i++;
+	}
+}
+
 void	calc_step(t_path *struc, int ant_n, int path_n)
 {
 	int	i;
@@ -70,25 +94,25 @@ int	main(int ac, char **av)
 {
 	int ant_n = atoi(av[1]);
 	t_path test;
-	int tablen[3]={5,8};
+	int tablen[3]={5,8,12};
 	int	len0[15] = {1,2,3,4,5,0,0,0,0,0,0,0,0,0,0};
 	int	len1[15] = {1,2,3,4,5,6,7,8,0,0,0,0,0,0,0};
-	//int	len2[15] = {1,2,3,4,5,6,7,8,9,10,11,12,0,0,0};
+	int	len2[15] = {1,2,3,4,5,6,7,8,9,10,11,12,0,0,0};
 
 	if (ac == 2)
 	{
 		test.path = (int**)malloc(sizeof(int*) * 2);
 		test.path[0] = len0;
 		test.path[1] = len1;
-	//	test.path[2] = len2;
+		test.path[2] = len2;
 		test.len = tablen;
-		calc_step(&test, ant_n, 2);
-		printf("step : %d\nlen0 : %d\nlen1 %d\n", test.step,len0[5],len1[8]);
+		calc_step(&test, ant_n, 3);
+		printf("step : %d\nlen0 : %d\nlen1 : %d\nlen2 : %d\n", test.step,len0[5],len1[8],len2[12]);
 	}
 	return (0);
 }
 
 /*void	algo(t_room *tab, int **matrix)
-{
-	t_path	*path;
-}*/
+  {
+  t_path	*path;
+  }*/

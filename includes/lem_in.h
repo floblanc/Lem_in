@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/04 16:34:04 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/08 19:07:40 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef	struct		s_path
 	int				**path;
 	int				*len;
 	int				step;
-	struct s_path	*next;
 }					t_path;
 
 int					room_already_exist(t_room **begin, t_room *new);

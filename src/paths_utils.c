@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 12:01:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/08 16:07:47 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/08 19:08:17 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,6 @@ void	stock_len(t_path *new, int path_n)
 			j++;
 		new->len[i] = j;
 		i++;
-	}
-}
-
-void	push_back_path(t_path **begin, t_path *new)
-{
-	t_path	*current;
-
-	if (!(begin))
-		*begin = new;
-	else
-	{
-		current = begin;
-		while (current->next)
-			current = current->next;
-		current->next = new;
 	}
 }
 
@@ -65,7 +50,6 @@ void	init_t_path(t_path *struc, int size; int path_n)
 		}
 		i++;
 	}
-	struc->next = 0;
 }
 
 int		calc_step(t_path *struc, int ant_n, int path_n)

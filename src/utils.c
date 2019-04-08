@@ -6,11 +6,22 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:56:29 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/01 17:35:57 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/08 12:05:46 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+int		calc_size(t_room *tab)
+{
+	int		size;
+
+	size = 0;
+	while (tab[size].next)
+		size++;
+	size++;
+	return (size);
+}
 
 int		room_already_use(int room_to_test, int **path_tab, int path_n, int size)
 {

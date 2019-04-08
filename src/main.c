@@ -6,11 +6,35 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/03 18:17:28 by maginist         ###   ########.fr       */
+/*   Updated: 2019/04/08 18:29:47 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+void	main3(int **matrix, t_room *tab, int size)
+{
+	t_path	*begin;
+	t_path	*new;
+	int		path_n;
+
+	begin = 0;
+	path_n = 0;
+	new = 0;
+	path_n = (matrix[1][1] > matrix[0][0] ? matrix[0][0] : matrix[1][1]);
+	path_n = (path_n > tab[0].taken ? tab[0].taken : path_n);
+	while (path_n > 0)
+	{
+		new = 0;
+		new = init_t_path(new, size, path_n);
+		//////////////////find_path(matrix, tab, size, new);
+		stock_len(new, path_n);
+		calc_step(new, tab[0].taken, 1);
+		path_n--;
+	}
+	use_shortest_path(&begin);//////
+	free_paths(&begin);
+}
 
 void	main2(t_room *roombeg, t_link *linkbeg, int ant_n, t_write *str)
 {
@@ -28,11 +52,10 @@ void	main2(t_room *roombeg, t_link *linkbeg, int ant_n, t_write *str)
 		write(2, "ERROR\n", 6);
 	else
 	{
+		tab[0].taken = ant_n;
 		write_data(&str);
-		free_lst_write(&str);
-		algosamere(tab, matrix);
+		main3(matrix, tab, size);
 	}
-
 	free_room_tab(&tab, size);
 	free_matrix(&matrix, size);
 	free_lst_write(&str);

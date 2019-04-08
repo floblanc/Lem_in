@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 16:50:34 by maginist          #+#    #+#             */
-/*   Updated: 2019/03/30 20:54:38 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/08 18:29:44 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,21 @@ void	write_data(t_write **begin)
 		current = current->next;
 	}
 	free_lst_write(begin);
+}
+
+void	use_path(t_path *struc, t_room *tab, int path_n, int ant)
+{
+	int	i;
+
+	i = ant % path_n;
+	ant++;
+	while (i < path_n && struc->path[i][struc->len[i]] == 0)
+		i++;
+	while ()
+	{
+		if (i % path_n != path_n - 1)
+			ft_printf("L%d-%s ", ant, tab[struc->path[i]].name);
+		else
+			ft_printf("L%d-%s\n", ant, tab[struc->path[i]].name);
+	}
 }

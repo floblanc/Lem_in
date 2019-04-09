@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 16:50:34 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/09 13:38:11 by maginist         ###   ########.fr       */
+/*   Updated: 2019/04/09 13:57:09 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	write_path(t_path *best, t_room *tab, int j, int path_n)
 	i = best->len[j] - 1;
 	while (i >= 0)
 	{
-		if (((i > 0 && !(tab[best->path[j][i - 1]].taken)) || i == 0) 
+		if (((i > 0 && !(tab[best->path[j][i - 1]].taken)) || i == 0)
 				&& (j == path_n - 1 || !(best->path[j + 1][best->len[j + 1]])))
 			ft_printf("L%d-%s\n"
 					, tab[best->path[j][i]].taken, tab[best->path[j][i]].name);

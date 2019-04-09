@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 11:50:14 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/09 11:16:54 by maginist         ###   ########.fr       */
+/*   Updated: 2019/04/09 14:00:10 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	free_paths(t_path **begin)
 {
-	int i;
-	int	j;
+	int		i;
+	int		j;
 	t_path	*before;
 
 	if (!(begin && *begin))

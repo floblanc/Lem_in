@@ -6,13 +6,13 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 18:16:42 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/03 17:09:44 by maginist         ###   ########.fr       */
+/*   Updated: 2019/04/09 14:08:42 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	order_tabroom(t_room **tab)
+void	order_tabroom(t_room **tab, t_room **begin)
 {
 	t_room	tmp;
 	int		i;
@@ -36,6 +36,7 @@ void	order_tabroom(t_room **tab)
 	tmp.next = (*tab)[i].next;
 	(*tab)[i].next = (*tab)[1].next;
 	(*tab)[1].next = tmp.next;
+	free_lst_room(begin);
 }
 
 void	rooms_in_tab(t_room **tab, t_room **begin)
@@ -64,8 +65,7 @@ void	rooms_in_tab(t_room **tab, t_room **begin)
 		i++;
 	}
 	if (check_startend(begin))
-		order_tabroom(tab);
-	free_lst_room(begin);
+		order_tabroom(tab, begin);
 }
 
 void	fill_matrix2(t_room *tab, t_link **c, int **matrix, int i)

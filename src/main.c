@@ -6,11 +6,22 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/09 13:30:37 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/09 14:15:45 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+void	main4(t_path **best, t_path **new)
+{
+	if (*best && (*new)->step > 0 && (*new)->step < (*best)->step)
+	{
+		free_paths(best);
+		*best = *new;
+	}
+	else
+		free_paths(new);
+}
 
 void	main3(int **matrix, t_room *tab, int size)
 {
@@ -29,16 +40,10 @@ void	main3(int **matrix, t_room *tab, int size)
 	{
 		new = 0;
 		init_t_path(new, size, i);
-		//////////////////find_path(matrix, tab, size, new);
+		find_path(matrix, tab, size, new);
 		stock_len(new, i);
 		calc_step(new, tab[0].taken, 1);
-		if (best && new->step > 0 && new->step < best->step)
-		{
-			free_paths(&best);
-			best = new;
-		}
-		else
-			free_paths(&new);
+		main4(&best, &new);
 	}
 	use_path(best, tab, path_n);
 	free_paths(&best);

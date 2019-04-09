@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   paths_utils.c                                              :+:      :+:    :+:   */
+/*   paths_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/02 12:01:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/09 13:41:53 by maginist         ###   ########.fr       */
+/*   Created: 2019/04/09 13:58:32 by floblanc          #+#    #+#             */
+/*   Updated: 2019/04/09 14:05:02 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-
 
 void	ant_walk(t_path *best, t_room *tab, int j)
 {
@@ -24,6 +23,7 @@ void	ant_walk(t_path *best, t_room *tab, int j)
 		i--;
 	}
 }
+
 void	use_path(t_path *best, t_room *tab, int path_n)
 {
 	int	i;
@@ -107,13 +107,14 @@ int		calc_step(t_path *struc, int ant_n, int path_n)
 	while (i > 0)
 	{
 		i = 0;
-		while ((i < path_n - 1) && (struc->len[i] + struc->path[i][struc->len[i]] - 1 >= struc->len[i + 1] + struc->path[i + 1][struc->len[i + 1]]))
+		while ((i < path_n - 1) && (struc->len[i]
+					+ struc->path[i][struc->len[i]] - 1 >= struc->len[i + 1]
+					+ struc->path[i + 1][struc->len[i + 1]]))
 			i++;
 		if (i > 0)
-		{
 			struc->path[0][struc->len[0]]--;
+		if (i > 0)
 			struc->path[i][struc->len[i]]++;
-		}
 	}
 	struc->step = struc->len[1] + struc->path[1][struc->len[1]] - 1;
 	return (struc->step);

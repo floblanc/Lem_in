@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/09 11:27:57 by maginist         ###   ########.fr       */
+/*   Updated: 2019/04/09 13:30:37 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	main3(int **matrix, t_room *tab, int size)
 		else
 			free_paths(&new);
 	}
-//	use_path(&best);//////
+	use_path(best, tab, path_n);
 	free_paths(&best);
 }
 

@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/09 17:34:34 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/09 19:32:02 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,28 @@ void	main3(int **matrix, t_room *tab, int size)
 {
 	t_path	*best;
 	t_path	*new;
-	int		path_n;
+	int		path_max;
 	int		i;
 
 	i = 0;
 	best = 0;
 	path_n = 0;
 	new = 0;
-	path_n = (matrix[1][1] > matrix[0][0] ? matrix[0][0] : matrix[1][1]);
-	path_n = (path_n > tab[0].taken ? tab[0].taken : path_n);
-	while (i++ < path_n)
+	path_max = ((matrix[1][1] > matrix[0][0]) ? matrix[0][0] : matrix[1][1]);
+	path_max = ((path_max > tab[0].taken) ? tab[0].taken : path_max);
+	while (i++ < path_max && enougth_room_for_more(best, tab))
 	{
 		new = 0;
 		init_t_path(new, size, i);
-		find_path(matrix, tab, i, new);
+		if (!(find_path(matrix, tab, new)))
+			break ;
 		stock_len(new, i);
 		calc_step(new, tab[0].taken, 1);
 		main4(&best, &new);
 	}
-	use_path(best, tab, path_n);
+	use_path(best, tab);
 	free_paths(&best);
+	free_paths(&new);
 }
 
 void	main2(t_room *roombeg, t_link *linkbeg, int ant_n, t_write *str)

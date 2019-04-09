@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/09 13:37:28 by maginist         ###   ########.fr       */
+/*   Updated: 2019/04/09 19:31:21 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef	struct		s_path
 	int				**path;
 	int				*len;
 	int				step;
+	int				path_n;
 	struct s_path	*next;
 }					t_path;
 
@@ -81,7 +82,7 @@ int					calc_step(t_path *struc, int ant_n, int path_n);
 void				put_wth(int **matrix, int i, int j, t_room *tab);
 int					calc_size(t_room *tab);
 void				free_paths(t_path **begin);
-void				use_path(t_path *best, t_room *tab, int path_n);
+void				use_path(t_path *best, t_room *tab);
 void				write_path(t_path *best, t_room *tab, int j, int path_n);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:56:29 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/09 14:10:02 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/09 19:12:53 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,60 +23,18 @@ int		calc_size(t_room *tab)
 	return (size);
 }
 
-/*int		room_already_use(int room_to_test, int **path_tab, int path_n, int size)
+int		enougth_room_for_more(t_path *best, t_room *tab)
 {
 	int	i;
-	int	j;
+	int	size;
+	int	len_som;
 
+	if (!(*best))
+		return (1);
 	i = 0;
-	while (i < path_n)
-	{
-		j = 0;
-		while (path_tab[i][j] != 0)
-		{
-			if (path_tab[i][j] == room_to_test && room_to_test != 0)
-				return (1);
-			j++;
-		}
-		i++;
-	}
-	return (0);
+	len_som = 0;
+	size = calc_size(tab);
+	while (i < best->path_n)
+		len_som += best->len[i++];
+	return (((size - len_som > best->len[best->path_n - 1]) ? 1 : 0));
 }
-
-int		how_many_steps(int ant_n, int **path_tab, int path_n)
-{
-	int	step_min;
-
-	step_min = size;
-	while (step_min > 0)
-	{
-		if  ((tab[0].wth + ((ant_n - 1) / available)) <= step_min)
-		{
-			step_min = tab[0].wth + ((ant_n - 1) / available);
-			path_n = available;
-		}
-		available--;
-	}
-	return (path_n);
-}
-
-int		**set_paths(int **matrix, int size, int path_n)
-{
-	int **path_tab;
-	int	i;
-	int j;
-
-	i = 0;
-	if (!(path_tab = (int**)malloc(sizeof(int*) * path_n)))
-		exit(0);
-	while (i < path_n)
-	{
-		if (!(path_tab[i++] = (int*)malloc(sizeof(int) * size)))
-			exit(0);
-		j = 0;
-		while (j < size)
-			path_tab[i][j++] = 0;
-		i++;
-	}
-	return (path_tab);
-}*/

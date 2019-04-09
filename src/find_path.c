@@ -6,13 +6,13 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/09 17:34:31 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/09 19:29:26 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	find_path(int **matrix, t_room *tab, int path_n, t_path *new)
+int		find_path(int **matrix, t_room *tab, t_path *new)
 {
 	/*
 	 *HYPOTHESES : (usefull or useless that is the question)

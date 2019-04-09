@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/09 14:15:45 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/09 17:34:34 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	main3(int **matrix, t_room *tab, int size)
 	{
 		new = 0;
 		init_t_path(new, size, i);
-		find_path(matrix, tab, size, new);
+		find_path(matrix, tab, i, new);
 		stock_len(new, i);
 		calc_step(new, tab[0].taken, 1);
 		main4(&best, &new);

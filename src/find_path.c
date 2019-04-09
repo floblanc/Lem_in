@@ -25,6 +25,10 @@ int		find_path(int **matrix, t_room *tab, t_path *new)
 	 * ex: taken = 1 => pris par le chemin path[0]
 	 * 	   taken = 2 => pris par le chemin path[1]
 	 * 	   etc...
+	 et poids negatif du numero utilisé si c'est juste une case sur laquelle 
+	 il doit pas retourner : ex : tab[].taken = -1 => index path[0] doit pas y aller
+	                            tab[].taken = -2 => index path[1} doit pas y aller
+				    etc...
 	 *
 	 * 	   calcul pout savoir si un autre chemin est possible en fonction du nombre de
 	 * 	   salles et de la len du chemin le plus court et de la somme des rooms

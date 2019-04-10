@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/10 18:49:02 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/10 22:59:28 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int		find_path(int **matrix, t_room *tab, t_path *new, int size)
 			{
 				onfaitdestrucs;
 			}
+			else
+				tab[new->path[i][j]].taken = i + 1;
 			if (new->path[i][j] == 1)
 				break;
 			j++;

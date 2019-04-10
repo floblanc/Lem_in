@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/10 14:55:07 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/10 18:49:02 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,52 @@
  *	PS: sinon on commence a coder l'algo et on voit ensuite
  *	(histoire de pas perdre de temps sur des outils inutiles)
  */
+int		way_is_possible(int **matrix, t_room *tab, int *path, int j)
+{
+	int	pos;
+	int lim;
+	int	best;
+	int	i;
+
+	pos = ((j == 0) ? 0 : path[j - 1]);
+	lim = matrix[pos][pos];
+	best = 0;
+	i = 0;
+	while (lim > 0)
+	{
+		if (matrix[pos][i] == -1)
+		{
+			lim--;
+			if (tab[i].taken == 0 && (best == 0 || tab[i].wth < tab[best].wth))
+				best = i;
+		}
+		i++;
+	}
+	if (best != 0)
+		return (best);
+	return (on_precise_la_nature_du_blocage_ici_ou_pas_ou_meme_on_lance_un_autre_truc);
+}
+
 int		find_path(int **matrix, t_room *tab, t_path *new, int size)
 {
 	int	i;
 	int	j;
 
-	i = path_n - 1;
-	while (i < path_n)
+	i = new->path_n - 1;
+	while (i < new->path_n)
 	{
 		j = 0;
 		while (new->path[i][j] != 0)
 			j++;
 		while (j < size)
 		{
-			
+			if ((new->path[i][j] = way_is_possible(matrix, tab, new->path[i], j)) <= 0)
+			{
+				onfaitdestrucs;
+			}
 			if (new->path[i][j] == 1)
 				break;
+			j++;
 		}
 		i++;
 	}

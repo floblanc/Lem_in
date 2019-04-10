@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:56:29 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/09 19:12:53 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/10 14:55:09 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,3 +38,23 @@ int		enougth_room_for_more(t_path *best, t_room *tab)
 		len_som += best->len[i++];
 	return (((size - len_som > best->len[best->path_n - 1]) ? 1 : 0));
 }
+
+void	copy_best(t_path *best, t_path *new, int size)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < best->path_n)
+	{
+		j = 0;
+		while (j < size && best->path[i][j] != 0)
+		{
+			new->path[i][j] = best->path[i][j];
+			j++;
+		}
+		if (j > 0)
+			new->path[i][j - 1] = 0;
+		i++;
+	}
+

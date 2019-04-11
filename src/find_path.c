@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/11 17:44:38 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/11 19:02:50 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	roll_back_way(t_room *tab, t_path *new, int *i, int size)
 		if (tab[size].taken == (i + 1) * -1)
 			tab[size].taken = 0;
 	}
-	*i = *i - 1;
+	new->len[*i] = 0;
+	*i = *i - 2;
 }
 
 void	roll_back(t_path *new, int i, int *j, t_room *tab)
@@ -70,12 +71,28 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 	return (best);
 }
 
+void	other_way(int **matrix, t_room *tab, t_path *new, int size)
+{
+	int	i;
+	t_path *another_new;
+
+	i = 0;
+	init_t_path(another_new, size, new->path_n);
+	while (new->path[0][i] != 1)
+	{
+		if (matrix[new->path[0][i]][new->path[0][i]] < 3 
+				&& way_is_possible(matrix, tab, another_new, 0) > 0)
+		{//reset les .taken ? risque de boucle infni : risque de rien se passer
+		}
+	}
+}
+
 int		find_path(int **matrix, t_room *tab, t_path *new, int size)
 {
 	int	i;
 	int	j;
 
-	i = new->path_n - 1;
+	i = 0;
 	while (i < new->path_n)
 	{
 		j = 0;
@@ -89,7 +106,7 @@ int		find_path(int **matrix, t_room *tab, t_path *new, int size)
 				new->len[i] = j + 1;
 		}
 		if (j == -1 && i > 0)
-			roll_back_way(tab, new, &i, size);
+			roll_back_way(tab, new, &i, size);//pertinence de l'effacage des .taken : inconnue
 		else if (j == -1)
 			return (0);
 		i++;

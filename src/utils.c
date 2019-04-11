@@ -6,11 +6,48 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:56:29 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/11 15:43:29 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/11 20:21:29 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+void	try_swap_t_path(t_path **another_new, t_path **new)
+{
+	t_path *tmp;
+	int new_som;
+	int ano_som;
+	int	i;
+
+	new_som = 0;
+	ano_som = 0;
+	i = 0;
+	while (i < (*new)->path_n)
+	{
+		new_som += (*new)->len[i];
+		ano_som += (*another_new)->len[i];
+		i++
+	}
+	if (ano_som && ano_som < new_som)
+	{
+		tmp = *another_new;
+		*another_new = *new;
+		*new = tmp;
+	}
+}
+
+void	clean_some_taken(t_room *tab, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (tab[i].taken != 1)
+			tab[i].taken = 0;
+		i++;
+	}
+}
 
 int		calc_size(t_room *tab)
 {

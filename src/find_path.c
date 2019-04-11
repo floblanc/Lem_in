@@ -6,26 +6,12 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/11 19:02:50 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/11 20:22:11 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-/*
- *HYPOTHESES : (usefull or useless that is the question)
- *
- * tab[].taken == i => i - 1 == index path
- * ex: taken = 1 => pris par le chemin path[0]
- * 	   taken = 2 => pris par le chemin path[1]
- * 	   etc...
- * 	   et poids negatif du numero utilisé si c'est juste une case sur laquelle 
- * 	   il doit pas retourner : ex : tab[].taken = -1 => index path[0] doit pas y aller
- * 	   								tab[].taken = -2 => index path[1} doit pas y aller
- * 	   etc...
- *
- *	PS: sinon on commence a coder l'algo et on voit ensuite
- *	(histoire de pas perdre de temps sur des outils inutiles)
- */
+
 void	roll_back_way(t_room *tab, t_path *new, int *i, int size)
 {
 	while (--size > 1)
@@ -62,8 +48,8 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 		if (matrix[pos][i] == -1)
 		{
 			lim--;
-			if (tab[i].taken <= 0 && tab[i].taken <= (way + 1) * -1
-					&& (best == 0 || tab[i].wth < tab[best].wth))
+			if (((tab[i].taken <= 0 && tab[i].taken <= (way + 1) * -1)
+						|| i == 1) && (best == 0 || tab[i].wth < tab[best].wth))
 				best = i;
 		}
 		i++;
@@ -76,15 +62,28 @@ void	other_way(int **matrix, t_room *tab, t_path *new, int size)
 	int	i;
 	t_path *another_new;
 
-	i = 0;
+	i = -1;
 	init_t_path(another_new, size, new->path_n);
-	while (new->path[0][i] != 1)
+	while (new->path[0][++i] != 1)
+		another_new->[0][i] = new->[0][i];
+	i--;
+	while (i >= 0 && (matrix[1][new->path[0][i]] == -1
+				|| (matrix[new->path[0][i]][new->path[0][i]] < 3
+					&& !(way_is_possible(matrix, tab, another_new, 0)))))
 	{
-		if (matrix[new->path[0][i]][new->path[0][i]] < 3 
-				&& way_is_possible(matrix, tab, another_new, 0) > 0)
-		{//reset les .taken ? risque de boucle infni : risque de rien se passer
-		}
+		tab[another_new->path[i]].taken = 0;
+		another_new->path[0][i] == 0;
+		i--;
 	}
+	if (i < 0)
+	{
+		tab[way_is_possible(matrix, tab, another_new, 0)].taken = -1;
+		clean_some_taken(tab, size);
+		if (find_path(matrix, tab, another_new, size))
+			try_swap_t_path(&another_new, &new);
+	}
+	free_paths(&another_new);// si on free dans le vide ca viens de la je pense
+	return ;
 }
 
 int		find_path(int **matrix, t_room *tab, t_path *new, int size)
@@ -112,4 +111,5 @@ int		find_path(int **matrix, t_room *tab, t_path *new, int size)
 		i++;
 	}
 	other_way(matrix, tab, new, size);
+	return (1);
 }

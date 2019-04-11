@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:56:29 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/10 14:55:09 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/11 15:43:29 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	copy_best(t_path *best, t_path *new, int size)
 	i = 0;
 	while (i < best->path_n)
 	{
+		new->len[i] = best->len[i];
 		j = 0;
 		while (j < size && best->path[i][j] != 0)
 		{
@@ -57,4 +58,5 @@ void	copy_best(t_path *best, t_path *new, int size)
 			new->path[i][j - 1] = 0;
 		i++;
 	}
-
+	new->len[new->path_n - 1] = 0;
+}

@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/12 14:09:20 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/12 16:12:54 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 		if (matrix[pos][i] == -1)
 		{
 			lim--;
-			if (((tab[i].taken <= 0 && tab[i].taken <= (way + 1) * -1)
+			if (((tab[i].taken <= 0 && tab[i].taken > (way + 1) * -1)
 						|| i == 1) && (best == 0 || tab[i].wth < tab[best].wth))
 				best = i;
 		}
@@ -93,11 +93,9 @@ int		find_path(int **matrix, t_room *tab, t_path *new, int size)
 	int	i;
 	int	j;
 
-	printf("lul\n");
 	if (!(new))
 		return (0);
 	i = -1;
-	printf("ca entre\n");
 	while (++i < new->path_n)
 	{
 		j = 0;
@@ -115,8 +113,6 @@ int		find_path(int **matrix, t_room *tab, t_path *new, int size)
 		else if (j == -1)
 			return (0);
 	}
-	printf("normalement y'a 1 chemin\n");
 	other_way(matrix, tab, new, size);
-	printf("et qui est envoye en plus\n");
 	return (1);
 }

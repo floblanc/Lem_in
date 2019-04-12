@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 15:36:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/01 17:04:25 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/12 15:42:34 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	stock_link(char *line, t_link **begin, t_room **roombeg, int *error)
 	if (!(new = (t_link*)malloc(sizeof(t_link) * 1)))
 		exit(0);
 	new_link_maker(new, line, i);
-	if (!(link_is_valid(new, roombeg)) || link_already_exist(begin, new))
+	if (!(link_is_valid(new, roombeg)) && !(link_already_exist(begin, new)))
 	{
 		free_lst_link(&new);
 		*error = 1;

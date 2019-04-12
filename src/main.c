@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/12 13:23:19 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/12 16:36:29 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,12 @@
 
 void	main4(t_path **best, t_path **new)
 {
-	if (*best && (*new)->step > 0 && (*new)->step < (*best)->step)
+	if (!(*best))
+	{
+		*best = *new;
+		*new = 0;
+	}
+	else if (*best && (*new)->step > 0 && (*new)->step < (*best)->step)
 	{
 		free_paths(best);
 		*best = *new;
@@ -36,7 +41,6 @@ void	main3(int **matrix, t_room *tab, int size)
 	path_max = ((path_max > tab[0].taken) ? tab[0].taken : path_max);
 	while (++i < path_max && enougth_room_for_more(best, tab))
 	{
-		printf("while main3\n");
 		new = 0;
 		init_t_path(&new, size, i);
 		copy_best(best, new, size);
@@ -45,7 +49,23 @@ void	main3(int **matrix, t_room *tab, int size)
 		calc_step(new, tab[0].taken, 1);
 		main4(&best, &new);
 	}
-	use_path(best, tab);
+	//use_path(best, tab);
+	
+	int j;
+	i = 0;
+	while (i < best->path_n)
+	{
+		j = 0;
+		while (best->path[i][j] != 0)
+		{
+			printf("path[%d][%d] = %d \n", i, j, best->path[i][j]);
+			j++;
+		}
+		i++;
+	}
+
+
+
 	free_paths(&best);
 	free_paths(&new);
 }

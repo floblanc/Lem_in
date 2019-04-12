@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:58:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/10 23:01:08 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/12 11:57:30 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	use_path(t_path *best, t_room *tab)
 
 	i = 1;
 	j = 1;
+	if (!(best))// c'est pas sense arriver
+		return ;
 	while (tab[j].next)
 		tab[j++].taken = 0;
 	tab[j].taken = 0;

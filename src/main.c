@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/11 20:21:31 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/12 10:42:02 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	main3(int **matrix, t_room *tab, int size)
 
 	i = 0;
 	best = 0;
-	path_n = 0;
 	new = 0;
 	path_max = ((matrix[1][1] > matrix[0][0]) ? matrix[0][0] : matrix[1][1]);
 	path_max = ((path_max > tab[0].taken) ? tab[0].taken : path_max);
@@ -41,7 +40,7 @@ void	main3(int **matrix, t_room *tab, int size)
 		new = 0;
 		init_t_path(new, size, i);
 		copy_best(best, new, size);
-		if (!(find_path(matrix, tab, new, size))
+		if (!(find_path(matrix, tab, new, size)))
 			break ;
 		stock_len(new, i);
 		calc_step(new, tab[0].taken, 1);

@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:56:29 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/11 20:21:29 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/12 11:41:38 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	try_swap_t_path(t_path **another_new, t_path **new)
 {
-	t_path *tmp;
-	int new_som;
-	int ano_som;
-	int	i;
+	t_path	*tmp;
+	int		new_som;
+	int		ano_som;
+	int		i;
 
 	new_som = 0;
 	ano_som = 0;
@@ -26,7 +26,7 @@ void	try_swap_t_path(t_path **another_new, t_path **new)
 	{
 		new_som += (*new)->len[i];
 		ano_som += (*another_new)->len[i];
-		i++
+		i++;
 	}
 	if (ano_som && ano_som < new_som)
 	{
@@ -66,7 +66,7 @@ int		enougth_room_for_more(t_path *best, t_room *tab)
 	int	size;
 	int	len_som;
 
-	if (!(*best))
+	if (!(best))
 		return (1);
 	i = 0;
 	len_som = 0;
@@ -82,6 +82,8 @@ void	copy_best(t_path *best, t_path *new, int size)
 	int	j;
 
 	i = 0;
+	if (!(best))
+		return ;
 	while (i < best->path_n)
 	{
 		new->len[i] = best->len[i];

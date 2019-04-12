@@ -6,7 +6,7 @@
 #    By: maginist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/09 11:22:24 by maginist          #+#    #+#              #
-#    Updated: 2019/04/09 11:31:20 by maginist         ###   ########.fr        #
+#    Updated: 2019/04/12 11:03:04 by floblanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,17 +14,18 @@ NAME = lem_in
 
 SRC_NAME =already_exist.c\
 		  extract_room.c\
+		  find_path.c\
 		  free_lst.c\
+		  free_lst2.c\
+		  ft_lstlen.c\
 		  is_valid.c\
-		  stock_data.c\
 		  main.c\
 		  make_matrix.c\
-		  write_data.c\
-		  ft_lstlen.c\
 		  paths_utils.c\
-		  free_lst2.c\
 		  put_wth.c\
-		  utils.c
+		  stock_data.c\
+		  utils.c\
+		  write_data.c\
 
 SRC_PATH = ./src
 

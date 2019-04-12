@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/12 16:12:54 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/12 18:43:21 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,16 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 	int lim;
 	int	best;
 	int	i;
-
+// BEAUCOUP DE CHOSES A FAIRE ICI CAR CA MARCHE PAS
 	pos = 0;
 	while (new->path[way][pos + 1] != 0)
 		pos++;
-	lim = matrix[pos][pos];
+	lim = matrix[new->path[way][pos]][new->path[way][pos]];
 	best = 0;
 	i = 0;
 	while (lim > 0)
 	{
-		if (matrix[pos][i] == -1)
+		if (matrix[new->path[way][pos]][i] == -1)
 		{
 			lim--;
 			if (((tab[i].taken <= 0 && tab[i].taken > (way + 1) * -1)
@@ -56,6 +56,8 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 		}
 		i++;
 	}
+	if (best != 0 && best != 1)
+		tab[best].taken = way + 1;
 	return (best);
 }
 
@@ -96,7 +98,7 @@ int		find_path(int **matrix, t_room *tab, t_path *new, int size)
 	if (!(new))
 		return (0);
 	i = -1;
-	while (++i < new->path_n)
+	while (++i < new->path_n && i >= 0)
 	{
 		j = 0;
 		while (j >= 0 && new->len[i] == 0)
@@ -109,7 +111,7 @@ int		find_path(int **matrix, t_room *tab, t_path *new, int size)
 				new->len[i] = j + 1;
 		}
 		if (j == -1 && i > 0)
-			roll_back_way(tab, new, &i, size);//pertinence de l'effacage des .taken : inconnue
+			roll_back_way(tab, new, &i, size);
 		else if (j == -1)
 			return (0);
 	}

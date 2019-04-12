@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/12 18:43:21 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/12 19:18:12 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ int		find_path(int **matrix, t_room *tab, t_path *new, int size)
 		else if (j == -1)
 			return (0);
 	}
-	other_way(matrix, tab, new, size);
+	if (new->path_n > 1)
+		other_way(matrix, tab, new, size);
 	return (1);
 }

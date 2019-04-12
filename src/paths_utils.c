@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:58:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/12 22:38:04 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/12 23:54:45 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,16 @@ void	use_path(t_path *best, t_room *tab, int size)
 	while ((best->step)-- > 0)
 	{
 		j = -1;
-		if ()
 		write(1, "\n", 1);
 		while (++j < best->path_n)
 		{
 			ant_walk(best, tab, j);
-			if (best->path[best->len[j]] > 0)
+			if (best->path[best->path[j][best->len[j]]] > 0)
 				tab[best->path[j][0]].taken = i++;
 			else
 				tab[best->path[j][0]].taken = 0;
-			(best->path[best->len[j]])--;
-			write_path(best, tab, j, best->path_n);
+			(best->path[j][best->len[j]])--;
+			write_path(best, tab, j);
 		}
 	}
 }

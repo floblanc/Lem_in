@@ -6,25 +6,24 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 16:50:34 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/12 22:38:07 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/12 23:54:28 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	write_path(t_path *best, t_room *tab, int j, int path_n)
+void	write_path(t_path *best, t_room *tab, int j)
 {
 	int	i;
 
 	i = best->len[j] - 1;
 	while (i >= 0)
 	{
-		if (((i > 0 && !(tab[best->path[j][i - 1]].taken)) || i == 0)
-				&& (j == path_n - 1 || !(best->path[j + 1][best->len[j + 1]])))
+		if (tab[best->path[j][i]].taken > 0)
 			ft_printf("L%d-%s "
 					, tab[best->path[j][i]].taken, tab[best->path[j][i]].name);
-		else
-			ft_printf("L%d-%s "
+		else if (tab[best->path[j][i]].taken > 0)
+			ft_printf(" L%d-%s"
 					, tab[best->path[j][i]].taken, tab[best->path[j][i]].name);
 		i--;
 	}

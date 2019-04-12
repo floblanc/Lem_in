@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/12 11:56:38 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/12 13:17:08 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void				stock_to_write(char *line, t_write **begin);
 void				rooms_in_tab(t_room **tab, t_room **begin);
 void				write_data(t_write **begin);
 void				stock_len(t_path *new, int path_n);
-void				init_t_path(t_path *struc, int size, int t_path_n);
+void				init_t_path(t_path **struc, int size, int t_path_n);
 int					find_path(int **matrix, t_room *tab, t_path *new, int size);
 int					calc_step(t_path *struc, int ant_n, int path_n);
 void				put_wth(int **matrix, int i, int j, t_room *tab);

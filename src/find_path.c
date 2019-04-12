@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/12 11:54:12 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/12 14:09:20 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	roll_back_way(t_room *tab, t_path *new, int *i, int size)
 void	roll_back(t_path *new, int i, int *j, t_room *tab)
 {
 	*j = *j - 1;
+	if (*j < 0)
+		return ;
 	tab[new->path[i][(*j)]].taken = (i + 1) * -1;
 	new->path[i][(*j)] = 0;
 }
@@ -64,7 +66,7 @@ void	other_way(int **matrix, t_room *tab, t_path *new, int size)
 
 	i = -1;
 	another_new = 0;
-	init_t_path(another_new, size, new->path_n);
+	init_t_path(&another_new, size, new->path_n);
 	while (new->path[0][++i] != 1)
 		another_new->path[0][i] = new->path[0][i];
 	i--;
@@ -91,9 +93,11 @@ int		find_path(int **matrix, t_room *tab, t_path *new, int size)
 	int	i;
 	int	j;
 
+	printf("lul\n");
 	if (!(new))
 		return (0);
 	i = -1;
+	printf("ca entre\n");
 	while (++i < new->path_n)
 	{
 		j = 0;
@@ -111,6 +115,8 @@ int		find_path(int **matrix, t_room *tab, t_path *new, int size)
 		else if (j == -1)
 			return (0);
 	}
+	printf("normalement y'a 1 chemin\n");
 	other_way(matrix, tab, new, size);
+	printf("et qui est envoye en plus\n");
 	return (1);
 }

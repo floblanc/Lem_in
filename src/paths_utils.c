@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:58:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/12 16:37:52 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/12 19:08:51 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,6 @@ void	use_path(t_path *best, t_room *tab)
 			best->path[best->len[j]]--;
 			write_path(best, tab, j, best->path_n);
 		}
-	}
-}
-
-void	stock_len(t_path *new, int path_n)
-{
-	int i;
-	int	j;
-
-	i = 0;
-	while (i < path_n)
-	{
-		j = 0;
-		while (new->path[i][j] != 0)
-			j++;
-		new->len[i] = j;
-		i++;
 	}
 }
 

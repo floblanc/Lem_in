@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:58:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/13 15:03:29 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/13 15:26:20 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ void	ant_walk(t_path *best, t_room *tab, int j)
 	int i;
 
 	i = best->len[j] - 1;
-	printf("path[%d][%d] = %d -> room : LEN(%d).taken = %d\n", j, i + 1, best->path[j][i + 1], best->len[j], tab[best->path[j][i + 1]].taken);
+//	printf("path[%d][%d] = %d -> room : LEN(%d).taken = %d\n", j, i + 1, best->path[j][i + 1], best->len[j], tab[best->path[j][i + 1]].taken);
 	while (i > 0)
 	{
-		printf("path[%d][%d] = %d -> room : %s.taken = %d\n", j, i, best->path[j][i], tab[best->path[j][i]].name, tab[best->path[j][i]].taken);
+//		printf("path[%d][%d] = %d -> room : %s.taken = %d\n", j, i, best->path[j][i], tab[best->path[j][i]].name, tab[best->path[j][i]].taken);
 		tab[best->path[j][i]].taken = tab[best->path[j][i - 1]].taken;
 		i--;
 	}
-		printf("path[%d][%d] = %d -> room : %s.taken = %d\n", j, i, best->path[j][i], tab[best->path[j][i]].name, tab[best->path[j][i]].taken);
+//		printf("path[%d][%d] = %d -> room : %s.taken = %d\n", j, i, best->path[j][i], tab[best->path[j][i]].name, tab[best->path[j][i]].taken);
 	tab[best->path[j][best->len[j]]].taken = 0;
 }
 
@@ -46,8 +46,11 @@ void	use_path(t_path *best, t_room *tab, int size)
 		while (++j < best->path_n)
 		{
 			ant_walk(best, tab, j);
-			if (best->path[best->path[j][best->len[j]]] > 0)
+			if (best->path[best->path[j][best->len[j]]] > 0 && tab[0].taken > 0)
+			{
 				tab[best->path[j][0]].taken = i++;
+				(tab[0].taken)--;
+			}
 			else
 				tab[best->path[j][0]].taken = 0;
 			(best->path[j][best->len[j]]) -= 1;

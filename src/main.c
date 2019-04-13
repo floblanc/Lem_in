@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/13 10:59:07 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/13 15:05:36 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ void	main3(int **matrix, t_room *tab, int size)
 	best = 0;
 	path_max = ((matrix[1][1] > matrix[0][0]) ? matrix[0][0] : matrix[1][1]);
 	path_max = ((path_max > tab[0].taken) ? tab[0].taken : path_max);
-	while (++i < path_max && enougth_room_for_more(best, tab))
+	while (++i <= path_max && enougth_room_for_more(best, tab))
 	{
 		new = 0;
 		init_t_path(&new, size, i);
 		copy_best(best, new, size);
 		if (!(find_path(matrix, tab, new, size)))
 			break ;
-		calc_step(new, tab[0].taken, 1);
+		calc_step(new, tab[0].taken, i);
 		main4(&best, &new);
 	}
 	
@@ -57,18 +57,18 @@ void	main3(int **matrix, t_room *tab, int size)
 		j = 0;
 		while (best->path[i][j] != 0)
 		{
-			printf("path[%d][%d] = %d -> room : %s.wth = %d\n", i, j, best->path[i][j], tab[best->path[i][j]].name, tab[best->path[i][j]].wth);
+			printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d", i, j, best->path[i][j], tab[best->path[i][j]].name, tab[best->path[i][j]].wth, tab[best->path[i][j]].taken);
 			j++;
 		}
-		printf("len = %d\n", best->len[i]);
+		printf("\nlen = %d\n", best->len[i]);
 		i++;
 	}
 
 
 
-	use_path(best, tab, size);
-	free_paths(&best);
-	free_paths(&new);
+//	use_path(best, tab, size);
+//	free_paths(&best);
+//	free_paths(&new);
 }
 
 void	main2(t_room *roombeg, t_link *linkbeg, int ant_n, t_write *str)

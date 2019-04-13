@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:58:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/13 10:59:04 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/13 15:03:29 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int		calc_step(t_path *struc, int ant_n, int path_n)
 
 	if (!(struc->len[path_n - 1]))
 		return (0);
+	//printf("CALCUL path_n = %d et strucpath_n = %d\n", path_n, struc->path_n);
 	struc->path[0][struc->len[0]] = ant_n;
 	if (path_n == 1)
 	{
@@ -98,6 +99,7 @@ int		calc_step(t_path *struc, int ant_n, int path_n)
 		return (struc->step);
 	}
 	i = 1;
+	//printf("CALCUL222\n");
 	while (i > 0)
 	{
 		i = 0;
@@ -110,6 +112,7 @@ int		calc_step(t_path *struc, int ant_n, int path_n)
 		if (i > 0)
 			struc->path[i][struc->len[i]]++;
 	}
-	struc->step = struc->len[1] + struc->path[1][struc->len[1]] - 1;
+	//printf("add is %d + %d\n",struc->len[1], struc->path[1][struc->len[1]] - 1);
+	struc->step = struc->len[1] + (struc->path[1][struc->len[1]] - 1);
 	return (struc->step);
 }

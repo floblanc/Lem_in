@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/12 19:18:12 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/13 15:05:05 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,35 @@
 
 void	roll_back_way(t_room *tab, t_path *new, int *i, int size)
 {
+	int j;
+
+//	printf("roll_back_way\n");
+	j = 0;
 	while (--size > 1)
 	{
 		if (tab[size].taken == ((*i) + 1) * -1)
 			tab[size].taken = 0;
 	}
 	new->len[*i] = 0;
-	*i = *i - 2;
+	*i = *i - 1;
+	while (new->path[*i][j] != 1)
+		j++;
+	new->path[*i][j] = 0;
+	j = j - 1;
+	tab[new->path[*i][j]].taken = (*i + 1) * -1;
+	new->path[*i][j] = 0;
+	new->len[*i] = 0;
+	*i = *i - 1;
 }
 
 void	roll_back(t_path *new, int i, int *j, t_room *tab)
 {
+	//printf("avant path[%d][%d] = %s.taken = %d\n", i, *j, tab[new->path[i][*j]].name, tab[new->path[i][*j]].taken);
 	*j = *j - 1;
 	if (*j < 0)
 		return ;
 	tab[new->path[i][(*j)]].taken = (i + 1) * -1;
+//	printf("path[%d][%d] = %s.taken = %d\n", i, *j, tab[new->path[i][*j]].name, tab[new->path[i][*j]].taken);
 	new->path[i][(*j)] = 0;
 }
 
@@ -38,7 +52,7 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 	int lim;
 	int	best;
 	int	i;
-// BEAUCOUP DE CHOSES A FAIRE ICI CAR CA MARCHE PAS
+
 	pos = 0;
 	while (new->path[way][pos + 1] != 0)
 		pos++;
@@ -56,6 +70,7 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 		}
 		i++;
 	}
+//	printf("best : %d (%s).taken = %d pour le way %d\n", best, tab[best].name, tab[best].taken, way);
 	if (best != 0 && best != 1)
 		tab[best].taken = way + 1;
 	return (best);
@@ -110,12 +125,16 @@ int		find_path(int **matrix, t_room *tab, t_path *new, int size)
 			else if (new->path[i][j] == 1)
 				new->len[i] = j + 1;
 		}
+//	printf("len[%d] = %d\n", i, new->len[i]);
+//	printf("path[%d][%d] = %s.taken = %d\n", i, j, tab[new->path[i][j]].name, tab[new->path[i][j]].taken);
 		if (j == -1 && i > 0)
 			roll_back_way(tab, new, &i, size);
 		else if (j == -1)
 			return (0);
 	}
+//	printf("other way loop\n");
 	if (new->path_n > 1)
 		other_way(matrix, tab, new, size);
+	//printf("not a loop\n");
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:58:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/12 23:54:45 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/13 10:59:04 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,15 @@ void	ant_walk(t_path *best, t_room *tab, int j)
 	int i;
 
 	i = best->len[j] - 1;
+	printf("path[%d][%d] = %d -> room : LEN(%d).taken = %d\n", j, i + 1, best->path[j][i + 1], best->len[j], tab[best->path[j][i + 1]].taken);
 	while (i > 0)
 	{
+		printf("path[%d][%d] = %d -> room : %s.taken = %d\n", j, i, best->path[j][i], tab[best->path[j][i]].name, tab[best->path[j][i]].taken);
 		tab[best->path[j][i]].taken = tab[best->path[j][i - 1]].taken;
 		i--;
 	}
+		printf("path[%d][%d] = %d -> room : %s.taken = %d\n", j, i, best->path[j][i], tab[best->path[j][i]].name, tab[best->path[j][i]].taken);
+	tab[best->path[j][best->len[j]]].taken = 0;
 }
 
 void	use_path(t_path *best, t_room *tab, int size)
@@ -46,7 +50,7 @@ void	use_path(t_path *best, t_room *tab, int size)
 				tab[best->path[j][0]].taken = i++;
 			else
 				tab[best->path[j][0]].taken = 0;
-			(best->path[j][best->len[j]])--;
+			(best->path[j][best->len[j]]) -= 1;
 			write_path(best, tab, j);
 		}
 	}

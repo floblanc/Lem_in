@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/13 15:05:05 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/13 17:52:37 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 		}
 		i++;
 	}
-//	printf("best : %d (%s).taken = %d pour le way %d\n", best, tab[best].name, tab[best].taken, way);
+	printf("depuis la salle %s best : %d (%s).taken = %d pour le way %d\n", tab[new->path[way][pos]].name, best, tab[best].name, tab[best].taken, way);
 	if (best != 0 && best != 1)
 		tab[best].taken = way + 1;
 	return (best);
@@ -79,25 +79,45 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 void	other_way(int **matrix, t_room *tab, t_path *new, int size)
 {
 	int		i;
+	int		j;
 	t_path	*another_new;
 
-	i = -1;
+	printf("on cherche\n");
+	j = -1;
 	another_new = 0;
 	init_t_path(&another_new, size, new->path_n);
-	while (new->path[0][++i] != 1)
-		another_new->path[0][i] = new->path[0][i];
-	i--;
-	while (i >= 0 && (matrix[1][new->path[0][i]] == -1
-				|| (matrix[new->path[0][i]][new->path[0][i]] < 3
-					&& !(way_is_possible(matrix, tab, another_new, 0)))))
+	while (++j < new->path_n)
+	{
+		i = -1;
+		while (new->path[j][++i] != 1)
+			another_new->path[j][i] = new->path[j][i];
+	}
+	while (--j >= 0)
+	{
+		i = 0;
+		while (another_new->path[j][i + 1] != 0)
+			i++;
+		tab[another_new->path[j][i]].taken = (j + 1) * -1;
+		printf("tab[%d](%s).taken = %d\n", another_new->path[j][i], tab[another_new->path[j][i]].name, tab[another_new->path[j][i]].taken);
+		another_new->path[j][i] = 0;
+	}
+/*	printf("new->path[0][%d] = %d(%s)\n", i - 1, another_new->path[0][i -1], tab[another_new->path[0][i -1]].name);
+	tab[another_new->path[0][--i]].taken = -1;
+	another_new->path[0][i--] = 0;
+	printf("new->path[0][%d] = %d(%s)\n", i, another_new->path[0][i], tab[another_new->path[0][i]].name);*/
+	printf("tab[%d] = %s.taken = %d\n", 5, tab[5].name, tab[5].taken);
+	/*while (matrix[new->path[0][i]][new->path[0][i]] < 3
+					&& !(way_is_possible(matrix, tab, another_new, 0)))
 	{
 		tab[another_new->path[0][i]].taken = 0;
 		another_new->path[0][i--] = 0;
-	}
-	if (i < 0)
+	}*/
+	printf("i = %d\n",i);
+	if (i >= 0)
 	{
-		tab[way_is_possible(matrix, tab, another_new, 0)].taken = -1;
-		clean_some_taken(tab, size);
+		printf("ca tente un truc\n");
+		//tab[way_is_possible(matrix, tab, another_new, 0)].taken = -1;
+		//clean_some_taken(tab, size);
 		if (find_path(matrix, tab, another_new, size))
 			try_swap_t_path(&another_new, &new);
 	}

@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/13 15:15:58 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/13 16:51:25 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	main3(int **matrix, t_room *tab, int size)
 		if (!(find_path(matrix, tab, new, size)))
 			break ;
 		calc_step(new, tab[0].taken, i);
+		printf("new_way : path_n = %d, step = %d\n", new->path_n, new->step);
 		main4(&best, &new);
 	}
 	

@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/13 17:52:37 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/13 18:18:58 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ int		find_path(int **matrix, t_room *tab, t_path *new, int size)
 		}
 //	printf("len[%d] = %d\n", i, new->len[i]);
 //	printf("path[%d][%d] = %s.taken = %d\n", i, j, tab[new->path[i][j]].name, tab[new->path[i][j]].taken);
+		printf("i = %d et j = %d\n", i, j);
 		if (j == -1 && i > 0)
 			roll_back_way(tab, new, &i, size);
 		else if (j == -1)

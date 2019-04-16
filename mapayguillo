@@ -1,0 +1,37 @@
+50
+##start
+start 1 0
+a 2 0
+b 3 0
+c 4 0
+d 6 0
+e 7 0
+f 8 0
+g 9 0
+h 1 1
+i 2 1
+j 3 1
+k 4 1
+l 5 1
+m 6 1
+##end
+end 7 1
+start-m
+m-end
+start-a
+a-b
+b-c
+c-l
+c-d
+d-e
+e-f
+f-g
+g-end
+l-k
+k-end
+start-h
+h-l
+h-i
+i-j
+j-k
+l-g

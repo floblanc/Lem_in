@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/13 18:19:14 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/16 16:31:07 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,15 @@ void	main4(t_path **best, t_path **new)
 	}
 	else if (*best && (*new)->step > 0 && (*new)->step < (*best)->step)
 	{
+		printf("new->step = %d best = %d\n", (*new)->step, (*best)->step);
 		free_paths(best);
 		*best = *new;
 	}
 	else
+	{
+		printf("new->step = %d best = %d\n", (*new)->step, (*best)->step);
 		free_paths(new);
+	}
 }
 
 void	main3(int **matrix, t_room *tab, int size)
@@ -44,10 +48,9 @@ void	main3(int **matrix, t_room *tab, int size)
 		new = 0;
 		init_t_path(&new, size, i);
 		copy_best(best, new, size);
-		if (!(find_path(matrix, tab, new, size)))
+		if (!(find_path(matrix, tab, &new, size)))
 			break ;
 		calc_step(new, tab[0].taken, i);
-		printf("new_way : path_n = %d, step = %d\n", new->path_n, new->step);
 		main4(&best, &new);
 	}
 	
@@ -56,7 +59,7 @@ void	main3(int **matrix, t_room *tab, int size)
 	while (i < best->path_n)
 	{
 		j = 0;
-		while (best->path[i][j] != 0)
+		while (best->path[i][j] != 1)
 		{
 			printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d", i, j, best->path[i][j], tab[best->path[i][j]].name, tab[best->path[i][j]].wth, tab[best->path[i][j]].taken);
 			j++;

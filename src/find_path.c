@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/16 16:32:52 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/16 18:24:32 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	roll_back_way(t_room *tab, t_path *new, int *i, int size)
 		if (tab[size].taken == ((*i) + 1) * -1)
 			tab[size].taken = 0;
 	}
-	new->len[*i] = 0;
+	new->len[*i] = -1;
 	*i = *i - 1;
 	while (new->path[*i][j] != 1)
 		j++;
@@ -87,7 +87,7 @@ void	other_way(int **matrix, t_room *tab, t_path **new, int size)
 		only_one = (*new)->path_n;
 	else
 		return ;
-	printf("OTHER_WAY_START\n");
+//	printf("OTHER_WAY_START\n");
 	i = 0;
 	another_new = 0;
 	init_t_path(&another_new, size, (*new)->path_n);
@@ -104,7 +104,7 @@ void	other_way(int **matrix, t_room *tab, t_path **new, int size)
 		another_new->path[i][j] = 0;
 		i++;
 	}
-	printf("ON TENTE LE COUP\n");
+//	printf("ON TENTE LE COUP\n");
 	if (find_path(matrix, tab, &another_new, size))
 		try_swap_t_path(&another_new, new);
 	free_paths(&another_new);// si on free dans le vide ca viens de la je pense
@@ -122,7 +122,7 @@ int		find_path(int **matrix, t_room *tab, t_path **new, int size)
 	while (++i < (*new)->path_n && i >= 0)
 	{
 		j = 0;
-		while (j >= 0 && (*new)->len[i] == 0)
+		while (j >= 0 && (*new)->len[i] <= 0)
 		{
 			while ((*new)->path[i][j] != 0)
 				j++;
@@ -131,9 +131,9 @@ int		find_path(int **matrix, t_room *tab, t_path **new, int size)
 			else if ((*new)->path[i][j] == 1)
 				(*new)->len[i] = j + 1;
 		}
-		//	printf("len[%d] = %d\n", i, new->len[i]);
+		//	printf("len[%d] = %d\n", i, (*new)->len[i]);
 		//	printf("path[%d][%d] = %s.taken = %d\n", i, j, tab[new->path[i][j]].name, tab[new->path[i][j]].taken);
-		if (j == -1 && i > 0)
+		if (j == -1 && i > 0 && (*new)->len[i] == 0)
 			roll_back_way(tab, *new, &i, size);
 		else if (j == -1)
 			return (0);

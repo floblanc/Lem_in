@@ -6,13 +6,13 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/16 18:26:28 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/17 15:49:42 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	main4(t_path **best, t_path **new)
+void	main4(t_path **best, t_path **new/*, t_room *tab*/)
 {
 	if (!(*best))
 	{
@@ -21,15 +21,12 @@ void	main4(t_path **best, t_path **new)
 	}
 	else if (*best && (*new)->step > 0 && (*new)->step < (*best)->step)
 	{
-		//printf("new->step = %d best = %d\n", (*new)->step, (*best)->step);
 		free_paths(best);
 		*best = *new;
+		*new = 0;
 	}
 	else
-	{
-	//	printf("new->step = %d best = %d\n", (*new)->step, (*best)->step);
 		free_paths(new);
-	}
 }
 
 void	main3(int **matrix, t_room *tab, int size)
@@ -51,15 +48,15 @@ void	main3(int **matrix, t_room *tab, int size)
 		if (!(find_path(matrix, tab, &new, size)))
 			break ;
 		calc_step(new, tab[0].taken, i);
-		main4(&best, &new);
+		main4(&best, &new/*, tab*/);
 	}
-	
-/*	int j;
+/*	
+	int j;
 	i = 0;
 	while (i < best->path_n)
 	{
 		j = 0;
-		while (best->path[i][j + 1] != 0)
+		while (best->path[i][j] != 0)
 		{
 			printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d", i, j, best->path[i][j], tab[best->path[i][j]].name, tab[best->path[i][j]].wth, tab[best->path[i][j]].taken);
 			j++;
@@ -68,11 +65,10 @@ void	main3(int **matrix, t_room *tab, int size)
 		i++;
 	}
 
-
-
-	*/use_path(best, tab, size);
+*/
+	use_path(best, tab, size);
 //	free_paths(&best);
-//	free_paths(&new);
+	free_paths(&new);
 }
 
 void	main2(t_room *roombeg, t_link *linkbeg, int ant_n, t_write *str)
@@ -92,7 +88,7 @@ void	main2(t_room *roombeg, t_link *linkbeg, int ant_n, t_write *str)
 	else
 	{
 		tab[0].taken = ant_n;
-	//	write_data(&str);
+		write_data(&str);
 		main3(matrix, tab, size);
 	}
 	free_room_tab(&tab, size);

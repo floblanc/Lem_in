@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:58:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/16 18:24:50 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/17 11:06:21 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	ant_walk(t_path *best, t_room *tab, int j)
 		i--;
 	}
 //		printf("path[%d][%d] = %d -> room : %s.taken = %d\n", j, i, best->path[j][i], tab[best->path[j][i]].name, tab[best->path[j][i]].taken);
-	tab[best->path[j][best->len[j]]].taken = 0;
 }
 
 void	use_path(t_path *best, t_room *tab, int size)

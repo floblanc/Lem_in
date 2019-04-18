@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/16 15:25:48 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/18 11:44:45 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,6 @@ void				write_path(t_path *best, t_room *tab, int j, int ant_n);
 void				copy_best(t_path *best, t_path *new, int size);
 int					enougth_room_for_more(t_path *best, t_room *tab);
 void				clean_some_taken(t_room *tab, int size);
-void				try_swap_t_path(t_path **another_new, t_path **new);
+void				try_swap_t_path(t_path **another_new, t_path **new, t_room *tab);
 
 #endif

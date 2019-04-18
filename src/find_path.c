@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/17 15:48:01 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/18 11:45:45 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 		}
 		i++;
 	}
+	printf("best = %d %s.taken = %d pour le way %d\n", best, tab[best].name, tab[best].taken,  way);
 	if (best != 0 && best != 1)
 		tab[best].taken = way + 1;
 	return (best);
@@ -81,6 +82,7 @@ void	other_way(int **matrix, t_room *tab, t_path **new, int size)
 		only_one = (*new)->path_n;
 	else
 		return ;
+	printf("TRY ANOTHER\n");
 	i = 0;
 	another_new = 0;
 	init_t_path(&another_new, size, (*new)->path_n);
@@ -98,7 +100,19 @@ void	other_way(int **matrix, t_room *tab, t_path **new, int size)
 		i++;
 	}
 	if (find_path(matrix, tab, &another_new, size))
-		try_swap_t_path(&another_new, new);
+		try_swap_t_path(&another_new, new, tab);
+	else
+	{
+		i = 0;
+		j = 0;
+		while (i < (*new)->path_n)
+		{
+			j = 0;
+			while ((*new)->path[i][j] != 1)
+				tab[(*new)->path[i][j++]].taken = i + 1;
+			i++;
+		}
+	}
 	free_paths(&another_new);// si on free dans le vide ca viens de la je pense
 	return ;
 }
@@ -111,6 +125,7 @@ int		find_path(int **matrix, t_room *tab, t_path **new, int size)
 	if (!(*new))
 		return (0);
 	i = -1;
+	printf("FOR %d paths\n", (*new)->path_n);
 	while (++i < (*new)->path_n && i >= 0)
 	{
 		j = 0;

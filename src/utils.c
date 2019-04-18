@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:56:29 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/18 11:41:29 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/18 17:23:54 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	try_swap_t_path(t_path **another_new, t_path **new, t_room *tab)
 	int		ano_som;
 	int		i;
 
-//	printf("OTHER WAY FOUND\n");
+	//printf("OTHER WAY FOUND\n");
 	new_som = 0;
 	ano_som = 0;
 	i = 0;
@@ -44,6 +44,9 @@ void	try_swap_t_path(t_path **another_new, t_path **new, t_room *tab)
 		while (i < (*new)->path_n)
 		{
 			new_som = 0;
+			while ((*another_new)->path[i][new_som] != 1)
+				tab[(*another_new)->path[i][new_som++]].taken = 0;
+			new_som = 0;
 			while ((*new)->path[i][new_som] != 1)
 				tab[(*new)->path[i][new_som++]].taken = i + 1;
 			i++;
@@ -55,10 +58,10 @@ void	clean_some_taken(t_room *tab, int size)
 {
 	int	i;
 
-	i = 0;
+	i = 1;
 	while (i < size)
 	{
-		if (tab[i].taken != 1)
+		if (tab[i].taken > 0)
 			tab[i].taken = 0;
 		i++;
 	}

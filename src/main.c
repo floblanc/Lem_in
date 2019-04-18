@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/18 11:01:22 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/18 17:36:05 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	main4(t_path **best, t_path **new/*, t_room *tab*/)
 {
 	if (!(*best))
 	{
+		printf("%d steps\n",(*new)->step);
 		*best = *new;
 		*new = 0;
 	}
@@ -52,23 +53,25 @@ void	main3(int **matrix, t_room *tab, int size)
 		main4(&best, &new/*, tab*/);
 	}
 	
-	int j;
+
+
+/*	int j;
 	i = 0;
 	while (i < best->path_n)
 	{
 		j = 0;
-		while (best->path[i][j] != 0)
+		while (best->path[i][j] != 1)
 		{
 			printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d", i, j, best->path[i][j], tab[best->path[i][j]].name, tab[best->path[i][j]].wth, tab[best->path[i][j]].taken);
 			j++;
 		}
+			printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d", i, j, best->path[i][j], tab[best->path[i][j]].name, tab[best->path[i][j]].wth, tab[best->path[i][j]].taken);
 		printf("\nlen = %d\n", best->len[i]);
 		i++;
 	}
-
-
+*/
 	use_path(best, tab, size);
-//	free_paths(&best);
+	free_paths(&best);
 	free_paths(&new);
 }
 

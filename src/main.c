@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/17 15:49:42 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/18 11:01:22 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	main4(t_path **best, t_path **new/*, t_room *tab*/)
 	}
 	else if (*best && (*new)->step > 0 && (*new)->step < (*best)->step)
 	{
+		printf("from %d steps to %d steps\n",(*best)->step, (*new)->step);
 		free_paths(best);
 		*best = *new;
 		*new = 0;
@@ -50,7 +51,7 @@ void	main3(int **matrix, t_room *tab, int size)
 		calc_step(new, tab[0].taken, i);
 		main4(&best, &new/*, tab*/);
 	}
-/*	
+	
 	int j;
 	i = 0;
 	while (i < best->path_n)
@@ -65,7 +66,7 @@ void	main3(int **matrix, t_room *tab, int size)
 		i++;
 	}
 
-*/
+
 	use_path(best, tab, size);
 //	free_paths(&best);
 	free_paths(&new);

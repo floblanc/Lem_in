@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 11:24:49 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/09 11:30:21 by maginist         ###   ########.fr       */
+/*   Updated: 2019/04/19 12:05:11 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,20 @@ void	put_wth(int **matrix, int i, int j, t_room *tab)
 	tab[j].wth = tab[i].wth + 1;
 	put_wth(matrix, i, j + 1, tab);
 	put_wth(matrix, j, 0, tab);
+}
+
+int		fill_matrix(t_room *tab, int **matrix, char *str, int size)
+{
+	int		i;
+	int		run;
+
+	i = 0;
+	while (str[i] != '-')
+		i++;
+	run = 0;
+	while (run < size && ft_strncmp(tab[run].name, str, i) != 0)
+		run++;
+	if (run < size && fill_matrix2(tab, str + i + 1, matrix, run))
+		return (1);
+	return (0);
 }

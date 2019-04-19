@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 10:08:54 by floblanc          #+#    #+#             */
-/*   Updated: 2019/03/30 15:40:00 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/19 12:08:24 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,35 +33,6 @@ void	free_lst_room(t_room **begin)
 			current = current->next;
 			before->next = 0;
 			ft_strdel(&(before->name));
-			free(before);
-			before = 0;
-		}
-	}
-}
-
-void	free_lst_link(t_link **begin)
-{
-	t_link	*current;
-	t_link	*before;
-
-	current = 0;
-	before = 0;
-	if (begin && *begin)
-	{
-		before = *begin;
-		current = before->next;
-		*begin = 0;
-		before->next = 0;
-		ft_strdel(&(before->name1));
-		ft_strdel(&(before->name2));
-		free(before);
-		while (current)
-		{
-			before = current;
-			current = current->next;
-			before->next = 0;
-			ft_strdel(&(before->name1));
-			ft_strdel(&(before->name2));
 			free(before);
 			before = 0;
 		}
@@ -118,4 +89,27 @@ void	free_matrix(int ***matrix, int size)
 		free((*matrix)[i++]);
 	free(*matrix);
 	*matrix = 0;
+}
+
+void	free_paths(t_path **begin)
+{
+	int		i;
+	int		j;
+	t_path	*before;
+
+	if (!(begin && *begin))
+		return ;
+	i = 1;
+	while (*begin)
+	{
+		before = *begin;
+		j = 0;
+		while (j < i)
+			free((*begin)->path[j++]);
+		free((*begin)->len);
+		i++;
+		*begin = (*begin)->next;
+		free(before);
+		before = 0;
+	}
 }

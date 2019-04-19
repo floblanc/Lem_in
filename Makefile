@@ -6,7 +6,7 @@
 #    By: maginist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/09 11:22:24 by maginist          #+#    #+#              #
-#    Updated: 2019/04/12 11:03:04 by floblanc         ###   ########.fr        #
+#    Updated: 2019/04/19 12:09:06 by floblanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,6 @@ SRC_NAME =already_exist.c\
 		  extract_room.c\
 		  find_path.c\
 		  free_lst.c\
-		  free_lst2.c\
 		  ft_lstlen.c\
 		  is_valid.c\
 		  main.c\

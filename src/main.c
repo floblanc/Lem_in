@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/18 18:29:02 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/19 12:34:15 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	main3(int **matrix, t_room *tab, int size)
 	free_paths(&new);
 }
 
-void	main2(t_room *roombeg, t_link *linkbeg, int ant_n, t_write *str)
+void	main2(t_room *roombeg, int ant_n, t_write **str)
 {
 	int		**matrix;
 	t_room	*tab;
@@ -85,19 +85,19 @@ void	main2(t_room *roombeg, t_link *linkbeg, int ant_n, t_write *str)
 	matrix = 0;
 	size = ft_lstlen(&roombeg);
 	rooms_in_tab(&tab, &roombeg);
-	matrix = set_matrix(tab, &linkbeg, size);
-	put_wth(matrix, 1, 0, tab);
+	matrix = set_matrix(tab, str, size);
+	//put_wth(matrix, 1, 0, tab);
 	if (tab[0].wth <= 0)
 		write(2, "ERROR\n", 6);
 	else
 	{
 		tab[0].taken = ant_n;
-		write_data(&str);
-//		main3(matrix, tab, size);
+		write_data(str);
+		//main3(matrix, tab, size);
 	}
 	free_room_tab(&tab, size);
 	free_matrix(&matrix, size);
-	free_lst_write(&str);
+	free_lst_write(str);
 	return ;
 }
 
@@ -105,14 +105,12 @@ int		main(void)
 {
 	int		ant_n;
 	t_room	*roombeg;
-	t_link	*linkbeg;
 	t_write	*str;
 
 	ant_n = 0;
 	roombeg = 0;
-	linkbeg = 0;
 	str = 0;
-	read_n_stock(&ant_n, &roombeg, &linkbeg, &str);
-	main2(roombeg, linkbeg, ant_n, str);
+	read_n_stock(&ant_n, &roombeg, &str);
+	main2(roombeg, ant_n, &str);
 	return (0);
 }

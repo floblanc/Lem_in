@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 18:16:42 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/09 14:08:42 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/19 12:19:49 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,47 +68,65 @@ void	rooms_in_tab(t_room **tab, t_room **begin)
 		order_tabroom(tab, begin);
 }
 
-void	fill_matrix2(t_room *tab, t_link **c, int **matrix, int i)
+int		fill_matrix2(t_room *tab, char *str, int **matrix, int i)
 {
 	int		j;
 
 	j = 0;
-	while (j < i)
+	while (tab[j].next)
 	{
-		if (ft_strcmp(tab[j].name, (*c)->name1) == 0
-				|| ft_strcmp(tab[j].name, (*c)->name2) == 0)
+		if (ft_strcmp(tab[j].name, str) == 0)
 		{
 			matrix[i][i] = matrix[i][i] + 1;
 			matrix[j][j] = matrix[j][j] + 1;
 			matrix[j][i] = -1;
 			matrix[i][j] = -1;
-			return ;
+			return (1);
 		}
 		j++;
 	}
-}
-
-void	fill_matrix(t_room *tab, t_link **begin, int **matrix, int size)
-{
-	int		i;
-	t_link	*c;
-
-	i = 1;
-	while (i < size)
+	if (ft_strcmp(tab[j].name, str) == 0)
 	{
-		c = *begin;
-		while (c)
-		{
-			if (ft_strcmp(tab[i].name, c->name1) == 0
-					|| ft_strcmp(tab[i].name, c->name2) == 0)
-				fill_matrix2(tab, &c, matrix, i);
-			c = c->next;
-		}
-		i++;
+		matrix[i][i] = matrix[i][i] + 1;
+		matrix[j][j] = matrix[j][j] + 1;
+		matrix[j][i] = -1;
+		matrix[i][j] = -1;
+		return (1);
 	}
+	return (0);
 }
 
-int		**set_matrix(t_room *tab, t_link **begin, int size)
+void	run_in_links(t_room *tab, int **matrix, int size, t_write **begin)
+{
+	t_write *current;
+	char	*line;
+	int		error;
+
+	current = *begin;
+	line = 0;
+	error = 0;
+	while (current->next)
+				current = current->next;
+	if (!(fill_matrix(tab, matrix, current->str, size)))
+		return ;
+	while (get_next_line(0, &line) > 0)
+	{
+		if (link_form_is_valid(line))
+		{
+			if (!(fill_matrix(tab, matrix, line, size)))
+				break ;
+		}
+		else if (line[0] != '#' || command_is_valid(line))
+			error = 1;
+		if (error)
+			break;
+		stock_to_write(line, begin);
+			ft_strdel(&line);
+	}
+	ft_strdel(&line);
+}
+
+int		**set_matrix(t_room *tab, t_write **str, int size)
 {
 	int		**matrix;
 	int		i;
@@ -129,7 +147,6 @@ int		**set_matrix(t_room *tab, t_link **begin, int size)
 		}
 		i++;
 	}
-	fill_matrix(tab, begin, matrix, size);
-	free_lst_link(begin);
+	run_in_links(tab, matrix, size, str);
 	return (matrix);
 }

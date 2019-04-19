@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 18:16:42 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/19 14:08:48 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/19 14:55:35 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	run_in_links(t_room *tab, int **matrix, int size, t_write **begin)
 		if (error)
 			break;
 		stock_to_write(line, begin);
-			ft_strdel(&line);
+		ft_strdel(&line);
 	}
 	ft_strdel(&line);
 }

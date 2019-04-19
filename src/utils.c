@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:56:29 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/18 17:23:54 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/19 18:53:01 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ void	try_swap_t_path(t_path **another_new, t_path **new, t_room *tab)
 	i = 0;
 	while (i < (*new)->path_n)
 	{
-//		printf("new-len[%d] = %d et anothernew->len[%d] = %d\n",i,(*new)->len[i],i,(*another_new)->len[i]);
+		//		printf("new-len[%d] = %d et anothernew->len[%d] = %d\n",i,(*new)->len[i],i,(*another_new)->len[i]);
 		new_som += (*new)->len[i];
 		ano_som += (*another_new)->len[i];
 		i++;
 	}
 	if (ano_som && ano_som < new_som)
 	{
-	//	printf("le nouveau est mieux\n");
+		//	printf("le nouveau est mieux\n");
 		tmp = *another_new;
 		*another_new = *new;
 		*new = tmp;
@@ -54,16 +54,28 @@ void	try_swap_t_path(t_path **another_new, t_path **new, t_room *tab)
 	}
 }
 
-void	clean_some_taken(t_room *tab, int size)
+void	clean_some_taken(t_room *tab, int size, int symb)
 {
 	int	i;
 
 	i = 1;
-	while (i < size)
+	if (symb >= 0)
 	{
-		if (tab[i].taken > 0)
-			tab[i].taken = 0;
-		i++;
+		while (i < size)
+		{
+			if (tab[i].taken > 0)
+				tab[i].taken = 0;
+			i++;
+		}
+	}
+	else
+	{
+		while (i < size)
+		{
+			if (tab[i].taken < 0)
+				tab[i].taken = 0;
+			i++;
+		}
 	}
 }
 

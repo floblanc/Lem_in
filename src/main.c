@@ -6,19 +6,20 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/19 19:21:36 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/19 21:36:16 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	main4(t_path **best, t_path **new, int size/*, t_room *tab*/)
+void	main4(t_path **best, t_path **new, int size, t_room *tab)
 {
 	if (!(*best))
 	{
 		printf("%d steps\n",(*new)->step);
 		init_t_path(best, size, (*new)->path_n);
 		copy_best(*new, *best, size);
+		calc_step(*best, tab[0].taken, (*best)->path_n);
 	}
 	else if (*best && (*new)->step > 0 && (*new)->step < (*best)->step)
 	{
@@ -26,7 +27,9 @@ void	main4(t_path **best, t_path **new, int size/*, t_room *tab*/)
 		free_paths(best);
 		init_t_path(best, size, (*new)->path_n);
 		copy_best(*new, *best, size);
+		calc_step(*best, tab[0].taken, (*best)->path_n);
 	}
+	printf("new->step %d, new_path_n : %d,  best->step %d, best-Path_n : %d\n",(*new)->step, (*new)->path_n, (*best)->step, (*best)->path_n);
 }
 
 void	main3(int **matrix, t_room *tab, int size)
@@ -51,7 +54,7 @@ void	main3(int **matrix, t_room *tab, int size)
 		{
 
 			calc_step(new, tab[0].taken, i);
-			main4(&best, &new, size/*, tab*/);
+			main4(&best, &new, size, tab);
 			printf("tab[%d](%s).taken = -%d\n", new->path[i - 1][new->len[i - 1] - 2], tab[new->path[i -1 ][new->len[i -1] - 2]].name, tab[new->path[i -1 ][new->len[i -1] - 2]].taken);
 			printf("tab[%d](%s).taken = -%d\n", new->path[i - 1][new->len[i - 1] - 2], tab[new->path[i -1 ][new->len[i -1] - 2]].name, i);
 			tab[new->path[i - 1][new->len[i - 1] - 2]].taken = i * -1;

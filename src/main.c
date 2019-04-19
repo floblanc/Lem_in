@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/19 12:34:15 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/19 13:55:35 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,24 @@ void	main3(int **matrix, t_room *tab, int size)
 		calc_step(new, tab[0].taken, i);
 		main4(&best, &new/*, tab*/);
 	}
-	
 
 
-/*	int j;
-	i = 0;
-	while (i < best->path_n)
-	{
+
+	/*	int j;
+		i = 0;
+		while (i < best->path_n)
+		{
 		j = 0;
 		while (best->path[i][j] != 1)
 		{
-			printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d", i, j, best->path[i][j], tab[best->path[i][j]].name, tab[best->path[i][j]].wth, tab[best->path[i][j]].taken);
-			j++;
+		printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d", i, j, best->path[i][j], tab[best->path[i][j]].name, tab[best->path[i][j]].wth, tab[best->path[i][j]].taken);
+		j++;
 		}
-			printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d", i, j, best->path[i][j], tab[best->path[i][j]].name, tab[best->path[i][j]].wth, tab[best->path[i][j]].taken);
+		printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d", i, j, best->path[i][j], tab[best->path[i][j]].name, tab[best->path[i][j]].wth, tab[best->path[i][j]].taken);
 		printf("\nlen = %d\n", best->len[i]);
 		i++;
-	}
-*/
+		}
+		*/
 	use_path(best, tab, size);
 	free_paths(&best);
 	free_paths(&new);
@@ -84,16 +84,19 @@ void	main2(t_room *roombeg, int ant_n, t_write **str)
 	tab = 0;
 	matrix = 0;
 	size = ft_lstlen(&roombeg);
-	rooms_in_tab(&tab, &roombeg);
-	matrix = set_matrix(tab, str, size);
-	//put_wth(matrix, 1, 0, tab);
-	if (tab[0].wth <= 0)
+	if (ant_n > 0)
+	{
+		rooms_in_tab(&tab, &roombeg);
+		matrix = set_matrix(tab, str, size);
+		put_wth(matrix, 1, 0, tab);
+	}
+	if (ant_n <= 0 || tab[0].wth <= 0)
 		write(2, "ERROR\n", 6);
 	else
 	{
 		tab[0].taken = ant_n;
 		write_data(str);
-		//main3(matrix, tab, size);
+		main3(matrix, tab, size);
 	}
 	free_room_tab(&tab, size);
 	free_matrix(&matrix, size);

@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 18:16:42 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/19 12:19:49 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/19 14:08:48 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		fill_matrix2(t_room *tab, char *str, int **matrix, int i)
 	j = 0;
 	while (tab[j].next)
 	{
-		if (ft_strcmp(tab[j].name, str) == 0)
+		if (ft_strcmp(tab[j].name, str) == 0 && matrix[i][j] == 0)
 		{
 			matrix[i][i] = matrix[i][i] + 1;
 			matrix[j][j] = matrix[j][j] + 1;
@@ -85,7 +85,7 @@ int		fill_matrix2(t_room *tab, char *str, int **matrix, int i)
 		}
 		j++;
 	}
-	if (ft_strcmp(tab[j].name, str) == 0)
+	if (ft_strcmp(tab[j].name, str) == 0 && matrix[i][j] == 0)
 	{
 		matrix[i][i] = matrix[i][i] + 1;
 		matrix[j][j] = matrix[j][j] + 1;

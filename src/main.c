@@ -104,6 +104,8 @@ void	main2(t_room **roombeg, int ant_n, t_write **str)
 	{
 		rooms_in_tab(&tab, roombeg);
 		matrix = set_matrix(tab, str, size);
+                if(matrix[0][1] == -1)
+                    on_passe_tout_d_un_coup(ant_n);//Lol caca fait coder ça et le mettre à un meilleur endroit qu’ici
 		put_wth(matrix, 1, 0, tab);
 	}
 	if (ant_n <= 0 || tab[0].wth <= 0)

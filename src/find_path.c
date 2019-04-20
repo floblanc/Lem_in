@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/20 14:24:45 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/20 16:40:09 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 		//		printf("check : (((tab[%d].taken (%d) <= 0 && ((tab[%d].taken (%d) > (way (%d) + 1) * -1 (%d) && !(tab[%d].taken(%d) == -1 && pos(%d) == 0))) || tab[%d].taken (%d) == 0)) || i (%d)== 1) && (best(%d) == 0 || tab[%d].wth(%d) < tab[%d].wth (%d)))\n\n", i, tab[i].taken, i, tab[i].taken, way, (way + 1) * -1, i, tab[i].taken, pos, i, tab[i].taken, i, best, i, tab[i].wth, best, tab[best].wth);
 			if (((tab[i].taken <= 0 
 				&& ((tab[i].taken > (way + 1) * -1
-							&& !(tab[i].taken == -1 && pos == 0))
+							&& !(tab[i].taken >= (new->path_n - 1) * -1 && pos == 0))
 				|| tab[i].taken == 0) && matrix[i][i] > 1)
 				|| i == 1) && (best == 0 || tab[i].wth < tab[best].wth))
 			{
@@ -75,7 +75,7 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 		}
 		i++;
 	}
-//	printf("best = %d %s.taken = %d pour le way %d\n", best, tab[best].name, tab[best].taken,  way);
+		printf("best = %d %s.taken = %d pour le way %d\n", best, tab[best].name, tab[best].taken,  way);
 	if (best != 0 && best != 1)
 		tab[best].taken = way + 1;
 	return (best);
@@ -143,7 +143,7 @@ int		find_path(int **matrix, t_room *tab, t_path **new, int size)
 	if (!(*new))
 		return (0);
 	i = -1;
-//	printf("----------FOR %d paths----------\n", (*new)->path_n);
+	printf("----------FOR %d paths----------\n", (*new)->path_n);
 //	printf("tab[%d](%s).taken = %d\n", 2, tab[2].name, tab[2].taken);
 //	printf("tab[%d](%s).taken = %d\n", 12, tab[12].name, tab[12].taken);
 	while (++i < (*new)->path_n && i >= 0)
@@ -169,7 +169,7 @@ int		find_path(int **matrix, t_room *tab, t_path **new, int size)
 			return (0);
 	//	printf("len[%d] = %d\n", i, (*new)->len[i]);
 	}
-	if ((*new)->path_n > 1)
-		other_way(matrix, tab, new, size);//test d'en faire qu'un
+	//if ((*new)->path_n > 1)
+	//	other_way(matrix, tab, new, size);//test d'en faire qu'un
 	return (1);
 }

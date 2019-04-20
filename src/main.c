@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/19 21:36:16 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/20 13:30:34 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	main4(t_path **best, t_path **new, int size, t_room *tab)
 	{
 		printf("%d steps\n",(*new)->step);
 		init_t_path(best, size, (*new)->path_n);
-		copy_best(*new, *best, size);
+		copy_best(*new, *best, size, tab);
 		calc_step(*best, tab[0].taken, (*best)->path_n);
 	}
 	else if (*best && (*new)->step > 0 && (*new)->step < (*best)->step)
@@ -26,7 +26,7 @@ void	main4(t_path **best, t_path **new, int size, t_room *tab)
 		printf("from %d steps to %d steps\n",(*best)->step, (*new)->step);
 		free_paths(best);
 		init_t_path(best, size, (*new)->path_n);
-		copy_best(*new, *best, size);
+		copy_best(*new, *best, size, tab);
 		calc_step(*best, tab[0].taken, (*best)->path_n);
 	}
 	printf("new->step %d, new_path_n : %d,  best->step %d, best-Path_n : %d\n",(*new)->step, (*new)->path_n, (*best)->step, (*best)->path_n);
@@ -48,7 +48,7 @@ void	main3(int **matrix, t_room *tab, int size)
 		new = 0;
 		free_paths(&new);
 		init_t_path(&new, size, i);
-		copy_best(best, new, size);
+		copy_best(best, new, size, tab);
 		clean_some_taken(tab, size, -1);
 		while ((find_path(matrix, tab, &new, size) > 0))
 		{
@@ -69,6 +69,7 @@ void	main3(int **matrix, t_room *tab, int size)
 
 	int j;
 	i = 0;
+	printf("new->step %d, new_path_n : %d,  best->step %d, best-Path_n : %d\n",(new)->step, (new)->path_n, (best)->step, (best)->path_n);
 	while (i < best->path_n)
 	{
 		j = 0;

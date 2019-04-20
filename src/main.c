@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/20 13:30:34 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/20 14:24:43 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	main3(int **matrix, t_room *tab, int size)
 
 			calc_step(new, tab[0].taken, i);
 			main4(&best, &new, size, tab);
-			printf("tab[%d](%s).taken = -%d\n", new->path[i - 1][new->len[i - 1] - 2], tab[new->path[i -1 ][new->len[i -1] - 2]].name, tab[new->path[i -1 ][new->len[i -1] - 2]].taken);
-			printf("tab[%d](%s).taken = -%d\n", new->path[i - 1][new->len[i - 1] - 2], tab[new->path[i -1 ][new->len[i -1] - 2]].name, i);
+		//	printf("tab[%d](%s).taken = -%d\n", new->path[i - 1][new->len[i - 1] - 2], tab[new->path[i -1 ][new->len[i -1] - 2]].name, tab[new->path[i -1 ][new->len[i -1] - 2]].taken);
+		//	printf("tab[%d](%s).taken = -%d\n", new->path[i - 1][new->len[i - 1] - 2], tab[new->path[i -1 ][new->len[i -1] - 2]].name, i);
 			tab[new->path[i - 1][new->len[i - 1] - 2]].taken = i * -1;
 			new->path[i - 1][new->len[i - 1] - 2] = 0;
 			new->path[i - 1][new->len[i - 1] - 1] = 0;
@@ -67,7 +67,7 @@ void	main3(int **matrix, t_room *tab, int size)
 
 
 
-	int j;
+/*	int j;
 	i = 0;
 	printf("new->step %d, new_path_n : %d,  best->step %d, best-Path_n : %d\n",(new)->step, (new)->path_n, (best)->step, (best)->path_n);
 	while (i < best->path_n)
@@ -81,9 +81,9 @@ void	main3(int **matrix, t_room *tab, int size)
 		printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d", i, j, best->path[i][j], tab[best->path[i][j]].name, tab[best->path[i][j]].wth, tab[best->path[i][j]].taken);
 		printf("\nlen = %d\n", best->len[i]);
 		i++;
-	}
+	}*/
 
-	calc_step(best, tab[0].taken, i);
+	calc_step(best, tab[0].taken, best->path_n);
 	use_path(best, tab, size);
 	free_paths(&best);
 	free_paths(&new);

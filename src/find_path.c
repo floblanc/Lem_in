@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/21 14:21:45 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/21 15:56:24 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 	//printf(" %d\n",new->path[way][pos]);
 	lim = matrix[new->path[way][pos]][new->path[way][pos]];
 	best = 0;
+	block = 0;
 	i = 0;
 	while (lim > 0)
 	{
@@ -74,8 +75,8 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 			//		printf("check : (((tab[%d].taken (%d) <= 0 && ((tab[%d].taken (%d) > (way (%d) + 1) * -1 (%d) && !(tab[%d].taken(%d) == -1 && pos(%d) == 0))) || tab[%d].taken (%d) == 0)) || i (%d)== 1) && (best(%d) == 0 || tab[%d].wth(%d) < tab[%d].wth (%d)))\n\n", i, tab[i].taken, i, tab[i].taken, way, (way + 1) * -1, i, tab[i].taken, pos, i, tab[i].taken, i, best, i, tab[i].wth, best, tab[best].wth);
 			if ((!(tab[i].taken) && (best == 0 || tab[i].wth < tab[best].wth)))
 				best = i;
-			else if (pos > 0 && (tab[i].taken > 0 && tab[i].taken < way + 1
-						&& (block == 0 || tab[i].taken < block)))
+			else if (pos > 0 && tab[i].taken > 0 && (tab[i].taken > way + 1
+							&& (best == 0 || tab[block].wth > tab[i].wth)))
 				block = i;
 		}
 			if (best == 1)

@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/21 13:35:29 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/21 16:44:43 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ void	main3(int **matrix, t_room *tab, int size)
 		i++;
 	}
 
-	//calc_step(best, tab[0].taken, best->path_n);
-	//use_path(best, tab, size);
+	calc_step(best, tab[0].taken, best->path_n);
+	printf("%d steps\n",best->step);
+	use_path(best, tab, size);
 	free_paths(&best);
 	//free_paths(&new);
 }

@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 15:36:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/19 14:53:11 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/24 11:32:16 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	stock_room(char *line, t_room **begin, int *startend, int *error)
 {
 	t_room	*new;
-	t_room	*current;
+	t_room	*end;
 
 	if (!(new = (t_room*)malloc(sizeof(t_room) * 1)))
 		exit(0);
@@ -25,20 +25,15 @@ void	stock_room(char *line, t_room **begin, int *startend, int *error)
 	new->startend = *startend;
 	*startend = 0;
 	new->next = 0;
-	if (room_already_exist(begin, new) || *error == 1)
+	if (room_already_exist(begin, new, &end) || *error == 1)
 	{
 		free_lst_room(&new);
 		*error = 1;
 	}
-	if (!(*begin))
+	else if (!(*begin))
 		*begin = new;
-	else if (new)
-	{
-		current = *begin;
-		while (current->next)
-			current = current->next;
-		current->next = new;
-	}
+	else
+		end->next = new;
 }
 
 void	new_link_maker(t_link *new, char *line, int i)

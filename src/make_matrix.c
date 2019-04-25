@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 18:16:42 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/19 14:55:35 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/24 11:47:37 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,27 +126,25 @@ void	run_in_links(t_room *tab, int **matrix, int size, t_write **begin)
 	ft_strdel(&line);
 }
 
-int		**set_matrix(t_room *tab, t_write **str, int size)
+void	set_matrix(t_room *tab, t_write **str, int size, int ***matrix)
 {
-	int		**matrix;
 	int		i;
 	int		j;
 
 	i = 0;
-	if (!(matrix = (int**)malloc(sizeof(int*) * size)))
+	if (!((*matrix) = (int**)malloc(sizeof(int*) * size)))
 		exit(0);
 	while (i < size)
 	{
-		if (!(matrix[i] = (int*)malloc(sizeof(int) * size)))
+		if (!((*matrix)[i] = (int*)malloc(sizeof(int) * size)))
 			exit(0);
 		j = 0;
 		while (j < size)
 		{
-			matrix[i][j] = 0;
+			(*matrix)[i][j] = 0;
 			j++;
 		}
 		i++;
 	}
-	run_in_links(tab, matrix, size, str);
-	return (matrix);
+	run_in_links(tab, *matrix, size, str);
 }

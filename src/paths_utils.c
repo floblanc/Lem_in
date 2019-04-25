@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:58:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/20 13:52:31 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/24 15:20:35 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int		calc_step(t_path *struc, int ant_n, int path_n)
 	while (i > 0)
 	{
 		i = 0;
-		while ((i < path_n - 1) && (struc->len[i]
+		while ((i < path_n - 1)  && struc->len[i + 1] > 0 && (struc->len[i]
 					+ struc->path[i][struc->len[i]] - 1 >= struc->len[i + 1]
 					+ struc->path[i + 1][struc->len[i + 1]]))
 			i++;

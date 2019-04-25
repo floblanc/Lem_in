@@ -6,13 +6,13 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 19:56:06 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/12 15:46:00 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/24 11:23:30 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-int		room_already_exist(t_room **begin, t_room *new)
+int		room_already_exist(t_room **begin, t_room *new, t_room **end)
 {
 	t_room *current;
 
@@ -21,6 +21,8 @@ int		room_already_exist(t_room **begin, t_room *new)
 	current = *begin;
 	while (current)
 	{
+		if (current->next == 0)
+			*end = current;
 		if (!(ft_strcmp(current->name, new->name)))
 			return (1);
 		else if (current->x == new->x && current->y == new->y)

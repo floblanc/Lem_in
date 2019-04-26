@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:58:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/25 15:23:13 by maginist         ###   ########.fr       */
+/*   Updated: 2019/04/26 12:07:14 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	use_path(t_path *best, t_room *tab, int size)
 	{
 		j = -1;
 		write(1, "\n", 1);
-		while (++j < best->path_n)
+		while (++j < best->path_n && best->len[j] > 0)
 		{
 			ant_walk(best, tab, j);
 			if (best->path[j][best->len[j]] > 0 /*&& tab[0].taken > 0*/)
@@ -92,21 +92,20 @@ int		calc_step(t_path *struc, int ant_n, int path_n)
 	int	i;
 
 //	printf("struc->len[%d] = %d\n", path_n - 1, struc->len[0]);
-	if (!(struc->len[path_n - 1]))
-		return (0);
 //	printf("CALCUL path_n = %d et strucpath_n = %d\n", path_n, struc->path_n);
 	struc->path[0][struc->len[0]] = ant_n;
-	if (path_n == 1)
+	if (path_n == 1 || struc->len[1] <= 0)
 	{
 		struc->step = struc->len[0] + struc->path[0][struc->len[0]] - 1;
 		return (struc->step);
 	}
 	i = 1;
 	//printf("CALCUL222\n");
-	while (i > 0)
+	while (i > 0 )
 	{
 		i = 0;
-		while ((i < path_n - 1)  && struc->len[i + 1] > 0 && (struc->len[i]
+		while ((i < path_n - 1) && struc->len[i + 1] > 0
+				&& struc->len[i + 1] > 0 && (struc->len[i]
 					+ struc->path[i][struc->len[i]] - 1 >= struc->len[i + 1]
 					+ struc->path[i + 1][struc->len[i + 1]]))
 			i++;
@@ -117,7 +116,7 @@ int		calc_step(t_path *struc, int ant_n, int path_n)
 //		printf("struc->path[%d][%d] = %d\n", 0, struc->len[0],struc->path[0][struc->len[0]]);
 //		printf("struc->path[%d][%d] = %d\n", i, struc->len[i],struc->path[i][struc->len[i]]);
 	}
-	printf("add is %d + %d\n",struc->len[1], struc->path[1][struc->len[1]] - 1);
+//	printf("add is %d + %d\n",struc->len[1], struc->path[1][struc->len[1]] - 1);
 	struc->step = struc->len[1] + (struc->path[1][struc->len[1]] - 1);
 	return (struc->step);
 }

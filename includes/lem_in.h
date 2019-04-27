@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/26 09:36:44 by maginist         ###   ########.fr       */
+/*   Updated: 2019/04/27 11:21:17 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,6 @@ void				clean_some_taken(t_room *tab, int size, int symb);
 void				try_swap_t_path(t_path **another_new, t_path **new
 		, t_room *tab);
 void				onelink_startend(int ant_n);
+int					other_turn(int **matrix, t_room *tab, int *way, int room_n);
 
 #endif

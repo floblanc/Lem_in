@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/26 17:17:44 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/27 13:28:34 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,19 +118,24 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 			//		printf("check : (((tab[%d].taken (%d) <= 0 && ((tab[%d].taken (%d) > (way (%d) + 1) * -1 (%d) && !(tab[%d].taken(%d) == -1 && pos(%d) == 0))) || tab[%d].taken (%d) == 0)) || i (%d)== 1) && (best(%d) == 0 || tab[%d].wth(%d) < tab[%d].wth (%d)))\n\n", i, tab[i].taken, i, tab[i].taken, way, (way + 1) * -1, i, tab[i].taken, pos, i, tab[i].taken, i, best, i, tab[i].wth, best, tab[best].wth);
 			if ((!(tab[i].taken) && (best == 0 || tab[i].wth < tab[best].wth)))
 				best = i;
-			else if (pos > 0 && tab[i].taken > 0 && (tab[i].taken </*si on l'inverse on a d'autres chemins ca peut etre interessant de lancer les 2 et garder le meilleur*/ way + 1
+			else if (pos > 0 && i && tab[i].taken > 0 && (tab[i].taken </*si on l'inverse on a d'autres chemins ca peut etre interessant de lancer les 2 et garder le meilleur*/ way + 1
 						&& (block == 0 || tab[block].wth > tab[i].wth)))
 				block = i;
+			else if (pos > 0 && i && tab[i].taken > 0 && (tab[i].taken > way + 1
+						&& (block == 0 || tab[block].wth > tab[i].wth)
+						&& other_turn(matrix, tab, new->path[tab[i].taken - 1], i)))
+								block = i;
 		}
 		if (best == 1)
 			break ;
 		i++;
 	}
 	//	printf("best = %d %s.taken = %d pour le way %d\n", best, tab[best].name, tab[best].taken,  way);
-	if ((!(best) || tab[best].wth > tab[block].wth) && block > 0)
-		best = -block;
-	else if (best != 0 && best != 1)
+	//	printf("Block = %d %s.taken = %d pour le way %d\n", block, tab[block].name, tab[block].taken,  way);
+	if (best != 0 && best != 1)
 		tab[best].taken = way + 1;
+	else if ((!(best) /* || tab[best].wth > tab[block].wth) */&& block > 0))
+		best = -block;
 	return (best);
 }
 

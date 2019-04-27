@@ -6,7 +6,7 @@
 #    By: maginist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/09 11:22:24 by maginist          #+#    #+#              #
-#    Updated: 2019/04/19 13:36:01 by floblanc         ###   ########.fr        #
+#    Updated: 2019/04/27 11:21:38 by floblanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ SRC_NAME =already_exist.c\
 		  stock_data.c\
 		  utils.c\
 		  write_data.c\
+		  other_utils.c
 
 SRC_PATH = ./src
 

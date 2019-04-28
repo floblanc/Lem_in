@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/28 13:41:22 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/28 14:43:46 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	swap_path(t_path **new, int size, int i)
 void	sort_paths(t_path **new, int size)
 {
 	int	i;
-
+	
 	i = 0;
 	while (i < (*new)->path_n - 1)
 	{
@@ -123,7 +123,7 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 			if ((tab[i].taken <= 0 && tab[i].taken > (way + 1) * -1
 						&& (best == 0 || tab[i].wth < tab[best].wth)))
 				best = i;
-			else if (pos > 0 && i && tab[i].taken > 0 && (tab[i].taken > way + 1
+			else if (pos > 0 && i && tab[i].taken > 0 && (tab[i].taken != way + 1
 						&& (block == 0 || tab[block].wth > tab[i].wth)
 						&& other_turn(matrix, tab, new->path[tab[i].taken - 1], i)))
 				block = i;
@@ -136,12 +136,12 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 			break ;
 		i++;
 	}
-	//	printf("best = %d %s.taken = %d pour le way %d\n", best, tab[best].name, tab[best].taken,  way + 1);
-	//	printf("Block = %d %s.taken = %d pour le way %d\n", block, tab[block].name, tab[block].taken,  way + 1);
-	if (block > 0 && (!(best) || tab[best].wth > tab[block].wth))
-		best = -block;
-	else if (best != 0 && best != 1)
+		printf("best = %d %s.taken = %d pour le way %d\n", best, tab[best].name, tab[best].taken,  way + 1);
+		printf("Block = %d %s.taken = %d pour le way %d\n", block, tab[block].name, tab[block].taken,  way + 1);
+	if (best != 0 && best != 1)
 		tab[best].taken = way + 1;
+	else if (block > 0 && (!(best) /*|| tab[best].wth > tab[block].wth*/))
+		best = -block;
 	return (best);
 }
 

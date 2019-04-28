@@ -6,13 +6,13 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/28 16:18:33 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/28 17:24:45 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	swap_path(t_path **new, int size, int i, t_room *tab)
+void	swap_path2(t_path **new, int size, int i, t_room *tab)
 {
 	int	tmp[size];
 	int	save_len;
@@ -40,7 +40,7 @@ void	swap_path(t_path **new, int size, int i, t_room *tab)
 	(*new)->len[i + 1] = save_len;
 }
 
-void	sort_paths(t_path **new, int size, t_room *tab)
+void	sort_paths2(t_path **new, int size, t_room *tab)
 {
 	int	i;
 	
@@ -50,14 +50,14 @@ void	sort_paths(t_path **new, int size, t_room *tab)
 		if (((*new)->len[i] <= 0 || (*new)->len[i] > (*new)->len[i + 1])
 				&& (*new)->len[i + 1] > 0)
 		{
-			swap_path(new, size, i, tab);
+			swap_path2(new, size, i, tab);
 			i = -1;
 		}
 		i++;
 	}
 }
 
-int		all_len_complete(t_path *new)
+int		all_len_complete2(t_path *new)
 {
 	int	i;
 
@@ -71,7 +71,7 @@ int		all_len_complete(t_path *new)
 	return (1);
 }
 
-int		analyse_block(t_room *tab, t_path *new, int *way, int pos)
+int		analyse_block2(t_room *tab, t_path *new, int *way, int pos)
 {
 	int	block;
 	int	i;
@@ -105,7 +105,7 @@ int		analyse_block(t_room *tab, t_path *new, int *way, int pos)
 	return (0);
 }
 
-int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
+int		way_is_possible2(int **matrix, t_room *tab, t_path *new, int way)
 {
 	int	pos;
 	int lim;
@@ -153,7 +153,7 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 	return (best);
 }
 
-int		find_path(int **matrix, t_room *tab, t_path **new, int size)
+int		find_path2(int **matrix, t_room *tab, t_path **new, int size)
 {
 	int	i;
 	int	j;
@@ -169,11 +169,11 @@ int		find_path(int **matrix, t_room *tab, t_path **new, int size)
 		{
 			if ((*new)->len[i] == 0 && (*new)->path[i][j] == 0)
 			{
-				(*new)->path[i][j] = way_is_possible(matrix, tab, *new, i);
+				(*new)->path[i][j] = way_is_possible2(matrix, tab, *new, i);
 				if ((*new)->path[i][j] == 1)
 					(*new)->len[i] = j + 1;
 				else if ((*new)->path[i][j] < 0)
-					j = analyse_block(tab, *new, &i, j);
+					j = analyse_block2(tab, *new, &i, j);
 				else if ((*new)->path[i][j] == 0)
 				{
 					if (j > 1)
@@ -196,6 +196,6 @@ int		find_path(int **matrix, t_room *tab, t_path **new, int size)
 		}
 		j++;
 	}
-	sort_paths(new, size, tab);
+	sort_paths2(new, size, tab);
 	return (0);
 }

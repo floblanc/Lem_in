@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/28 14:44:03 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/28 17:30:11 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,20 @@ void	main3(int **matrix, t_room *tab, int size)
 			printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d", i, j, new->path[i][j], tab[new->path[i][j]].name, tab[new->path[i][j]].wth, tab[new->path[i][j]].taken);
 			j++;
 		}
-	printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d", i, j, new->path[i][j], tab[new->path[i][j]].name, tab[new->path[i][j]].wth, tab[new->path[i][j]].taken);
+	//printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d", i, j, new->path[i][j], tab[new->path[i][j]].name, tab[new->path[i][j]].wth, tab[new->path[i][j]].taken);
 		printf("\nlen = %d\n", new->len[i]);
 		i++;
 	}
 	printf("start : %d, end : %d, path_max = %d\n",matrix[0][0], matrix[1][1], path_max);
 //	printf("oo %d\n",tab[0].taken);
 	calc_step(new, tab[0].taken, new->path_n);
+	try_one_more(tab, new);
+	if (!(all_len_complete(new)))
+	{
+		clean_some_taken(tab, size, -1);
+		find_path2(matrix, tab, &new, size);
+		calc_step(new, tab[0].taken, new->path_n);
+	}
 	main4(&best, &new, size, tab);
 	//printf("%d steps\n",best->step);
 //	use_path(best, tab, size);

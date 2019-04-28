@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:58:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/26 12:07:14 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/28 17:43:15 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int		calc_step(t_path *struc, int ant_n, int path_n)
 	}
 	i = 1;
 	//printf("CALCUL222\n");
-	while (i > 0 )
+	while (i > 0)
 	{
 		i = 0;
 		while ((i < path_n - 1) && struc->len[i + 1] > 0
@@ -113,10 +113,13 @@ int		calc_step(t_path *struc, int ant_n, int path_n)
 			struc->path[0][struc->len[0]]--;
 		if (i > 0)
 			struc->path[i][struc->len[i]]++;
-//		printf("struc->path[%d][%d] = %d\n", 0, struc->len[0],struc->path[0][struc->len[0]]);
-//		printf("struc->path[%d][%d] = %d\n", i, struc->len[i],struc->path[i][struc->len[i]]);
+	//	printf("struc->path[%d][%d] = %d\n", 0, struc->len[0],struc->path[0][struc->len[0]]);
+	//	printf("struc->path[%d][%d] = %d\n", i, struc->len[i],struc->path[i][struc->len[i]]);
 	}
 //	printf("add is %d + %d\n",struc->len[1], struc->path[1][struc->len[1]] - 1);
 	struc->step = struc->len[1] + (struc->path[1][struc->len[1]] - 1);
+	i = -1;
+//	while (struc->len[++i] > 0)
+//		printf("path[%d](len = %d) got %d ants\n", i, struc->len[i], struc->path[i][struc->len[i]]);
 	return (struc->step);
 }

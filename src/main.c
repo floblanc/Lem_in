@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/27 10:01:17 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/28 10:35:20 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	main3(int **matrix, t_room *tab, int size)
 	while (i < new->path_n)
 	{
 		j = 0;
-		while (new->path[i][j] != 1 && new->path[i][j] != -1 && new->len[i] > 0)
+		while (new->path[i][j] != 1 && new->path[i][j] != -1)
 		{
 			printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d", i, j, new->path[i][j], tab[new->path[i][j]].name, tab[new->path[i][j]].wth, tab[new->path[i][j]].taken);
 			j++;

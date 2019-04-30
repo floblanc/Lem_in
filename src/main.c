@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/28 17:30:11 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/30 17:08:38 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,23 @@ void	main3(int **matrix, t_room *tab, int size)
 	new = 0;
 	path_max = ((matrix[1][1] > matrix[0][0]) ? matrix[0][0] : matrix[1][1]);
 	path_max = ((path_max > tab[0].taken) ? tab[0].taken : path_max);
-	init_t_path(&new, size, path_max);
-	find_path(matrix, tab, &new, size);
+	while (++i <= path_max)
+	{
+		init_t_path(&new, size, i);
+		copy_best(best, new, size, tab);
+		if (!(find_path(matrix, tab, &new, best)))
+			break;
+		calc_step(new, tab[0].taken, i);
+		main4(&best, &new, size, tab);
+		free_path(&new);
+	}
+
+
+
+
+
+
+
 
 	int j;
 	i = 0;
@@ -64,15 +79,10 @@ void	main3(int **matrix, t_room *tab, int size)
 	}
 	printf("start : %d, end : %d, path_max = %d\n",matrix[0][0], matrix[1][1], path_max);
 //	printf("oo %d\n",tab[0].taken);
-	calc_step(new, tab[0].taken, new->path_n);
-	try_one_more(tab, new);
-	if (!(all_len_complete(new)))
-	{
-		clean_some_taken(tab, size, -1);
-		find_path2(matrix, tab, &new, size);
-		calc_step(new, tab[0].taken, new->path_n);
-	}
-	main4(&best, &new, size, tab);
+
+
+
+
 	//printf("%d steps\n",best->step);
 //	use_path(best, tab, size);
 	free_paths(&best);

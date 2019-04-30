@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:58:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/28 17:43:15 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/30 14:30:28 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,28 +62,30 @@ void	init_t_path(t_path **struc, int size, int path_n)
 	int	i;
 	int	j;
 
-	i = 0;
+	i = -1;
 	if (!((*struc) = (t_path*)malloc(sizeof(t_path) * 1)))
 		exit(0);
 	if (!((*struc)->path = (int**)malloc(sizeof(int*) * path_n)))
 		exit(0);
+	if (!((*struc)->node = (int**)malloc(sizeof(int*) * path_n)))
+		exit(0);
 	if (!((*struc)->len = (int*)malloc(sizeof(int) * path_n)))
 		exit(0);
-	while (i < path_n)
+	while (++i < path_n)
 	{
 		(*struc)->len[i] = 0;
 		if (!((*struc)->path[i] = (int*)malloc(sizeof(int) * size)))
+			exit(0);
+		if (!((*struc)->node[i] = (int*)malloc(sizeof(int) * size)))
 			exit(0);
 		j = 0;
 		while (j < size)
 		{
 			(*struc)->path[i][j] = 0;
-			j++;
+			(*struc)->node[i][j++] = 0;
 		}
-		i++;
 	}
 	(*struc)->path_n = path_n;
-	(*struc)->next = 0;
 	(*struc)->step = 0;
 }
 

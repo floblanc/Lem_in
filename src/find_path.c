@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/04/28 16:18:33 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/04/30 17:39:58 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,37 +71,19 @@ int		all_len_complete(t_path *new)
 	return (1);
 }
 
-int		analyse_block(t_room *tab, t_path *new, int *way, int pos)
+int		check_nodes(t_room *tab, t_path **new, t_path *best, int **matrix)
 {
-	int	block;
+	static int	node;
 	int	i;
+	int	j;
+	int	lim;
 
+	if (!(node) || (!(tab) && !(new) && !(best) && !(matrix)))
+		node = 0;
+	if (tab == 0 || new == 0 || best == 0 || matrix == 0)
+		return (0);
 	i = 0;
-	//printf(" %d\n",tab[-1 * new->path[*way][pos]].taken);
-	new->path[*way][pos] *= -1;
-	block = tab[new->path[*way][pos]].taken - 1;
-	tab[new->path[*way][pos]].taken = *way + 1;
-	while (new->path[block][i] != 0 && new->path[block][i] != -1)
-		i++;
-	//	printf("new->path[%d][%d] = %d != new->path[%d][%d] = %d\n", block, 28, new->path[block][28], *way, pos, new->path[*way][pos]);
-	if (new->path[block][i] == -1)
-		new->path[block][i--] = 0;
-	while (new->path[block][i] != new->path[*way][pos])
-	{
-//			if (i >= 0 && block == 11)
-//				printf("new->path[%d][%d] = %d != new->path[%d][%d] = %d\n", block, i, new->path[block][i], *way, pos, new->path[*way][pos]);
-		if (new->path[block][i] != 0)
-			tab[new->path[block][i]].taken = 0;
-		new->path[block][i] = 0;
-		//if (i >= 0 && block == 11)
-		//		printf("remi a 0 new->path[%d][%d] = %d\n", block, i, new->path[block][i]);
-		i--;
-	}
-//	if (i >= 0 && block == 11)
-//			printf("remi a 0 new->path[%d][%d] = %d\n", block, i, new->path[block][i]);
-	new->path[block][i] = 0;
-	new->len[block] = 0;
-	*way = block - 1;
+	node++;
 	return (0);
 }
 
@@ -110,92 +92,54 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 	int	pos;
 	int lim;
 	int	best;
-	int	block;
 	int	i;
 
 	pos = 0;
 	while (new->path[way][pos + 1] != 0)
 		pos++;
-//	printf(" %d\n",new->path[way][pos]);
 	lim = matrix[new->path[way][pos]][new->path[way][pos]];
 	best = 0;
-	block = 0;
 	i = 0;
 	while (lim > 0)
 	{
 		if (matrix[new->path[way][pos]][i] == -1)
 		{
 			lim--;
-			//	if (way != 0)
-			//		printf("check : (((tab[%d].taken (%d) <= 0 && ((tab[%d].taken (%d) > (way (%d) + 1) * -1 (%d) && !(tab[%d].taken(%d) == -1 && pos(%d) == 0))) || tab[%d].taken (%d) == 0)) || i (%d)== 1) && (best(%d) == 0 || tab[%d].wth(%d) < tab[%d].wth (%d)))\n\n", i, tab[i].taken, i, tab[i].taken, way, (way + 1) * -1, i, tab[i].taken, pos, i, tab[i].taken, i, best, i, tab[i].wth, best, tab[best].wth);
-			if ((tab[i].taken <= 0 && tab[i].taken > (way + 1) * -1
-						&& (best == 0 || tab[i].wth < tab[best].wth)))
+			if (tab[i].taken <= 0 && tab[i].taken != (way + 1) * -1
+					&& (!(best) || tab[best.wth] > tab[i].wth))
 				best = i;
-			else if (pos > 0 && i && tab[i].taken > 0 && (tab[i].taken != way + 1
-						&& (block == 0 || tab[block].wth > tab[i].wth)
-						&& other_turn(matrix, tab, new->path[tab[i].taken - 1], i)))
-				block = i;
-			/*else if (pos > 0 && i && tab[i].taken > 0 && (tab[i].taken > way + 1
-						&& (block == 0 || tab[block].wth > tab[i].wth)
-						&& other_turn(matrix, tab, new->path[tab[i].taken - 1], i)))
-								block = i;
-		*/}
+		}
 		if (best == 1)
 			break ;
 		i++;
 	}
-		//printf("best = %d %s.taken = %d pour le way %d\n", best, tab[best].name, tab[best].taken,  way + 1);
-		//printf("Block = %d %s.taken = %d pour le way %d\n", block, tab[block].name, tab[block].taken,  way + 1);
-	if (best != 0 && best != 1)
-		tab[best].taken = way + 1;
-	else if (block > 0 && (!(best) /*|| tab[best].wth > tab[block].wth*/))
-		best = -block;
 	return (best);
 }
 
-int		find_path(int **matrix, t_room *tab, t_path **new, int size)
+int		find_path(int **matrix, t_room *tab, t_path **new, t_path *best)
 {
 	int	i;
 	int	j;
+	int	node;
 
-	(void)size;
-	if (!(*new))
-		return (0);
-	j = 0;
-	while (!(all_len_complete(*new)))
+	i = path_n - 1;
+	while (i < (*new)->path_n)
 	{
-		i = 0;
-		while (i < (*new)->path_n)
+		j = 0;
+		while (((*new)->path[i][j] = way_is_possible(matrix, tab, *new, i)) > 1)
 		{
-			if ((*new)->len[i] == 0 && (*new)->path[i][j] == 0)
-			{
-				(*new)->path[i][j] = way_is_possible(matrix, tab, *new, i);
-				if ((*new)->path[i][j] == 1)
-					(*new)->len[i] = j + 1;
-				else if ((*new)->path[i][j] < 0)
-					j = analyse_block(tab, *new, &i, j);
-				else if ((*new)->path[i][j] == 0)
-				{
-					if (j > 1)
-					{
-						tab[(*new)->path[i][j - 1]].taken *= -1;
-						(*new)->path[i][j - 1] = 0;
-						i = (i == 0 ? -1 : i - 2);
-						j = 0;
-					}
-					else
-					{
-						(*new)->len[i] = -1;
-						(*new)->path[i][j] = -1;
-					}
-				}
-				//	if (i == 11 && j > 0 && (*new)->path[i][j] >= 0)
-				//		printf("tab[path[%d][%d] = %d].taken = %d\n", i, j, (*new)->path[i][j], tab[(*new)->path[i][j]].taken);
-			}
-			i++;
+			if (matrix[(*new)->path[i][j]][(*new)->path[i][j]] > 2)
+				(*new)->node[i][j] = (*new)->path[i][j];
+			tab[(*new)->path[i][j++]].taken = i + 1;
 		}
-		j++;
+		if ((*new)->path[i][j] == 0)
+		{
+			if ((node = check_nodes(tab, new, best, matrix) > 0)
+				efface path[i];
+		}
+		else
+			len[i] = j;
 	}
-	sort_paths(new, size, tab);
-	return (0);
+	i = check_nodes(0, 0, 0, 0);
+	return (1);
 }

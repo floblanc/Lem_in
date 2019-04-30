@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 18:16:42 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/26 09:37:54 by maginist         ###   ########.fr       */
+/*   Updated: 2019/04/30 17:19:29 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,7 @@ void	rooms_in_tab(t_room **tab, t_room **begin)
 	i = 0;
 	while (current)
 	{
-		(*tab)[i].name = ft_strdup(current->name);
-		(*tab)[i].x = current->x;
-		(*tab)[i].y = current->y;
-		(*tab)[i].startend = current->startend;
-		(*tab)[i].wth = 0;
-		(*tab)[i].taken = 0;
-		(*tab)[i].next = current->next;
+		init_tab(tab, i, current);
 		current = current->next;
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/30 17:22:20 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/01 17:08:03 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void				rooms_in_tab(t_room **tab, t_room **begin);
 void				write_data(t_write **begin);
 void				init_t_path(t_path **struc, int size, int t_path_n);
 int					find_path(int **matrix, t_room *tab, t_path **new
-		, int size);
+		, t_path *best);
 int					calc_step(t_path *struc, int ant_n, int path_n);
 void				put_wth(int **matrix, int i, int j, t_room *tab);
 int					calc_size(t_room *tab);
@@ -96,5 +96,6 @@ void				onelink_startend(int ant_n);
 int					other_turn(int **matrix, t_room *tab, int *way, int room_n);
 int					all_len_complete(t_path *new);
 void				init_tab(t_room **tab, int i, t_room *current);
+void				init_tab(t_room **tab, int i, t_room * current);
 
 #endif

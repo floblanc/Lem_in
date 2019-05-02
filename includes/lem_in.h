@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/01 17:08:03 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/02 17:44:59 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,6 @@ int					other_turn(int **matrix, t_room *tab, int *way, int room_n);
 int					all_len_complete(t_path *new);
 void				init_tab(t_room **tab, int i, t_room *current);
 void				init_tab(t_room **tab, int i, t_room * current);
+void				sort_paths(t_path **new, int size, t_room *tab);
 
 #endif

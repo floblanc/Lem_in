@@ -14,12 +14,8 @@ j 3 0
 k 4 0
 l 2 1
 m 2 -1
-n 2 -2
 ##end
 end 7 1
-n-m
-start-n
-end-n
 start-m
 m-end
 start-a

@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:58:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/30 14:30:28 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/02 13:18:14 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ int		calc_step(t_path *struc, int ant_n, int path_n)
 {
 	int	i;
 
+	printf("les fourmis %d\n", ant_n);
 //	printf("struc->len[%d] = %d\n", path_n - 1, struc->len[0]);
 //	printf("CALCUL path_n = %d et strucpath_n = %d\n", path_n, struc->path_n);
 	struc->path[0][struc->len[0]] = ant_n;
@@ -118,10 +119,10 @@ int		calc_step(t_path *struc, int ant_n, int path_n)
 	//	printf("struc->path[%d][%d] = %d\n", 0, struc->len[0],struc->path[0][struc->len[0]]);
 	//	printf("struc->path[%d][%d] = %d\n", i, struc->len[i],struc->path[i][struc->len[i]]);
 	}
-//	printf("add is %d + %d\n",struc->len[1], struc->path[1][struc->len[1]] - 1);
+	printf("add is %d + %d\n",struc->len[1], struc->path[1][struc->len[1]] - 1);
 	struc->step = struc->len[1] + (struc->path[1][struc->len[1]] - 1);
 	i = -1;
 //	while (struc->len[++i] > 0)
-//		printf("path[%d](len = %d) got %d ants\n", i, struc->len[i], struc->path[i][struc->len[i]]);
+	//	printf("path[%d](len = %d) got %d ants\n", i, struc->len[i], struc->path[i][struc->len[i]]);
 	return (struc->step);
 }

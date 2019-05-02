@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 10:08:54 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/01 17:08:51 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/02 13:19:43 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,24 +95,19 @@ void	free_matrix(int ***matrix, int size)
 
 void	free_paths(t_path **begin)
 {
-	int		i;
-	int		j;
-	t_path	*before;
+	int	i;
 
+	i = 0;
 	if (!(begin && *begin))
 		return ;
-	i = 1;
-	while (*begin)
+	while (i < (*begin)->path_n)
 	{
-		before = *begin;
-		j = 0;
-		while (j <= i)
-			free((*begin)->path[j++]);
-		free((*begin)->path);
-		free((*begin)->len);
-		i++;
-		free(before);
-		before = 0;
+		free((*begin)->path[i]);
+		free((*begin)->node[i++]);
 	}
-//	free(*begin);
+	free((*begin)->path);
+	free((*begin)->node);
+	free((*begin)->len);
+	free(*begin);
+	*begin = 0;
 }

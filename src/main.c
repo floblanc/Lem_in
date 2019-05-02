@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/01 17:09:50 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/02 17:50:29 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	main3(int **matrix, t_room *tab, int size)
 		copy_best(best, new, size, tab);
 		if (!(find_path(matrix, tab, &new, best)))
 			break;
+	//	sort_paths(&new, size, tab);
 		calc_step(new, tab[0].taken, i);
 		main4(&best, &new, size, tab);
 		free_paths(&new);
@@ -65,16 +66,16 @@ void	main3(int **matrix, t_room *tab, int size)
 	int j;
 	i = 0;
 //	printf("new->step %d, new_path_n : %d,  new->step %d, new-Path_n : %d\n",(new)->step, (new)->path_n, (new)->step, (new)->path_n);
-	while (i < new->path_n)
+	while (i < best->path_n)
 	{
 		j = 0;
-		while (new->path[i][j] != 1 && new->path[i][j] != -1)
+		while (best->path[i][j] != 1 && best->path[i][j] != -1)
 		{
-			printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d", i, j, new->path[i][j], tab[new->path[i][j]].name, tab[new->path[i][j]].wth, tab[new->path[i][j]].taken);
+			printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d", i, j, best->path[i][j], tab[best->path[i][j]].name, tab[best->path[i][j]].wth, tab[best->path[i][j]].taken);
 			j++;
 		}
-	//printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d", i, j, new->path[i][j], tab[new->path[i][j]].name, tab[new->path[i][j]].wth, tab[new->path[i][j]].taken);
-		printf("\nlen = %d\n", new->len[i]);
+	printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d", i, j, best->path[i][j], tab[best->path[i][j]].name, tab[best->path[i][j]].wth, tab[best->path[i][j]].taken);
+		printf("\nlen = %d\n", best->len[i]);
 		i++;
 	}
 	printf("start : %d, end : %d, path_max = %d\n",matrix[0][0], matrix[1][1], path_max);
@@ -84,7 +85,7 @@ void	main3(int **matrix, t_room *tab, int size)
 
 
 	//printf("%d steps\n",best->step);
-//	use_path(best, tab, size);
+	//use_path(best, tab, size);
 	free_paths(&best);
 	free_paths(&new);
 }

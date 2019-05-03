@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/02 17:50:29 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/03 11:39:39 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,10 @@ void	main3(int **matrix, t_room *tab, int size)
 		i++;
 	}
 	printf("start : %d, end : %d, path_max = %d\n",matrix[0][0], matrix[1][1], path_max);
-//	printf("oo %d\n",tab[0].taken);
+	i = -1;
+	while (++i < size)
+		if (tab[i].taken > 0)
+		printf("tab[%d].taken = %d\n", i, tab[i].taken);
 
 
 

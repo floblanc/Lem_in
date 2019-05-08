@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/05/07 18:11:30 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/08 17:42:45 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 			//	printf("i = %d %s.taken = %d et wth = %d used = %d pour le path[%d][%d]\n", i, tab[i].name, tab[i].taken, tab[i].wth, tab[i].used,  way, pos + 1);
 			if (i != 0 && (i == 1 ||
 						(tab[i].taken == 0 && tab[i].used != way + 1
-						 && (!(best) || tab[best].wth > tab[i].wth) && tab[i].wth != 0)))
+						 && (!(best) || tab[best].wth > tab[i].wth) && tab[i].wth > 0)))
 				best = i;
 		}
 		if (best == 1)

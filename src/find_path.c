@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/05/08 17:42:45 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/09 16:08:15 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 			break ;
 		i++;
 	}
-	printf("best = %d %s pour le path[%d][%d]\n", best, tab[best].name, way, pos + 1);
+//	printf("best = %d %s pour le path[%d][%d]\n", best, tab[best].name, way, pos + 1);
 	return (best);
 }
 
@@ -142,7 +142,7 @@ void	make_a_turn(int ** matrix, t_room *tab, t_path *new, int node)
 	int	i;
 
 	i = 1;
-	printf("node = %d degre = %d\n", node, matrix[node][node]);
+//	printf("node = %d degre = %d\n", node, matrix[node][node]);
 	while (new->path[new->path_n - 2][i - 1] != node)
 		i++;
 	new->path[new->path_n - 2][i]
@@ -192,10 +192,11 @@ int		check_nodes(t_room *tab, t_path **new, t_path *best, int **matrix)
 	while ((*new)->node[(*new)->path_n - 2][i] == 0
 			|| (*new)->node[(*new)->path_n - 2][i] != best->node[(*new)->path_n - 2][i])
 	{
-//	printf("\nwhile ((*new)->node[best->path_n -1(%1$d)][i(%2$d)] == 0(%3$d) || (*new)->path->node[(*new)->path_n - 2 (%1$d)][i(%2$d)](%3$d) != best->node[best->(*new)->path_n - 2(%1$d)][i(%2$d)] (%4$d)\n\n", (*new)->path_n - 2, i, (*new)->node[best->path_n-1][i], best->node[best->path_n-1][i]);
+		//if (i > -2)
+			//printf("\nwhile ((*new)->node[new->path_n -2(%1$d)][i(%2$d)] == 0(%3$d) || (*new)->path->node[(*new)->path_n - 2 (%1$d)][i(%2$d)](%3$d) != best->node[best->(*new)->path_n - 2(%1$d)][i(%2$d)] (%4$d)\n\n", (*new)->path_n - 2, i, (*new)->node[(*new)->path_n-2][i], best->node[(*new)->path_n-2][i]);
 		if ((*new)->path[(*new)->path_n - 2][i] != 0)
 			tab[(*new)->path[(*new)->path_n - 2][i]].taken = 0;
-		if ((*new)->node[(*new)->path_n - 2][i - 1] == best->node[best->path_n - 1][i - 1])
+		if ((*new)->node[(*new)->path_n - 2][i - 1] == best->node[(*new)->path_n - 2][i - 1])
 			tab[(*new)->path[(*new)->path_n - 2][i]].used = (*new)->path_n - 1;
 		(*new)->node[(*new)->path_n - 2][i] = 0;
 		(*new)->path[(*new)->path_n - 2][i--] = 0;
@@ -204,7 +205,7 @@ int		check_nodes(t_room *tab, t_path **new, t_path *best, int **matrix)
 	{
 		if (best->path[(*new)->path_n - 2][i] != (*new)->path[(*new)->path_n - 2][i])
 		{
-			printf("\n\n-----------------USELESS AS FUCK!------------------------\n\n");
+		//	printf("\n\n-----------------USELESS AS FUCK!------------------------\n\n");
 			(*new)->path[(*new)->path_n - 2][i] = best->path[(*new)->path_n - 2][i];
 			(*new)->node[(*new)->path_n - 2][i] = best->node[(*new)->path_n - 2][i];
 		}

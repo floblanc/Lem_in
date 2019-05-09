@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 11:24:49 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/08 17:42:41 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/09 14:46:38 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	put_wth(int **matrix, int i, int j, t_room *tab)
 		return ;
 	else
 	{
-		tab[j].wth = tab[i].wth + 1;
-		put_wth(matrix, i, j + 1, tab);
-		put_wth(matrix, j, 0, tab);
+			tab[j].wth = tab[i].wth + 1;
+			put_wth(matrix, i, j + 1, tab);
+			put_wth(matrix, j, 0, tab);
 	}
 }
 

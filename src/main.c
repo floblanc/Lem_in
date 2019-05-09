@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/08 17:41:19 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/09 17:41:58 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	main4(t_path **best, t_path **new, int size, t_room *tab)
 {
+	printf("new step = %d\n",(*new)->step);
 	if (!(*best))
 	{
 		printf("%d steps\n",(*new)->step);
@@ -38,22 +39,27 @@ void	main3(int **matrix, t_room *tab, int size)
 	t_path	*new;
 	int		path_max;
 	int		i;
+	int		j;
 
-	i = 0;
 	best = 0;
 	new = 0;
+	j = 0;
 	path_max = ((matrix[1][1] > matrix[0][0]) ? matrix[0][0] : matrix[1][1]);
 	path_max = ((path_max > tab[0].taken) ? tab[0].taken : path_max);
+	while (matrix[0][0] > 0)
+	{
+	i = 0;
 	while (++i <= path_max)
 	{
 		init_t_path(&new, size, i);
 		copy_best(best, new, size, tab);
 		if (!(find_path(matrix, tab, &new, best)))
 			break;
-	//	sort_paths(&new, size, tab);
+		sort_paths(&new, size, tab);
 		calc_step(new, tab[0].taken, i);
 		main4(&best, &new, size, tab);
 		free_paths(&new);
+	}
 	}
 
 
@@ -81,8 +87,7 @@ void	main3(int **matrix, t_room *tab, int size)
 	printf("start : %d, end : %d, path_max = %d\n",matrix[0][0], matrix[1][1], path_max);
 	i = -1;
 	while (++i < size)
-		if (tab[i].taken > 0)
-		printf("tab[%d](%s).taken = %d wth = %d\n", i, tab[i].name, tab[i].taken, tab[i].wth);
+		printf("tab[%d](%s).taken = %d wth = %d degre = %d\n", i, tab[i].name, tab[i].taken, tab[i].wth, matrix[i][i]);
 
 
 

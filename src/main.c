@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/09 17:41:58 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/10 15:25:47 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,31 @@ void	main3(int **matrix, t_room *tab, int size)
 	int		path_max;
 	int		i;
 	int		j;
-
-	best = 0;
-	new = 0;
-	j = 0;
+//must create "last_best" or "global_best", rewrite or modify "copy_best"
+	j = 2;
 	path_max = ((matrix[1][1] > matrix[0][0]) ? matrix[0][0] : matrix[1][1]);
 	path_max = ((path_max > tab[0].taken) ? tab[0].taken : path_max);
 	while (matrix[0][0] > 0)
 	{
-	i = 0;
-	while (++i <= path_max)
-	{
-		init_t_path(&new, size, i);
-		copy_best(best, new, size, tab);
-		if (!(find_path(matrix, tab, &new, best)))
-			break;
-		sort_paths(&new, size, tab);
-		calc_step(new, tab[0].taken, i);
-		main4(&best, &new, size, tab);
-		free_paths(&new);
-	}
+		while (matrix[0][j] != -1)
+			j++;
+		matrix[0][0]--;
+
+		i = 0;
+		best = 0;
+		new = 0;
+		while (++i <= path_max)
+		{
+			init_t_path(&new, size, i);
+			copy_best(best, new, size, tab);
+			if (!(find_path(matrix, tab, &new, best)))
+				break;
+			sort_paths(&new, size, tab);
+			calc_step(new, tab[0].taken, i);
+			main4(&best, &new, size, tab);
+			free_paths(&new);
+		}
+		j++;
 	}
 
 
@@ -71,7 +76,7 @@ void	main3(int **matrix, t_room *tab, int size)
 
 	int j;
 	i = 0;
-//	printf("new->step %d, new_path_n : %d,  new->step %d, new-Path_n : %d\n",(new)->step, (new)->path_n, (new)->step, (new)->path_n);
+	//	printf("new->step %d, new_path_n : %d,  new->step %d, new-Path_n : %d\n",(new)->step, (new)->path_n, (new)->step, (new)->path_n);
 	while (i < best->path_n)
 	{
 		j = 0;
@@ -80,7 +85,7 @@ void	main3(int **matrix, t_room *tab, int size)
 			printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d degre = %d", i, j, best->path[i][j], tab[best->path[i][j]].name, tab[best->path[i][j]].wth, tab[best->path[i][j]].taken, matrix[best->path[i][j]][best->path[i][j]]);
 			j++;
 		}
-	printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d", i, j, best->path[i][j], tab[best->path[i][j]].name, tab[best->path[i][j]].wth, tab[best->path[i][j]].taken);
+		printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d", i, j, best->path[i][j], tab[best->path[i][j]].name, tab[best->path[i][j]].wth, tab[best->path[i][j]].taken);
 		printf("\nlen = %d\n", best->len[i]);
 		i++;
 	}

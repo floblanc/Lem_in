@@ -6,7 +6,7 @@
 #    By: maginist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/09 11:22:24 by maginist          #+#    #+#              #
-#    Updated: 2019/05/01 17:14:14 by floblanc         ###   ########.fr        #
+#    Updated: 2019/05/14 17:36:48 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,6 @@ SRC_NAME =already_exist.c\
 		  extract_room.c\
 		  find_path.c\
 		  free_lst.c\
-		  ft_lstlen.c\
 		  is_valid.c\
 		  main.c\
 		  make_matrix.c\
@@ -26,6 +25,7 @@ SRC_NAME =already_exist.c\
 		  utils.c\
 		  write_data.c\
 		  other_utils.c\
+		  other_path.c\
 		  init_struct.c\
 
 SRC_PATH = ./src

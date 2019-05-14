@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 12:11:11 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/19 14:34:49 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/14 12:01:22 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,30 +57,6 @@ int		link_form_is_valid(char *str)
 	if (i != -1)
 		return (0);
 	return (1);
-}
-
-int		link_is_valid(t_link *new, t_room **begin)
-{
-	t_room	*current;
-	int		name1;
-	int		name2;
-
-	name1 = 0;
-	name2 = 0;
-	if (!(begin && *begin && (*begin)->next))
-		return (0);
-	current = *begin;
-	while (current && (name1 == 0 || name2 == 0))
-	{
-		if (!(ft_strcmp(new->name1, current->name)))
-			name1 = 1;
-		else if (!(ft_strcmp(new->name2, current->name)))
-			name2 = 1;
-		current = current->next;
-	}
-	if (name1 == 1 && name2 == 1 && check_startend(begin))
-		return (1);
-	return (0);
 }
 
 int		command_is_valid(char *str)

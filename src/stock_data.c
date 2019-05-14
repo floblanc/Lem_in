@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 15:36:00 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/24 11:32:16 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/14 12:12:45 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,24 @@ void	stock_room(char *line, t_room **begin, int *startend, int *error)
 		end->next = new;
 }
 
-void	new_link_maker(t_link *new, char *line, int i)
+void	stock_to_write(char *line, t_write **begin)
 {
-	new->name1 = ft_strndup(line, (size_t)i);
-	new->name2 = ft_strdup(line + i + 1);
+	t_write	*new;
+	t_write	*current;
+
+	if (!(new = (t_write*)malloc(sizeof(t_write) * 1)))
+		exit(0);
+	new->str = ft_strdup(line);
 	new->next = 0;
+	if (!(*begin))
+		*begin = new;
+	else if (new)
+	{
+		current = *begin;
+		while (current->next)
+			current = current->next;
+		current->next = new;
+	}
 }
 
 void	save_line(char *line, int *error, t_write **str)

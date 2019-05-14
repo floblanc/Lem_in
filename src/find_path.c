@@ -6,56 +6,11 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/05/09 16:08:15 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/14 18:07:34 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-
-void	swap_path(t_path **new, int size, int i, t_room *tab)
-{
-	int	tmp[size];
-	int	save_len;
-	int	j;
-
-	j = -1;
-	while (++j < size)
-		tmp[j] = (*new)->path[i][j];
-	save_len = (*new)->len[i];
-	j = -1;
-	while (++j < size)
-	{
-		(*new)->path[i][j] = (*new)->path[i + 1][j];
-		if ((*new)->path[i][j] > 0)
-			tab[(*new)->path[i][j]].taken = i + 1;
-	}
-	(*new)->len[i] = (*new)->len[i + 1];
-	j = -1;
-	while (++j < size)
-	{
-		(*new)->path[i + 1][j] = tmp[j];
-		if (tmp[j] > 0)
-			tab[tmp[j]].taken = i + 2;
-	}
-	(*new)->len[i + 1] = save_len;
-}
-
-void	sort_paths(t_path **new, int size, t_room *tab)
-{
-	int	i;
-
-	i = 0;
-	while (i < (*new)->path_n - 1)
-	{
-		if (((*new)->len[i] <= 0 || (*new)->len[i] > (*new)->len[i + 1])
-				&& (*new)->len[i + 1] > 0)
-		{
-			swap_path(new, size, i, tab);
-			i = -1;
-		}
-		i++;
-	}
-}
 
 int		node_is_possible(int **matrix, t_room *tab, int	room, int way)
 {
@@ -102,7 +57,7 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 		{
 			lim--;
 
-			//	printf("i = %d %s.taken = %d et wth = %d used = %d pour le path[%d][%d]\n", i, tab[i].name, tab[i].taken, tab[i].wth, tab[i].used,  way, pos + 1);
+		//		printf("i = %d %s.taken = %d et wth = %d used = %d pour le path[%d][%d]\n", i, tab[i].name, tab[i].taken, tab[i].wth, tab[i].used,  way, pos + 1);
 			if (i != 0 && (i == 1 ||
 						(tab[i].taken == 0 && tab[i].used != way + 1
 						 && (!(best) || tab[best].wth > tab[i].wth) && tab[i].wth > 0)))
@@ -112,7 +67,7 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 			break ;
 		i++;
 	}
-//	printf("best = %d %s pour le path[%d][%d]\n", best, tab[best].name, way, pos + 1);
+	printf("best = %d %s pour le path[%d][%d]\n", best, tab[best].name, way, pos + 1);
 	return (best);
 }
 
@@ -159,7 +114,7 @@ void	check_first_node(t_path *new, t_room *tab, int size)
 		if (tab[i++].used == new->path_n - 1)
 			return ;
 	i = 1;
-	//printf("FIRST!!!!!!!!!!!!!!!!!!!!!!!!!1 %d\n", new->path_n - 1);
+//	printf("FIRST!!!!! ==  %d\n", new->path_n);
 	while (new->node[new->path_n - 2][i - 1] == 0)
 		i++;
 	tab[new->path[new->path_n - 2][i]].used = new->path_n - 1;
@@ -171,12 +126,32 @@ void	check_first_node(t_path *new, t_room *tab, int size)
 	}
 }
 
+int		no_node(t_path *new, t_path *best, int **matrix)
+{
+	int	i;
+
+	i = 0;
+	//printf("best->path[%d][%d](%d)\n", new->path_n - 2, i, best->path[new->path_n - 2][i]);
+	while (best->path[new->path_n - 2][i] != 1
+			&& best->path[new->path_n - 2][i] != 0)
+	{
+
+		//printf("matrix[best->path[%d][%d]][[%d]](%d)\n", new->path_n - 2, i, best->path[new->path_n - 2][i], matrix[best->path[new->path_n - 2][i]][best->path[new->path_n - 2][i]]);
+		if (matrix[best->path[new->path_n - 2][i]]
+				[best->path[new->path_n - 2][i]] > 2)
+			return (0);
+		i++;
+	}
+//	printf("prout\n");
+	return (1);
+}
+
 int		check_nodes(t_room *tab, t_path **new, t_path *best, int **matrix)
 {
 	int	i;
 	static int	size;
 
-	if (tab == 0 || new == 0 || best == 0 || matrix == 0)
+	if (!(tab) || !(new) || !(best) || !(matrix) || no_node(*new, best, matrix))
 		return (0);
 	if (!(size))
 		size = calc_size(tab);
@@ -192,8 +167,8 @@ int		check_nodes(t_room *tab, t_path **new, t_path *best, int **matrix)
 	while ((*new)->node[(*new)->path_n - 2][i] == 0
 			|| (*new)->node[(*new)->path_n - 2][i] != best->node[(*new)->path_n - 2][i])
 	{
-		//if (i > -2)
-			//printf("\nwhile ((*new)->node[new->path_n -2(%1$d)][i(%2$d)] == 0(%3$d) || (*new)->path->node[(*new)->path_n - 2 (%1$d)][i(%2$d)](%3$d) != best->node[best->(*new)->path_n - 2(%1$d)][i(%2$d)] (%4$d)\n\n", (*new)->path_n - 2, i, (*new)->node[(*new)->path_n-2][i], best->node[(*new)->path_n-2][i]);
+//		if (i > -2)
+//			printf("\nwhile ((*new)->node[new->path_n -2(%1$d)][i(%2$d)] == 0(%3$d) || (*new)->path->node[(*new)->path_n - 2 (%1$d)][i(%2$d)](%3$d) != best->node[best->(*new)->path_n - 2(%1$d)][i(%2$d)] (%4$d)\n\n", (*new)->path_n - 2, i, (*new)->node[(*new)->path_n-2][i], best->node[(*new)->path_n-2][i]);
 		if ((*new)->path[(*new)->path_n - 2][i] != 0)
 			tab[(*new)->path[(*new)->path_n - 2][i]].taken = 0;
 		if ((*new)->node[(*new)->path_n - 2][i - 1] == best->node[(*new)->path_n - 2][i - 1])
@@ -263,7 +238,7 @@ int		find_path(int **matrix, t_room *tab, t_path **new, t_path *best)
 			}
 			else if (way_is_possible(matrix, tab, *new, (*new)->path_n - 1) > 0)
 			{
-				printf("lol\n");
+//				printf("lol\n");
 				try_path(matrix, tab, *new, best);
 			}
 			else

@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 19:56:06 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/24 11:23:30 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/14 12:24:11 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		room_already_exist(t_room **begin, t_room *new, t_room **end)
 {
-	t_room *current;
+	t_room	*current;
 
 	if (!(begin && *begin))
 		return (0);
@@ -34,24 +34,22 @@ int		room_already_exist(t_room **begin, t_room *new, t_room **end)
 	return (0);
 }
 
-int		link_already_exist(t_link **begin, t_link *new)
+int		ft_lstlen(t_room **begin)
 {
-	t_link *current;
+	int		size;
+	t_room	*current;
 
-	if (!(begin && *begin))
-		return (0);
-	current = *begin;
-	while (current)
+	size = 0;
+	if (*begin)
 	{
-		if (!(ft_strcmp(current->name1, new->name1))
-				&& !(ft_strcmp(current->name2, new->name2)))
-			return (1);
-		if (!(ft_strcmp(current->name2, new->name1))
-				&& !(ft_strcmp(current->name1, new->name2)))
-			return (1);
-		current = current->next;
+		current = *begin;
+		while (current)
+		{
+			size++;
+			current = current->next;
+		}
 	}
-	return (0);
+	return (size);
 }
 
 int		check_startend(t_room **begin)

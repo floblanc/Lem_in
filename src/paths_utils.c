@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:58:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/09 14:59:41 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/14 12:42:35 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,38 +55,6 @@ void	use_path(t_path *best, t_room *tab, int size)
 			write_path(best, tab, j, ant_n);
 		}
 	}
-}
-
-void	init_t_path(t_path **struc, int size, int path_n)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	if (!((*struc) = (t_path*)malloc(sizeof(t_path) * 1)))
-		exit(0);
-	if (!((*struc)->path = (int**)malloc(sizeof(int*) * path_n)))
-		exit(0);
-	if (!((*struc)->node = (int**)malloc(sizeof(int*) * path_n)))
-		exit(0);
-	if (!((*struc)->len = (int*)malloc(sizeof(int) * path_n)))
-		exit(0);
-	while (++i < path_n)
-	{
-		(*struc)->len[i] = 0;
-		if (!((*struc)->path[i] = (int*)malloc(sizeof(int) * size)))
-			exit(0);
-		if (!((*struc)->node[i] = (int*)malloc(sizeof(int) * size)))
-			exit(0);
-		j = 0;
-		while (j < size)
-		{
-			(*struc)->path[i][j] = 0;
-			(*struc)->node[i][j++] = 0;
-		}
-	}
-	(*struc)->path_n = path_n;
-	(*struc)->step = 0;
 }
 
 int		calc_step(t_path *struc, int ant_n, int path_n)

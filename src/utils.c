@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:56:29 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/30 14:31:45 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/14 11:49:43 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,28 +54,16 @@ void	try_swap_t_path(t_path **another_new, t_path **new, t_room *tab)
 	}
 }
 
-void	clean_some_taken(t_room *tab, int size, int symb)
+void	clean_some_taken(t_room *tab, int size)
 {
 	int	i;
 
 	i = 1;
-	if (symb >= 0)
+	while (i < size)
 	{
-		while (i < size)
-		{
-			if (tab[i].taken > 0)
-				tab[i].taken = 0;
-			i++;
-		}
-	}
-	else
-	{
-		while (i < size)
-		{
-			if (tab[i].taken < 0)
-				tab[i].taken = 0;
-			i++;
-		}
+		if (tab[i].taken > 0)
+			tab[i].taken = 0;
+		i++;
 	}
 }
 

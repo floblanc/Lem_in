@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/28 18:16:42 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/02 13:18:33 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/14 12:44:12 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	run_in_links(t_room *tab, int **matrix, int size, t_write **begin)
 	line = 0;
 	error = 0;
 	while (current->next)
-				current = current->next;
+		current = current->next;
 	if (!(fill_matrix(tab, matrix, current->str, size)))
 		return ;
 	while (get_next_line(0, &line) > 0)
@@ -113,7 +113,7 @@ void	run_in_links(t_room *tab, int **matrix, int size, t_write **begin)
 		else if (line[0] != '#' || command_is_valid(line))
 			error = 1;
 		if (error)
-			break;
+			break ;
 		stock_to_write(line, begin);
 		ft_strdel(&line);
 	}

@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/14 18:12:18 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/15 17:04:07 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,18 +75,22 @@ void	main3(int **matrix, t_room *tab, int size)
 	better = 0;
 	i = matrix[0][0];
 	j = 2;
+	printf("tab[matrix[1][1]].wth = %d\n", tab[matrix[1][1]].wth);
 	while (i > 0)
 	{
 		while (matrix[0][j] != -1)
 			j++;
 		//printf("ON START A LA SALLE: %d(%s)\n", j, tab[j].name);
 		i--;
-		best_tmp = main_3bis(matrix, tab, size, j);
-		//printf("tab[%d].name = %s\n", j, tab[j].name);
-		main4(&better, &best_tmp, size, tab);
-		printf("%d stepsiBETTER\n",better->step);
-		free_paths(&best_tmp);
+		if (tab[j].wth > 0)
+		{
+			best_tmp = main_3bis(matrix, tab, size, j);
+			main4(&better, &best_tmp, size, tab);
+			printf("%d stepsiBETTER\n",better->step);
+			free_paths(&best_tmp);
+		}
 		j++;
+		/*
 		int k;
 		int l;
 		l = 0;
@@ -103,7 +107,7 @@ void	main3(int **matrix, t_room *tab, int size)
 			printf("\nlen = %d\n", better->len[l]);
 			l++;
 		}
-	}
+	*/}
 	printf("%d steps better", better->step);
 	//use_path(best, tab, size);
 	free_paths(&better);

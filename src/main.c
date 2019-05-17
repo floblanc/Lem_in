@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/15 17:04:07 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/17 11:55:08 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	main4(t_path **best, t_path **new, int size, t_room *tab)
 {
 	//	printf("new step = %d\n",(*new)->step);
+	if (!(new && *new))
+		return ;
 	if (!(*best))
 	{
 	//	printf("%d steps\n",(*new)->step);
@@ -135,7 +137,7 @@ void	main2(t_room **roombeg, int ant_n, t_write **str)
 				free_matrix(&matrix, size);
 				return ;
 			}
-			put_wth(matrix, 1, 0, tab);
+			put_wth(matrix, tab, size);
 		}
 		if (ant_n <= 0 || tab[0].wth <= 0)
 			write(2, "ERROR\n", 6);

@@ -6,31 +6,82 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 11:24:49 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/09 14:46:38 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/17 12:18:17 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	put_wth(int **matrix, int i, int j, t_room *tab)
+void	push_queue(int **queue)
 {
-	static int	size;
+	int	i;
 
-	if (!(size))
-		size = calc_size(tab);
-	if (i >= size || j >= size || i == 0)
-		return ;
-	while (j < size && (j == 1 || matrix[i][j] != -1 || (tab[j].wth != 0
-					&& tab[j].wth <= tab[i].wth + 1)))
-		j++;
-	if (j == size)
-		return ;
-	else
+	i = 0;
+	while ((*queue)[i] != -1)
 	{
-			tab[j].wth = tab[i].wth + 1;
-			put_wth(matrix, i, j + 1, tab);
-			put_wth(matrix, j, 0, tab);
+		(*queue)[i] = (*queue)[i + 1];
+		i++;
 	}
+}
+
+void		add_to_queue(int **queue, int room)
+{
+	int	i;
+
+	i = 0;
+	while ((*queue)[i] != -1)
+	{
+		if ((*queue)[i] == room)
+			return ;
+		i++;
+	}
+	(*queue)[i] = room;
+}
+
+void	put_wth(int **matrix, t_room *tab, int size)
+{
+	int	*visited;
+	int	*queue;
+	int	i;
+	int	j;
+	int	lim;
+
+	i = 0;
+	j = 0;
+	if (!(queue = (int*)malloc(sizeof(int) * size)))
+		return ;
+	if (!(visited = (int*)malloc(sizeof(int) * size)))
+		return ;
+	while (i < size)
+	{
+		visited[i] = -1;
+		queue[i++] = -1;
+	}
+	queue[0] = 1;
+	i = 0;
+	while (queue[0] != -1)
+	{
+		visited[i] = queue[0];
+		push_queue(&queue);
+		lim = matrix[visited[i]][visited[i]];
+		j = 0;
+		while (lim > 0)
+		{
+			if (matrix[visited[i]][j] == -1)
+			{
+				lim--;
+				if (visited[i] != 0 && (tab[j].wth == 0))
+				{
+					tab[j].wth = tab[visited[i]].wth + 1;
+					add_to_queue(&queue, j);
+				}
+			}
+			j++;
+		}
+		i++;
+	}
+	free(queue);
+	free(visited);
 }
 
 void	onelink_startend(int ant_n)

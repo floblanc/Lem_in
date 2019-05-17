@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/05/15 18:24:07 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/17 11:06:32 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,15 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 	lim = matrix[new->path[way][pos]][new->path[way][pos]];
 	best = 0;
 	i = 0;
-	printf("new->path[%d][%d](%s) = %d\n", way, pos, tab[new->path[way][pos]].name, new->path[way][pos]);
+//	printf("new->path[%d][%d](%s) = %d\n", way, pos, tab[new->path[way][pos]].name, new->path[way][pos]);
 	while (lim > 0)
 	{
 		if (matrix[new->path[way][pos]][i] == -1)
 		{
 			lim--;
 			//printf("lim = %d, i = %d\n", lim, i);
-			if (way == 1)
-				printf("i = %d %s.taken = %d et wth = %d used = %d, degre = %d pour le path[%d][%d]\n", i, tab[i].name, tab[i].taken, tab[i].wth, tab[i].used, matrix[i][i], way, pos + 1);
+//			if (way == 1)
+//				printf("i = %d %s.taken = %d et wth = %d used = %d, degre = %d pour le path[%d][%d]\n", i, tab[i].name, tab[i].taken, tab[i].wth, tab[i].used, matrix[i][i], way, pos + 1);
 			if (i != 0 && (i == 1 ||
 						(tab[i].taken == 0 && tab[i].used != way + 1
 						 && (!(best) || tab[best].wth > tab[i].wth) && tab[i].wth > 0)))
@@ -69,7 +69,7 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 			break ;
 		i++;
 	}
-	printf("best = %d %s pour le path[%d][%d], used = %d, wth = %d\n", best, tab[best].name, way, pos + 1, tab[best].used, tab[best].wth);
+//	printf("best = %d %s pour le path[%d][%d], used = %d, wth = %d\n", best, tab[best].name, way, pos + 1, tab[best].used, tab[best].wth);
 	return (best);
 }
 
@@ -78,16 +78,16 @@ void	close_path(t_path *new, t_room *tab, int size, int f_case)
 	int	i;
 
 	i = 0;
-	printf("CLOSEPATH\n");
+//	printf("CLOSEPATH\n");
 	if (f_case > 0)
 		tab[f_case].used = new->path_n;
 	while (new->path[new->path_n - 1][i] != 0)
 	{
-		printf("coucou close_path\n");
+//		printf("coucou close_path\n");
 		if (i == 0)
 		{
 			tab[new->path[new->path_n - 1][i]].used = new->path_n;
-			printf("TABBBB[new->path[%d][%d]].used = %d\n", new->path_n - 1, i, tab[new->path[new->path_n - 1][i]].used);
+//			printf("TABBBB[new->path[%d][%d]].used = %d\n", new->path_n - 1, i, tab[new->path[new->path_n - 1][i]].used);
 		}
 		tab[new->path[new->path_n - 1][i]].taken = 0;
 		new->path[new->path_n - 1][i++] = 0;
@@ -199,8 +199,8 @@ int		check_nodes(t_room *tab, t_path **new, t_path *best, int **matrix)
 			return (best->path[(*new)->path_n - 2][i]);
 		i++;
 	}
-		close_path(*new, tab, size
-				, way_is_possible(matrix, tab, *new, (*new)->path_n - 1));
+//		close_path(*new, tab, size
+//				, way_is_possible(matrix, tab, *new, (*new)->path_n - 1));
 	return (0);
 }
 
@@ -210,14 +210,14 @@ void	try_path(int **matrix, t_room *tab, t_path *new, t_path *best)
 	int	size;
 
 	(void)matrix;
-	printf("coucou trypath\n");
+//	printf("coucou trypath\n");
 	size = calc_size(tab);
 	i = check_nodes(0, 0, 0, 0) - 1;
 	copy_best(best, new, size, tab);
 	while (++i < size)
 		if (tab[i].used == new->path_n - 2)
 			tab[i].used = 0;
-	//tab[way_is_possible(matrix, tab, new, new->path_n - 1)].used = new->path_n;
+	tab[way_is_possible(matrix, tab, new, new->path_n - 1)].used = new->path_n;
 	new->path[new->path_n - 2][new->len[new->path_n - 2] - 1] = 0;
 }
 
@@ -252,7 +252,7 @@ int		find_path(int **matrix, t_room *tab, t_path **new, t_path *best)
 			}
 			else if (way_is_possible(matrix, tab, *new, (*new)->path_n - 1) > 0)
 			{
-				printf("lol\n");
+//				printf("lol\n");
 				try_path(matrix, tab, *new, best);
 			}
 			else

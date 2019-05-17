@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/14 17:27:45 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/17 11:55:10 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void				init_t_path(t_path **struc, int size, int t_path_n);
 int					find_path(int **matrix, t_room *tab, t_path **new
 		, t_path *best);
 int					calc_step(t_path *struc, int ant_n, int path_n);
-void				put_wth(int **matrix, int i, int j, t_room *tab);
+void				put_wth(int **matrix, t_room *tab, int size);
 int					calc_size(t_room *tab);
 void				free_paths(t_path **begin);
 void				use_path(t_path *best, t_room *tab, int size);

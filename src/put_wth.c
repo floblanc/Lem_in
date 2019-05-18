@@ -6,36 +6,62 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 11:24:49 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/17 12:18:17 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/18 14:38:39 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	push_queue(int **queue)
+void	add_to_queue(int **queue, int room, int add_or_push)
 {
 	int	i;
 
 	i = 0;
-	while ((*queue)[i] != -1)
+	if (add_or_push == 1)
 	{
-		(*queue)[i] = (*queue)[i + 1];
-		i++;
+		while ((*queue)[i] != -1)
+		{
+			if ((*queue)[i] == room)
+				return ;
+			i++;
+		}
+		(*queue)[i] = room;
 	}
+	else
+		while ((*queue)[i] != -1)
+		{
+			(*queue)[i] = (*queue)[i + 1];
+			i++;
+		}
 }
 
-void		add_to_queue(int **queue, int room)
+void	put_wth2(int *visited, int *queue, int **matrix, t_room *tab)
 {
 	int	i;
+	int	j;
+	int lim;
 
 	i = 0;
-	while ((*queue)[i] != -1)
+	while (queue[0] != -1)
 	{
-		if ((*queue)[i] == room)
-			return ;
+		visited[i] = queue[0];
+		add_to_queue(&queue, 0, 0);
+		lim = matrix[visited[i]][visited[i]];
+		j = 0;
+		while (lim > 0)
+		{
+			if (matrix[visited[i]][j] == -1 && lim-- > 0)
+			{
+				if (visited[i] != 0 && (tab[j].wth == 0))
+				{
+					tab[j].wth = tab[visited[i]].wth + 1;
+					add_to_queue(&queue, j, 1);
+				}
+			}
+			j++;
+		}
 		i++;
 	}
-	(*queue)[i] = room;
 }
 
 void	put_wth(int **matrix, t_room *tab, int size)
@@ -44,7 +70,6 @@ void	put_wth(int **matrix, t_room *tab, int size)
 	int	*queue;
 	int	i;
 	int	j;
-	int	lim;
 
 	i = 0;
 	j = 0;
@@ -58,28 +83,7 @@ void	put_wth(int **matrix, t_room *tab, int size)
 		queue[i++] = -1;
 	}
 	queue[0] = 1;
-	i = 0;
-	while (queue[0] != -1)
-	{
-		visited[i] = queue[0];
-		push_queue(&queue);
-		lim = matrix[visited[i]][visited[i]];
-		j = 0;
-		while (lim > 0)
-		{
-			if (matrix[visited[i]][j] == -1)
-			{
-				lim--;
-				if (visited[i] != 0 && (tab[j].wth == 0))
-				{
-					tab[j].wth = tab[visited[i]].wth + 1;
-					add_to_queue(&queue, j);
-				}
-			}
-			j++;
-		}
-		i++;
-	}
+	put_wth2(visited, queue, matrix, tab);
 	free(queue);
 	free(visited);
 }

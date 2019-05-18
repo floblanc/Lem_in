@@ -6,17 +6,12 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/17 11:55:10 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/18 14:20:12 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
-
-/////////////////////
-# include <stdio.h>//
-/////////////////////
-
 # include "../libprintf/include/libprintf.h"
 
 typedef	struct		s_room
@@ -87,7 +82,7 @@ void				onelink_startend(int ant_n);
 int					other_turn(int **matrix, t_room *tab, int *way, int room_n);
 int					all_len_complete(t_path *new);
 void				init_tab(t_room **tab, int i, t_room *current);
-void				init_tab(t_room **tab, int i, t_room * current);
+void				init_tab(t_room **tab, int i, t_room *current);
 void				sort_paths(t_path **new, int size, t_room *tab
 		, int **matrix);
 

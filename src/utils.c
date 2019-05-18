@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:56:29 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/14 11:49:43 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/18 14:27:14 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,17 @@ void	try_swap_t_path(t_path **another_new, t_path **new, t_room *tab)
 	int		ano_som;
 	int		i;
 
-	//printf("OTHER WAY FOUND\n");
 	new_som = 0;
 	ano_som = 0;
 	i = 0;
 	while (i < (*new)->path_n)
 	{
-		//		printf("new-len[%d] = %d et anothernew->len[%d] = %d\n",i,(*new)->len[i],i,(*another_new)->len[i]);
 		new_som += (*new)->len[i];
 		ano_som += (*another_new)->len[i];
 		i++;
 	}
 	if (ano_som && ano_som < new_som)
 	{
-		//	printf("le nouveau est mieux\n");
 		tmp = *another_new;
 		*another_new = *new;
 		*new = tmp;

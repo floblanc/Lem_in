@@ -6,14 +6,14 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 18:37:38 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/14 17:36:30 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/18 14:40:21 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
 void	swap_path(t_path **new, int size, int i, t_room *tab)
-{	
+{
 	int	tmp[size];
 	int	save_len;
 	int	j;

@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 11:24:49 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/18 14:38:39 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/20 17:58:56 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,24 @@ void	put_wth2(int *visited, int *queue, int **matrix, t_room *tab)
 	int	i;
 	int	j;
 	int lim;
+	int	size;
 
 	i = 0;
-	while (queue[0] != -1)
+	size = calc_size(tab);
+	while (queue[0] != -1 && i < size)
 	{
 		visited[i] = queue[0];
 		add_to_queue(&queue, 0, 0);
 		lim = matrix[visited[i]][visited[i]];
-		j = 0;
-		while (lim > 0)
+		j = -1;
+		while (lim > 0 && j++ < size)
 		{
 			if (matrix[visited[i]][j] == -1 && lim-- > 0)
-			{
 				if (visited[i] != 0 && (tab[j].wth == 0))
 				{
 					tab[j].wth = tab[visited[i]].wth + 1;
 					add_to_queue(&queue, j, 1);
 				}
-			}
-			j++;
 		}
 		i++;
 	}
@@ -90,7 +89,7 @@ void	put_wth(int **matrix, t_room *tab, int size)
 
 void	onelink_startend(int ant_n)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	printf("\n");
@@ -104,8 +103,8 @@ void	onelink_startend(int ant_n)
 
 int		fill_matrix(t_room *tab, int **matrix, char *str, int size)
 {
-	int		i;
-	int		run;
+	int	i;
+	int	run;
 
 	i = 0;
 	while (str[i] && str[i] != '-')

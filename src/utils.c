@@ -6,48 +6,22 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:56:29 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/18 14:27:14 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/20 11:45:11 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	try_swap_t_path(t_path **another_new, t_path **new, t_room *tab)
+void	clean_wth(t_room *tab, int size)
 {
-	t_path	*tmp;
-	int		new_som;
-	int		ano_som;
-	int		i;
+	int	i;
 
-	new_som = 0;
-	ano_som = 0;
 	i = 0;
-	while (i < (*new)->path_n)
+	while (i < size)
 	{
-		new_som += (*new)->len[i];
-		ano_som += (*another_new)->len[i];
+		if (tab[i].taken == 0)
+			tab[i].wth = 0;
 		i++;
-	}
-	if (ano_som && ano_som < new_som)
-	{
-		tmp = *another_new;
-		*another_new = *new;
-		*new = tmp;
-	}
-	else
-	{
-		i = 0;
-		new_som = 0;
-		while (i < (*new)->path_n)
-		{
-			new_som = 0;
-			while ((*another_new)->path[i][new_som] != 1)
-				tab[(*another_new)->path[i][new_som++]].taken = 0;
-			new_som = 0;
-			while ((*new)->path[i][new_som] != 1)
-				tab[(*new)->path[i][new_som++]].taken = i + 1;
-			i++;
-		}
 	}
 }
 
@@ -73,22 +47,6 @@ int		calc_size(t_room *tab)
 		size++;
 	size++;
 	return (size);
-}
-
-int		enougth_room_for_more(t_path *best, t_room *tab)
-{
-	int	i;
-	int	size;
-	int	len_som;
-
-	if (!(best))
-		return (1);
-	i = 0;
-	len_som = 0;
-	size = calc_size(tab);
-	while (i < best->path_n)
-		len_som += best->len[i++];
-	return (((size - len_som > best->len[best->path_n - 1]) ? 1 : 0));
 }
 
 void	copy_best(t_path *best, t_path *new, int size, t_room *tab)

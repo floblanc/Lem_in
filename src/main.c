@@ -6,24 +6,11 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/18 15:25:51 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/20 18:22:53 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-
-void	clean_wth(t_room *tab, int size)
-{
-	int	i;
-
-	i = 0;
-	while (i < size)
-	{
-		if (tab[i].taken == 0)
-			tab[i].wth = 0;
-		i++;
-	}
-}
 
 void	main4(t_path **best, t_path **new, int size, t_room *tab)
 {
@@ -59,15 +46,10 @@ t_path	*main_3bis(int **matrix, t_room *tab, int size, int first_room)
 	path_max = ((path_max > tab[0].taken) ? tab[0].taken : path_max);
 	while (++i <= path_max)
 	{
-		clean_wth(tab, size);
-		put_wth(matrix, tab, size);
-		init_t_path(&new, size, i);
+		main3_ter(matrix, tab, &new, i);
 		new->path[0][0] = first_room;
-		tab[new->path[0][0]].taken = 1;
-		copy_best(best, new, size, tab);
-		if (!(find_path(matrix, tab, &new, best)))
+		if (!(main_findpath(matrix, tab, new, best)))
 			break ;
-		sort_paths(&new, size, tab, matrix);
 		calc_step(new, tab[0].taken, i);
 		if (best && new->step >= best->step && new->path_n > best->path_n)
 			break ;
@@ -100,32 +82,25 @@ void	main3(int **matrix, t_room *tab, int size)
 			free_paths(&best_tmp);
 		}
 		j++;
-		free_paths(&better);
 	}
+	printf("step == %d\n", better->step);
+	use_path(better, tab, size);
+	free_paths(&better);
 }
 
-void	main2(t_room **roombeg, int ant_n, t_write **str)
+void	main2(t_room **roombeg, int ant_n, t_write **str, int size)
 {
 	int		**matrix;
 	t_room	*tab;
-	int		size;
 
 	tab = 0;
 	matrix = 0;
-	size = ft_lstlen(roombeg);
 	if (ant_n > 0)
 	{
 		rooms_in_tab(&tab, roombeg);
 		set_matrix(tab, str, size, &matrix);
-		if (matrix[0][1] == -1)
-		{
-			write_data(str);
-			onelink_startend(ant_n);
-			free_lst_write(str);
-			free_room_tab(&tab, size);
-			free_matrix(&matrix, size);
+		if (!(main2_onelink(matrix, tab, ant_n, str)))
 			return ;
-		}
 		put_wth(matrix, tab, size);
 	}
 	if (ant_n <= 0 || tab[0].wth <= 0)
@@ -147,12 +122,14 @@ int		main(void)
 	int		ant_n;
 	t_room	*roombeg;
 	t_write	*str;
+	int		size;
 
 	ant_n = 0;
 	roombeg = 0;
 	str = 0;
 	read_n_stock(&ant_n, &roombeg, &str);
-	main2(&roombeg, ant_n, &str);
+	size = ft_lstlen(&roombeg);
+	main2(&roombeg, ant_n, &str, size);
 	free_lst_room(&roombeg);
 	return (0);
 }

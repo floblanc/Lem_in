@@ -6,12 +6,17 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/18 14:20:12 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/20 17:55:43 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
+
+/////////////////////
+# include <stdio.h>//
+/////////////////////
+
 # include "../libprintf/include/libprintf.h"
 
 typedef	struct		s_room
@@ -49,6 +54,8 @@ int					ft_lstlen(t_room **begin);
 int					check_startend(t_room **begin);
 int					command_is_valid(char *str);
 int					valid_digit(char *line);
+int					main2_onelink(int **matrix, t_room *tab, int ant_n
+		, t_write **str);
 void				set_matrix(t_room *tab, t_write **str, int size
 		, int ***matrix);
 char				*extract_room_name(char *str);
@@ -70,20 +77,19 @@ int					find_path(int **matrix, t_room *tab, t_path **new
 int					calc_step(t_path *struc, int ant_n, int path_n);
 void				put_wth(int **matrix, t_room *tab, int size);
 int					calc_size(t_room *tab);
+void				main3_ter(int **matrix, t_room *tab, t_path **new, int size);
 void				free_paths(t_path **begin);
 void				use_path(t_path *best, t_room *tab, int size);
-void				write_path(t_path *best, t_room *tab, int j, int ant_n);
+void				write_path(t_path *best, t_room *tab, int j, int *first);
 void				copy_best(t_path *best, t_path *new, int size, t_room *tab);
-int					enougth_room_for_more(t_path *best, t_room *tab);
 void				clean_some_taken(t_room *tab, int size);
-void				try_swap_t_path(t_path **another_new, t_path **new
-		, t_room *tab);
 void				onelink_startend(int ant_n);
-int					other_turn(int **matrix, t_room *tab, int *way, int room_n);
-int					all_len_complete(t_path *new);
 void				init_tab(t_room **tab, int i, t_room *current);
-void				init_tab(t_room **tab, int i, t_room *current);
+void				init_tab(t_room **tab, int i, t_room * current);
 void				sort_paths(t_path **new, int size, t_room *tab
 		, int **matrix);
+int					main_findpath(int **matrix, t_room *tab, t_path *new
+		, t_path *best);
+void				clean_wth(t_room *tab, int size);
 
 #endif

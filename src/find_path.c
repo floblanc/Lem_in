@@ -6,17 +6,17 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/05/18 14:25:31 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/20 15:10:58 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-int		node_is_possible(int **matrix, t_room *tab, int	room, int way)
+int		node_is_possible(int **matrix, t_room *tab, int room, int way)
 {
-	int		i;
-	int		lim;
-	int		best;
+	int			i;
+	int			lim;
+	int			best;
 
 	i = 0;
 	best = 0;
@@ -39,13 +39,13 @@ int		node_is_possible(int **matrix, t_room *tab, int	room, int way)
 
 int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 {
-	int	pos;
-	int lim;
-	int	best;
-	int	i;
+	int			pos;
+	int			lim;
+	int			best;
+	int			i;
 
 	pos = 0;
-	while (new->path[way][pos + 1] != 0 && new->path[way][pos + 1])//peut etre a raccourcir
+	while (new->path[way][pos + 1] != 0 && new->path[way][pos + 1])
 		pos++;
 	lim = matrix[new->path[way][pos]][new->path[way][pos]];
 	best = 0;
@@ -57,7 +57,8 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 			lim--;
 			if (i != 0 && (i == 1 ||
 						(tab[i].taken == 0 && tab[i].used != way + 1
-						 && (!(best) || tab[best].wth > tab[i].wth) && tab[i].wth > 0)))
+						&& (!(best) || tab[best].wth > tab[i].wth)
+							&& tab[i].wth > 0)))
 				best = i;
 		}
 		if (best == 1)
@@ -69,7 +70,7 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 
 void	close_path(t_path *new, t_room *tab, int size, int f_case)
 {
-	int	i;
+	int			i;
 
 	i = 0;
 	if (f_case > 0)
@@ -90,21 +91,21 @@ void	close_path(t_path *new, t_room *tab, int size, int f_case)
 	}
 }
 
-void	make_a_turn(int ** matrix, t_room *tab, t_path *new, int node)
+void	make_a_turn(int **matrix, t_room *tab, t_path *new, int node)
 {
-	int	i;
+	int			i;
 
 	i = 1;
 	while (new->path[new->path_n - 2][i - 1] != node)
 		i++;
-	new->path[new->path_n - 2][i]
-		= way_is_possible(matrix, tab, new, new->path_n - 2);
+	new->path[new->path_n - 2][i] = way_is_possible(matrix, tab, new,
+			new->path_n - 2);
 	tab[new->path[new->path_n - 2][i]].taken = new->path_n - 2 + 1;
 }
 
 void	check_first_node(t_path *new, t_room *tab, int size)
 {
-	int	i;
+	int			i;
 
 	i = 0;
 	while (i < size)
@@ -124,7 +125,7 @@ void	check_first_node(t_path *new, t_room *tab, int size)
 
 int		no_node(t_path *new, t_path *best, int **matrix)
 {
-	int	i;
+	int			i;
 
 	i = 0;
 	while (best->path[new->path_n - 2][i] != 1
@@ -140,7 +141,7 @@ int		no_node(t_path *new, t_path *best, int **matrix)
 
 int		check_nodes(t_room *tab, t_path **new, t_path *best, int **matrix)
 {
-	int	i;
+	int			i;
 	static int	size;
 
 	if (!(tab) || !(new) || !(best) || !(matrix))
@@ -162,11 +163,13 @@ int		check_nodes(t_room *tab, t_path **new, t_path *best, int **matrix)
 	i = size - 1;
 	check_first_node(*new, tab, size);
 	while ((*new)->node[(*new)->path_n - 2][i] == 0
-			|| (*new)->node[(*new)->path_n - 2][i] != best->node[(*new)->path_n - 2][i])
+			|| (*new)->node[(*new)->path_n - 2][i]
+			!= best->node[(*new)->path_n - 2][i])
 	{
 		if ((*new)->path[(*new)->path_n - 2][i] != 0)
 			tab[(*new)->path[(*new)->path_n - 2][i]].taken = 0;
-		if ((*new)->node[(*new)->path_n - 2][i - 1] == best->node[(*new)->path_n - 2][i - 1])
+		if ((*new)->node[(*new)->path_n - 2][i - 1]
+				== best->node[(*new)->path_n - 2][i - 1])
 			tab[(*new)->path[(*new)->path_n - 2][i]].used = (*new)->path_n - 1;
 		(*new)->node[(*new)->path_n - 2][i] = 0;
 		(*new)->path[(*new)->path_n - 2][i--] = 0;
@@ -188,10 +191,10 @@ int		check_nodes(t_room *tab, t_path **new, t_path *best, int **matrix)
 
 void	try_path(int **matrix, t_room *tab, t_path *new, t_path *best)
 {
-	int i;
-	int	size;
+	int			i;
+	int			size;
 
-	(void)matrix;//
+	(void)matrix;
 	size = calc_size(tab);
 	i = check_nodes(0, 0, 0, 0) - 1;
 	copy_best(best, new, size, tab);
@@ -204,9 +207,9 @@ void	try_path(int **matrix, t_room *tab, t_path *new, t_path *best)
 
 int		find_path(int **matrix, t_room *tab, t_path **new, t_path *best)
 {
-	int	i;
-	int	j;
-	int	node;
+	int			i;
+	int			j;
+	int			node;
 
 	i = (*new)->path_n - 1;
 	while (i < (*new)->path_n)

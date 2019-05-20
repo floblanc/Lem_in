@@ -6,7 +6,7 @@
 #    By: maginist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/09 11:22:24 by maginist          #+#    #+#              #
-#    Updated: 2019/05/15 14:14:00 by maginist         ###   ########.fr        #
+#    Updated: 2019/05/20 17:10:29 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRC_NAME =already_exist.c\
 		  free_lst.c\
 		  is_valid.c\
 		  main.c\
+		  main2.c\
 		  make_matrix.c\
 		  paths_utils.c\
 		  put_wth.c\

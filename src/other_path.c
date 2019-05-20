@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 18:37:38 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/18 14:40:21 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/20 11:04:37 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	sort_paths(t_path **new, int size, t_room *tab, int **matrix)
 		j = 0;
 		while ((*new)->path[i][j] != 1 && (*new)->path[i][j] != 0)
 		{
-			(*new)->node[i][j] = (matrix[(*new)->path[i][j]][(*new)->path[i][j]] > 2)
-				? (*new)->path[i][j] : 0;
+			(*new)->node[i][j] = (matrix[(*new)->path[i][j]][(*new)->path[i]
+					[j]] > 2) ? (*new)->path[i][j] : 0;
 			j++;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:58:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/21 00:16:34 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/22 12:01:50 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ void	use_path2(t_path *best, t_room *tab, int j, int *i)
 {
 	ant_walk(best, tab, j);
 	if (best->path[j][best->len[j]] > 0)
-	{
 		tab[best->path[j][0]].taken = (*i)++;
-		(tab[0].taken)--;
-	}
 	else
 		tab[best->path[j][0]].taken = 0;
 	(best->path[j][best->len[j]]) -= 1;
@@ -67,9 +64,10 @@ int		calc_step(t_path *struc, int ant_n, int path_n)
 {
 	int	i;
 	int	best;
+
 	while (ant_n > 0)
 	{
-		i = 1 ;
+		i = 1;
 		best = 0;
 		while (i < path_n)
 		{

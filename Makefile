@@ -6,7 +6,7 @@
 #    By: maginist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/09 11:22:24 by maginist          #+#    #+#              #
-#    Updated: 2019/05/20 17:10:29 by maginist         ###   ########.fr        #
+#    Updated: 2019/05/21 17:55:42 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRC_NAME =already_exist.c\
 		  stock_data.c\
 		  utils.c\
 		  write_data.c\
-		  other_utils.c\
+		  nodes.c\
+		  way_is.c\
 		  other_path.c\
 		  init_struct.c\
 

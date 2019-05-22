@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/20 17:55:43 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/22 14:23:49 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ int					find_path(int **matrix, t_room *tab, t_path **new
 int					calc_step(t_path *struc, int ant_n, int path_n);
 void				put_wth(int **matrix, t_room *tab, int size);
 int					calc_size(t_room *tab);
-void				main3_ter(int **matrix, t_room *tab, t_path **new, int size);
+void				main3_ter(int **matrix, t_room *tab, t_path **new
+		, t_path **best);
 void				free_paths(t_path **begin);
 void				use_path(t_path *best, t_room *tab, int size);
 void				write_path(t_path *best, t_room *tab, int j, int *first);
@@ -88,8 +89,15 @@ void				init_tab(t_room **tab, int i, t_room *current);
 void				init_tab(t_room **tab, int i, t_room * current);
 void				sort_paths(t_path **new, int size, t_room *tab
 		, int **matrix);
-int					main_findpath(int **matrix, t_room *tab, t_path *new
+int					main_findpath(int **matrix, t_room *tab, t_path **new
 		, t_path *best);
+void				main4(t_path **best, t_path **new, int size, t_room *tab);
 void				clean_wth(t_room *tab, int size);
+int					way_is_possible(int **matrix, t_room *tab, t_path *new
+		, int way);
+int					close_path(t_path *new, t_room *tab, int size, int f_case);
+int					check_nodes(t_room *tab, t_path **n, t_path *b, int **mtrx);
+int					way_is_good(int **matrix, t_room *tab, t_path *new
+		, int way);
 
 #endif

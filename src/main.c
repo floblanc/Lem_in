@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/20 18:22:53 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/22 17:50:20 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,14 @@ t_path	*main_3bis(int **matrix, t_room *tab, int size, int first_room)
 	path_max = ((path_max > tab[0].taken) ? tab[0].taken : path_max);
 	while (++i <= path_max)
 	{
-		main3_ter(matrix, tab, &new, i);
+		init_t_path(&new, size, i);
 		new->path[0][0] = first_room;
-		if (!(main_findpath(matrix, tab, new, best)))
+		if (!(main_findpath(matrix, tab, &new, best)))
 			break ;
 		calc_step(new, tab[0].taken, i);
 		if (best && new->step >= best->step && new->path_n > best->path_n)
 			break ;
-		main4(&best, &new, size, tab);
-		free_paths(&new);
+		main3_ter(matrix, tab, &new, &best);
 	}
 	free_paths(&new);
 	return (best);
@@ -83,9 +82,28 @@ void	main3(int **matrix, t_room *tab, int size)
 		}
 		j++;
 	}
-	printf("step == %d\n", better->step);
+/*
+	int k;
+	int l;
+	l = 0;
+	printf("better->step %d, better_path_n : %d,  new->step %d, better-Path_n : %d\n", (better)->step, (better)->path_n, (better)->step, (better)->path_n);
+	while (l < better->path_n)
+	{
+		k = 0;
+		while (better->path[l][k] != 1 && better->path[l][k] != -1 && better->len[l] > 0)
+		{
+			printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d", l, k, better->path[l][k], tab[better->path[l][k]].name, tab[better->path[l][k]].wth, tab[better->path[l][k]].taken);
+			k++;
+		}
+		printf("\npath[%d][%d] = %d -> room: %s.wth = %d taken = %d", l, k, better->path[l][k], tab[better->path[l][k]].name, tab[better->path[l][k]].wth, tab[better->path[l][k]].taken);
+		printf("\nlen = %d Path_n = %d\n", better->len[l], better->path_n);
+		l++;
+	}
+*/
+//	i = better->step;
 	use_path(better, tab, size);
 	free_paths(&better);
+//	printf("step == %d\n", i);
 }
 
 void	main2(t_room **roombeg, int ant_n, t_write **str, int size)

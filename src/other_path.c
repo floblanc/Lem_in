@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/18 18:37:38 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/20 11:04:37 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/21 10:55:41 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ void	sort_paths(t_path **new, int size, t_room *tab, int **matrix)
 	i = 0;
 	while (i < (*new)->path_n - 1)
 	{
-		if (((*new)->len[i] <= 0 || (*new)->len[i] > (*new)->len[i + 1])
-				&& (*new)->len[i + 1] > 0)
+		if (((*new)->len[i] <= 0 || (*new)->len[i] > (*new)->len[i + 1]))
 		{
 			swap_path(new, size, i, tab);
 			i = -1;

@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/31 13:56:29 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/22 13:49:16 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/23 15:31:24 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	clean_wth(t_room *tab, int size)
 	i = 0;
 	while (i < size)
 	{
-		if (tab[i].taken == 0)
+		if (tab[i].taken == 0 && tab[i].wth > 0)
 			tab[i].wth = 0;
 		i++;
 	}

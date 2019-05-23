@@ -6,34 +6,33 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 11:24:49 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/23 12:01:53 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/23 15:19:41 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	add_to_queue(int **queue, int room, int add_or_push, int *first)
+void	add_to_queue(int **queue, int room, int add_or_push)
 {
-	int			i;
-	static int	last;
+	int	i;
 
-	if ((*first) == 1)
-	{
-		last = 1;
-		*first = 0;
-	}
 	i = 0;
 	if (add_or_push == 1)
-		(*queue)[last++] = room;
-	else
 	{
+		while ((*queue)[i] != -1)
+		{
+			if ((*queue)[i] == room)
+				return ;
+			i++;
+		}
+		(*queue)[i] = room;
+	}
+	else
 		while ((*queue)[i] != -1)
 		{
 			(*queue)[i] = (*queue)[i + 1];
 			i++;
 		}
-		last--;
-	}
 }
 
 void	put_wth2(int *visited, int *queue, int **matrix, t_room *tab)
@@ -42,16 +41,14 @@ void	put_wth2(int *visited, int *queue, int **matrix, t_room *tab)
 	int			j;
 	int			lim;
 	static int	size;
-	int			first;
 
-	first = 1;
 	i = -1;
 	if (!(size))
 		size = calc_size(tab);
 	while (queue[0] != -1 && ++i < size)
 	{
 		visited[i] = queue[0];
-		add_to_queue(&queue, 0, 0, &first);
+		add_to_queue(&queue, 0, 0);
 		lim = matrix[visited[i]][visited[i]];
 		j = -1;
 		while (lim > 0)
@@ -59,7 +56,7 @@ void	put_wth2(int *visited, int *queue, int **matrix, t_room *tab)
 					&& visited[i] != 0 && tab[j].wth == 0 && j != 1)
 			{
 				tab[j].wth = tab[visited[i]].wth + 1;
-				add_to_queue(&queue, j, 1, &first);
+				add_to_queue(&queue, j, 1);
 			}
 	}
 }

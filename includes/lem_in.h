@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/23 11:49:53 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/23 16:09:21 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,5 +100,5 @@ int					check_nodes(t_room *tab, t_path **n, t_path *b, int **mtrx);
 int					way_is_good(int **matrix, t_room *tab, t_path *new
 		, int way);
 void				clean_used(t_room *tab, int size);
-
+void				add_to_queue(int **queue, int room, int add_or_push);
 #endif

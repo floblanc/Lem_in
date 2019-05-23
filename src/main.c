@@ -6,11 +6,100 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/23 13:59:07 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/23 16:11:45 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+int		is_dead_end(int **matrix, t_room *tab, int j)
+{
+	int lim;
+	int exit;
+	int	i;
+
+	lim = matrix[j][j];
+	exit = 0;
+	i = 0;
+	while (lim > 0)
+	{
+		if (matrix[j][i] == -1)
+		{
+			lim--;
+			if (tab[i].wth > 0)
+				if (++exit > 1)
+					return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
+void	close_wth2(int *visited, int *queue, int **matrix, t_room *tab)
+{
+	int			i;
+	int			j;
+	int			lim;
+	int			size;
+
+	i = -1;
+	size = calc_size(tab);
+	while (queue[0] != -1 && ++i < size)
+	{
+		visited[i] = queue[0];
+		add_to_queue(&queue, 0, 0);
+		lim = matrix[visited[i]][visited[i]];
+		j = -1;
+		while (lim > 0)
+			if (matrix[visited[i]][++j] == -1 && lim-- > 0
+					&& visited[i] != 0 && tab[j].wth >= 0 && j != 1
+					&& (matrix[j][j] <= 2 || is_dead_end(matrix, tab, j)))
+			{
+				tab[j].wth = -1;
+				add_to_queue(&queue, j, 1);
+			}
+	}
+}
+
+void	close_wth(int **matrix, t_room *tab, int size, int start)
+{
+	int			*visited;
+	int			*queue;
+	int			i;
+	int			j;
+
+	i = 0;
+	j = 0;
+	if (!(queue = (int*)malloc(sizeof(int) * size)))
+		return ;
+	if (!(visited = (int*)malloc(sizeof(int) * size)))
+		return ;
+	while (i < size)
+	{
+		visited[i] = -1;
+		queue[i++] = -1;
+	}
+	queue[0] = start;
+	close_wth2(visited, queue, matrix, tab);
+	free(queue);
+	free(visited);
+}
+
+void	close_wrong_wth(int **matrix, t_room *tab, int size)
+{
+	int	i;
+
+	i = 0;
+	while (i < size)
+	{
+		if (matrix[i][i] == 1 && tab[i].wth >= 0)
+		{
+			tab[i].wth = -1;
+			close_wth(matrix, tab, size, i);
+		}
+		i++;
+	}
+}
 
 void	copy_wth(int **cpy, t_room *tab, int size)
 {
@@ -38,14 +127,14 @@ void	main4(t_path **best, t_path **new, int size, t_room *tab)
 		return ;
 	if (!(*best))
 	{
-	//	printf("%d steps\n",(*new)->step);
+		//	printf("%d steps\n",(*new)->step);
 		init_t_path(best, size, (*new)->path_n);
 		copy_best(*new, *best, size, tab);
 		calc_step(*best, tab[0].taken, (*best)->path_n);
 	}
 	else if (*best && (*new)->step > 0 && (*new)->step < (*best)->step)
 	{
-	//	printf("from %d steps to %d steps\n",(*best)->step, (*new)->step);
+		//	printf("from %d steps to %d steps\n",(*best)->step, (*new)->step);
 		free_paths(best);
 		init_t_path(best, size, (*new)->path_n);
 		copy_best(*new, *best, size, tab);
@@ -100,7 +189,8 @@ void	main3(int **matrix, t_room *tab, int size)
 		while (matrix[0][j] != -1)
 			j++;
 		i--;
-		reset_wth(wth_cpy, tab, size);
+		if (matrix[0][0] - 1 != i)
+			reset_wth(wth_cpy, tab, size);
 		if (tab[j].wth > 0)
 		{
 			clean_used(tab, size);
@@ -110,24 +200,24 @@ void	main3(int **matrix, t_room *tab, int size)
 		}
 		j++;
 	}
-/*
-	int k;
-	int l;
-	l = 0;
-	printf("better->step %d, better_path_n : %d,  new->step %d, better-Path_n : %d\n", (better)->step, (better)->path_n, (better)->step, (better)->path_n);
-	while (l < better->path_n)
-	{
-		k = 0;
-		while (better->path[l][k] != 1 && better->path[l][k] != -1 && better->len[l] > 0)
-		{
-			printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d", l, k, better->path[l][k], tab[better->path[l][k]].name, tab[better->path[l][k]].wth, tab[better->path[l][k]].taken);
-			k++;
-		}
-		printf("\npath[%d][%d] = %d -> room: %s.wth = %d taken = %d", l, k, better->path[l][k], tab[better->path[l][k]].name, tab[better->path[l][k]].wth, tab[better->path[l][k]].taken);
-		printf("\nlen = %d Path_n = %d\n", better->len[l], better->path_n);
-		l++;
-	}
-*/
+	/*
+	   int k;
+	   int l;
+	   l = 0;
+	   printf("better->step %d, better_path_n : %d,  new->step %d, better-Path_n : %d\n", (better)->step, (better)->path_n, (better)->step, (better)->path_n);
+	   while (l < better->path_n)
+	   {
+	   k = 0;
+	   while (better->path[l][k] != 1 && better->path[l][k] != -1 && better->len[l] > 0)
+	   {
+	   printf("\npath[%d][%d] = %d -> room : %s.wth = %d taken = %d", l, k, better->path[l][k], tab[better->path[l][k]].name, tab[better->path[l][k]].wth, tab[better->path[l][k]].taken);
+	   k++;
+	   }
+	   printf("\npath[%d][%d] = %d -> room: %s.wth = %d taken = %d", l, k, better->path[l][k], tab[better->path[l][k]].name, tab[better->path[l][k]].wth, tab[better->path[l][k]].taken);
+	   printf("\nlen = %d Path_n = %d\n", better->len[l], better->path_n);
+	   l++;
+	   }
+	   */
 //	i = better->step;
 	use_path(better, tab, size);
 	free_paths(&better);
@@ -148,6 +238,7 @@ void	main2(t_room **roombeg, int ant_n, t_write **str, int size)
 		if (!(main2_onelink(matrix, tab, ant_n, str)))
 			return ;
 		put_wth(matrix, tab, size);
+		close_wrong_wth(matrix, tab, size);
 	}
 	if (ant_n <= 0 || tab[0].wth <= 0)
 		write(2, "ERROR\n", 6);

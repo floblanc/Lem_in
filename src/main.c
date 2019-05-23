@@ -237,7 +237,7 @@ void	main2(t_room **roombeg, int ant_n, t_write **str, int size)
 		set_matrix(tab, str, size, &matrix);
 		if (!(main2_onelink(matrix, tab, ant_n, str)))
 			return ;
-		put_wth(matrix, tab, size);
+		put_wth(matrix, tab, size); //laisser le classique avec le break mais ici on fait un full put_wth (qui sera copié et réécrit par la suite pour le first eau et je pense qu’avec ça ça peut le faire
 		//close_wrong_wth(matrix, tab, size);
 	}
 	if (ant_n <= 0 || tab[0].wth <= 0)

@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:44:27 by maginist          #+#    #+#             */
-/*   Updated: 2019/05/22 18:37:15 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/23 11:08:28 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,14 @@ void	check_first_node(t_path *new, t_room *tab, int size)
 	while (i < size)
 		if (tab[i++].used == new->path_n - 1)
 			return ;
+//	printf("FIRST\n");
 	i = 1;
 	while (new->node[new->path_n - 2][i - 1] == 0)
 		i++;
 	tab[new->path[new->path_n - 2][i]].used = new->path_n - 1;
 	while (new->path[new->path_n - 2][i] != 0)
 	{
-			printf("firstnodetab[%d].taken = %d\n", new->path[new->path_n - 2][i], tab[new->path[new->path_n - 2][i]].taken);
+//		printf("firstnodetab[%d].taken = %d\n", new->path[new->path_n - 2][i], tab[new->path[new->path_n - 2][i]].taken);
 		tab[new->path[new->path_n - 2][i]].taken = 0;
 		new->node[new->path_n - 2][i] = 0;
 		new->path[new->path_n - 2][i++] = 0;
@@ -98,12 +99,12 @@ void	check_nodes2(t_room *tab, t_path **n, t_path *best, int *i)
 				&& (*n)->node[(*n)->path_n - 2][(*i) - 1]
 				== best->node[(*n)->path_n - 2][(*i) - 1])
 			tab[(*n)->path[(*n)->path_n - 2][(*i)]].used = (*n)->path_n - 1;
-		if ((*i) < 50)
-			printf("i poeut = %d tab[%d].taken = %d .used = %d\n",(*i), (*n)->path[(*n)->path_n - 2][(*i)], tab[(*n)->path[(*n)->path_n - 2][(*i)]].taken, tab[(*n)->path[(*n)->path_n - 2][(*i)]].used);
+	//	if ((*i) < 50)
+	//		printf("i poeut = %d tab[%d].taken = %d .used = %d pour le best tab[%d]\n",(*i), (*n)->node[(*n)->path_n - 2][(*i)], tab[(*n)->path[(*n)->path_n - 2][(*i)]].taken, tab[(*n)->path[(*n)->path_n - 2][(*i)]].used, best->path[(*n)->path_n - 2][(*i)]);
 		(*n)->node[(*n)->path_n - 2][(*i)] = 0;
 		(*n)->path[(*n)->path_n - 2][(*i)--] = 0;
 	}
-			printf("plopi = %d tab[%d].taken = %d\n", (*i), (*n)->path[(*n)->path_n - 2][(*i)], tab[(*n)->path[(*n)->path_n - 2][(*i)]].taken);
+	//		printf("plopi = %d tab[%d].taken = %d\n", (*i), (*n)->path[(*n)->path_n - 2][(*i)], tab[(*n)->path[(*n)->path_n - 2][(*i)]].taken);
 	(*i)--;
 }
 
@@ -125,13 +126,14 @@ int		check_nodes(t_room *tab, t_path **n, t_path *b, int **mtrx)
 		if (b->path[(*n)->path_n - 2][i]
 				!= (*n)->path[(*n)->path_n - 2][i])
 		{
+//			printf("(*n)->path[balek][%d] = %d\n", i, b->path[(*n)->path_n - 2][i]);	
 			(*n)->path[(*n)->path_n - 2][i] = b->path[(*n)->path_n - 2][i];
 			(*n)->node[(*n)->path_n - 2][i] = b->node[(*n)->path_n - 2][i];
 			tab[b->path[(*n)->path_n - 2][i]].taken = (*n)->path_n - 1;
 		}
 		if (mtrx[b->path[(*n)->path_n - 2][i]][b->path[(*n)->path_n - 2][i]] > 2
 				&& way_is_possible(mtrx, tab, *n, (*n)->path_n - 2) > 1)
-			return (b->path[(*n)->path_n - 2][i]);
+			return (1);
 	}
 	return (0);
 }

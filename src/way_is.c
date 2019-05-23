@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:52:42 by maginist          #+#    #+#             */
-/*   Updated: 2019/05/22 18:06:15 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/23 11:08:31 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,13 @@ int		way_is_good(int **matrix, t_room *tab, t_path *new, int way)
 		if (best == 1)
 			break ;
 	}
-	printf("best = %d %s.taken = %d et wth = %d used = %d pour le path[%d][%d]\n", best, tab[best].name, tab[best].taken, tab[best].wth, tab[best].used,  way, pos + 1);
+	//printf("best = %d %s.taken = %d et wth = %d used = %d pour le path[%d][%d]\n", best, tab[best].name, tab[best].taken, tab[best].wth, tab[best].used,  way, pos + 1);
 	if (best > 0)
 	{
-		pos = (new->path[way][pos] == 0 ? 0 : 1);
+		pos = (new->path[way][pos] == 0 ? 0 : pos);
 		if (matrix[best][best] > 2 && best != 1)
-			new->node[way][pos] = best;
+			new->node[way][++pos] = best;
+	//	printf("new->node[%d][%d] = %d\n", way, pos, best);
 		tab[best].taken = way + 1;
 	}
 	return (best);
@@ -76,7 +77,7 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 		if (best == 1)
 			break ;
 	}
-	printf("best possible = %d %s.taken = %d et wth = %d used = %d pour le path[%d][%d]\n", best, tab[best].name, tab[best].taken, tab[best].wth, tab[best].used,  way, pos + 1);
+//	printf("best possible = %d %s.taken = %d et wth = %d used = %d pour le path[%d][%d]\n", best, tab[best].name, tab[best].taken, tab[best].wth, tab[best].used,  way, pos + 1);
 	return (best);
 }
 

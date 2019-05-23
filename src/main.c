@@ -6,11 +6,31 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/23 13:31:30 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/23 13:59:07 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+void	copy_wth(int **cpy, t_room *tab, int size)
+{
+	int	i;
+
+	i = -1;
+	if (!(*cpy = (int*)malloc(sizeof(int) * size)))
+		exit (0);
+	while (++i < size)
+		(*cpy)[i] = tab[i].wth;
+}
+
+void	reset_wth(int *cpy, t_room *tab, int size)
+{
+	int	i;
+
+	i = -1;
+	while (++i < size)
+		tab[i].wth = cpy[i];
+}
 
 void	main4(t_path **best, t_path **new, int size, t_room *tab)
 {
@@ -43,6 +63,7 @@ t_path	*main_3bis(int **matrix, t_room *tab, int size, int first_room)
 	i = 0;
 	best = 0;
 	new = 0;
+	clean_some_taken(tab, size);
 	path_max = ((matrix[1][1] > matrix[0][0]) ? matrix[0][0] : matrix[1][1]);
 	path_max = ((path_max > tab[0].taken) ? tab[0].taken : path_max);
 	//printf("degre start %d, degre end %d, ants %d, tab[%d{first room}].wth = %d\n", matrix[0][0], matrix[1][1], tab[0].taken, first_room, tab[first_room].wth);;
@@ -65,9 +86,12 @@ void	main3(int **matrix, t_room *tab, int size)
 {
 	t_path	*better;
 	t_path	*best_tmp;
+	int 	*wth_cpy;
 	int		i;
 	int		j;
 
+	wth_cpy = 0;
+	copy_wth(&wth_cpy, tab, size);
 	better = 0;
 	i = matrix[0][0];
 	j = 2;
@@ -76,11 +100,7 @@ void	main3(int **matrix, t_room *tab, int size)
 		while (matrix[0][j] != -1)
 			j++;
 		i--;
-		clean_some_taken(tab, size);
-		clean_wth(tab, size);
-		if (matrix[0][0] - 1 != i)
-			put_wth(matrix, tab, size);
-		//printf("i = %d, degre [j : %d %s] = %d et le poids %d\n", i, j, tab[j].name, matrix[j][j], tab[j].wth);
+		reset_wth(wth_cpy, tab, size);
 		if (tab[j].wth > 0)
 		{
 			clean_used(tab, size);

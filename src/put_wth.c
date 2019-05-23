@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 11:24:49 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/23 22:59:33 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/24 00:15:02 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,21 +48,20 @@ void	put_wth2(int *visited, int *queue, int **matrix, t_room *tab)
 	while (queue[0] != -1 && ++i < size)
 	{
 		visited[i] = queue[0];
+		if (queue[0] == 0)
+			break;
 		add_to_queue(&queue, 0, 0);
 		lim = matrix[visited[i]][visited[i]];
 		j = -1;
 		while (lim > 0)
+		{
 			if (matrix[visited[i]][++j] == -1 && lim-- > 0 && matrix[j][j] > 1
 					&& visited[i] != 0 && tab[j].wth == 0 && j != 1)
 			{
 				tab[j].wth = tab[visited[i]].wth + 1;
-				if (j == 0)
-				{
-					printf("BREAK\n");
-					break ;// TEST test test
-				}
 				add_to_queue(&queue, j, 1);
 			}
+		}
 	}
 }
 

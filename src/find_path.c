@@ -6,11 +6,20 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:45:26 by maginist          #+#    #+#             */
-/*   Updated: 2019/05/23 10:36:09 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/23 11:49:26 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+void	clean_used(t_room *tab, int size)
+{
+	int i;
+
+	i = 0;
+	while (i < size)
+		tab[i++].used = 0;
+}
 
 void	try_path(int **matrix, t_room *tab, t_path *new, t_path *best)
 {

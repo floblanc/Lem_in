@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:52:42 by maginist          #+#    #+#             */
-/*   Updated: 2019/05/23 11:08:31 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/23 13:25:21 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,10 @@ int		way_is_good(int **matrix, t_room *tab, t_path *new, int way)
 	while (lim > 0)
 	{
 		if (matrix[new->path[way][pos]][++i] == -1 && lim-- > 0)
+		{
+		//	printf("tab[%d].taken = %d, used = %d, wth =%d\n", i, tab[i].taken, tab[i].used, tab[i].wth);
 			way_is_possible2(tab, i, way, &best);
+		}
 		if (best == 1)
 			break ;
 	}
@@ -77,7 +80,7 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 		if (best == 1)
 			break ;
 	}
-//	printf("best possible = %d %s.taken = %d et wth = %d used = %d pour le path[%d][%d]\n", best, tab[best].name, tab[best].taken, tab[best].wth, tab[best].used,  way, pos + 1);
+	//printf("best possible = %d %s.taken = %d et wth = %d used = %d pour le path[%d][%d]\n", best, tab[best].name, tab[best].taken, tab[best].wth, tab[best].used,  way, pos + 1);
 	return (best);
 }
 

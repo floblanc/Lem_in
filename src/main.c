@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/23 11:08:26 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/23 13:31:30 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@ void	main4(t_path **best, t_path **new, int size, t_room *tab)
 		return ;
 	if (!(*best))
 	{
+	//	printf("%d steps\n",(*new)->step);
 		init_t_path(best, size, (*new)->path_n);
 		copy_best(*new, *best, size, tab);
 		calc_step(*best, tab[0].taken, (*best)->path_n);
 	}
 	else if (*best && (*new)->step > 0 && (*new)->step < (*best)->step)
 	{
+	//	printf("from %d steps to %d steps\n",(*best)->step, (*new)->step);
 		free_paths(best);
 		init_t_path(best, size, (*new)->path_n);
 		copy_best(*new, *best, size, tab);
@@ -41,9 +43,9 @@ t_path	*main_3bis(int **matrix, t_room *tab, int size, int first_room)
 	i = 0;
 	best = 0;
 	new = 0;
-	clean_some_taken(tab, size);
 	path_max = ((matrix[1][1] > matrix[0][0]) ? matrix[0][0] : matrix[1][1]);
 	path_max = ((path_max > tab[0].taken) ? tab[0].taken : path_max);
+	//printf("degre start %d, degre end %d, ants %d, tab[%d{first room}].wth = %d\n", matrix[0][0], matrix[1][1], tab[0].taken, first_room, tab[first_room].wth);;
 	while (++i <= path_max)
 	{
 		init_t_path(&new, size, i);
@@ -74,8 +76,14 @@ void	main3(int **matrix, t_room *tab, int size)
 		while (matrix[0][j] != -1)
 			j++;
 		i--;
+		clean_some_taken(tab, size);
+		clean_wth(tab, size);
+		if (matrix[0][0] - 1 != i)
+			put_wth(matrix, tab, size);
+		//printf("i = %d, degre [j : %d %s] = %d et le poids %d\n", i, j, tab[j].name, matrix[j][j], tab[j].wth);
 		if (tab[j].wth > 0)
 		{
+			clean_used(tab, size);
 			best_tmp = main_3bis(matrix, tab, size, j);
 			main4(&better, &best_tmp, size, tab);
 			free_paths(&best_tmp);

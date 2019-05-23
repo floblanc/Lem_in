@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/23 16:11:45 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/23 22:42:43 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,10 +218,10 @@ void	main3(int **matrix, t_room *tab, int size)
 	   l++;
 	   }
 	   */
-//	i = better->step;
+	i = better->step;
 	use_path(better, tab, size);
 	free_paths(&better);
-//	printf("step == %d\n", i);
+	printf("step == %d\n", i);
 }
 
 void	main2(t_room **roombeg, int ant_n, t_write **str, int size)
@@ -238,7 +238,7 @@ void	main2(t_room **roombeg, int ant_n, t_write **str, int size)
 		if (!(main2_onelink(matrix, tab, ant_n, str)))
 			return ;
 		put_wth(matrix, tab, size);
-		close_wrong_wth(matrix, tab, size);
+		//close_wrong_wth(matrix, tab, size);
 	}
 	if (ant_n <= 0 || tab[0].wth <= 0)
 		write(2, "ERROR\n", 6);

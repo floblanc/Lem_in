@@ -6,11 +6,25 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 12:19:34 by floblanc          #+#    #+#             */
-/*   Updated: 2019/04/01 16:34:08 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/24 13:36:28 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+void	onelink_startend(int ant_n)
+{
+	int	i;
+
+	i = 1;
+	ft_printf("\n");
+	while (i != ant_n)
+	{
+		ft_printf("L%d-end ", i);
+		i++;
+	}
+	ft_printf("L%d-end", i);
+}
 
 void	coord_is_valid(char *coord, int *error)
 {

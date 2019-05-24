@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/24 10:07:40 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/24 14:26:12 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,7 @@ int					way_is_good(int **matrix, t_room *tab, t_path *new
 		, int way);
 void				clean_used(t_room *tab, int size);
 void				add_to_queue(int **queue, int room, int add_or_push);
+void				reset_wth(int *cpy, t_room *tab, int size);
+void				copy_wth(int **cpy, t_room *tab, int size);
+
 #endif

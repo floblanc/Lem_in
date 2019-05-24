@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:44:27 by maginist          #+#    #+#             */
-/*   Updated: 2019/05/24 11:55:57 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/24 13:50:14 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,7 @@ void	check_nodes2(t_room *tab, t_path **n, t_path *best, int *i)
 {
 	static int	size;
 
-	if (!(size))
-		size = calc_size(tab);
+	size = (!(size)) ? calc_size(tab) : size;
 	while ((*n)->path[(*n)->path_n - 1][(*i)] != 0)
 	{
 		tab[(*n)->path[(*n)->path_n - 1][(*i)]].taken = 0;
@@ -108,10 +107,10 @@ int		check_nodes(t_room *tab, t_path **n, t_path *b, int **mtrx)
 	int			i;
 	static int	size;
 
-	if (!(tab) || !(n) || !(b) || !(mtrx))
-		return (0);
 	if (!(size))
 		size = calc_size(tab);
+	if (!(tab) || !(n) || !(b) || !(mtrx))
+		return (0);
 	if (no_node(*n, b, mtrx))
 		return (close_path(*n, tab, size, 0));
 	i = 0;

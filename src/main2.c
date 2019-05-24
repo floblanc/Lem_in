@@ -6,11 +6,31 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 13:29:44 by maginist          #+#    #+#             */
-/*   Updated: 2019/05/24 10:06:59 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/24 13:56:52 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+void	copy_wth(int **cpy, t_room *tab, int size)
+{
+	int		i;
+
+	i = -1;
+	if (!(*cpy = (int*)malloc(sizeof(int) * size)))
+		exit(0);
+	while (++i < size)
+		(*cpy)[i] = tab[i].wth;
+}
+
+void	reset_wth(int *cpy, t_room *tab, int size)
+{
+	int		i;
+
+	i = -1;
+	while (++i < size)
+		tab[i].wth = cpy[i];
+}
 
 int		main_findpath(int **matrix, t_room *tab, t_path **new, t_path *best)
 {

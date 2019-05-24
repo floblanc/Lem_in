@@ -6,19 +6,23 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:52:42 by maginist          #+#    #+#             */
-/*   Updated: 2019/05/24 11:50:05 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/24 13:20:10 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	way_is_possible2(t_room *tab, int i, int way, int *best)
+int		way_is_possible2(t_room *tab, int i, int way, int *best)
 {
 	if (i != 0 && (i == 1 ||
 			(tab[i].taken == 0 && tab[i].used != way + 1
 			&& ((*best) == 0 || tab[(*best)].wth > tab[i].wth)
 			&& tab[i].wth > 0)))
 		(*best) = i;
+	if ((*best) == 1)
+		return (0);
+	else
+		return (1);
 }
 
 int		way_is_good(int **matrix, t_room *tab, t_path *new, int way)
@@ -37,9 +41,8 @@ int		way_is_good(int **matrix, t_room *tab, t_path *new, int way)
 	while (lim > 0)
 	{
 		if (matrix[new->path[way][pos]][++i] == -1 && lim-- > 0)
-			way_is_possible2(tab, i, way, &best);
-		if (best == 1)
-			break ;
+			if (way_is_possible2(tab, i, way, &best) == 0)
+				break ;
 	}
 	if (best > 0)
 	{

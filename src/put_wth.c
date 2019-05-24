@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 11:24:49 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/24 00:15:02 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/24 11:56:59 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	add_to_queue(int **queue, int room, int add_or_push)
 		}
 }
 
-void	put_wth2(int *visited, int *queue, int **matrix, t_room *tab)
+void	full_put_wth2(int *visited, int *queue, int **matrix, t_room *tab)
 {
 	int			i;
 	int			j;
@@ -48,8 +48,6 @@ void	put_wth2(int *visited, int *queue, int **matrix, t_room *tab)
 	while (queue[0] != -1 && ++i < size)
 	{
 		visited[i] = queue[0];
-		if (queue[0] == 0)
-			break;
 		add_to_queue(&queue, 0, 0);
 		lim = matrix[visited[i]][visited[i]];
 		j = -1;
@@ -65,7 +63,37 @@ void	put_wth2(int *visited, int *queue, int **matrix, t_room *tab)
 	}
 }
 
-void	put_wth(int **matrix, t_room *tab, int size)
+void	put_wth2(int *visited, int *queue, int **matrix, t_room *tab)
+{
+	int			i;
+	int			j;
+	int			lim;
+	static int	size;
+
+	i = -1;
+	if (!(size))
+		size = calc_size(tab);
+	while (queue[0] != -1 && ++i < size)
+	{
+		visited[i] = queue[0];
+		if (queue[0] == 0)
+			break ;
+		add_to_queue(&queue, 0, 0);
+		lim = matrix[visited[i]][visited[i]];
+		j = -1;
+		while (lim > 0)
+		{
+			if (matrix[visited[i]][++j] == -1 && lim-- > 0 && matrix[j][j] > 1
+					&& visited[i] != 0 && tab[j].wth == 0 && j != 1)
+			{
+				tab[j].wth = tab[visited[i]].wth + 1;
+				add_to_queue(&queue, j, 1);
+			}
+		}
+	}
+}
+
+void	put_wth(int **matrix, t_room *tab, int size, int full)
 {
 	int			*visited;
 	int			*queue;
@@ -84,7 +112,10 @@ void	put_wth(int **matrix, t_room *tab, int size)
 		queue[i++] = -1;
 	}
 	queue[0] = 1;
-	put_wth2(visited, queue, matrix, tab);
+	if (full == 0)
+		put_wth2(visited, queue, matrix, tab);
+	else
+		full_put_wth2(visited, queue, matrix, tab);
 	free(queue);
 	free(visited);
 }

@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 13:29:44 by maginist          #+#    #+#             */
-/*   Updated: 2019/05/22 14:23:12 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/24 10:06:59 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	main3_ter(int **matrix, t_room *tab, t_path **new, t_path **best)
 	main4(best, new, size, tab);
 	free_paths(new);
 	clean_wth(tab, size);
-	put_wth(matrix, tab, size);
+	put_wth(matrix, tab, size, 0);
 	return ;
 }
 

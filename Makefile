@@ -6,7 +6,7 @@
 #    By: maginist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/09 11:22:24 by maginist          #+#    #+#              #
-#    Updated: 2019/05/24 12:06:16 by maginist         ###   ########.fr        #
+#    Updated: 2019/05/25 00:33:58 by floblanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC_NAME =already_exist.c\
 		  way_is.c\
 		  other_path.c\
 		  init_struct.c\
+		  shortcut.c\
 
 SRC_PATH = ./src
 

@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/24 14:26:12 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/25 00:43:53 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,7 @@ void				clean_used(t_room *tab, int size);
 void				add_to_queue(int **queue, int room, int add_or_push);
 void				reset_wth(int *cpy, t_room *tab, int size);
 void				copy_wth(int **cpy, t_room *tab, int size);
+void				set_matrix_shortcut(int **matrix, int size);
+void				lets_search_match(int **matrix, int i, int *j);
 
 #endif

@@ -6,58 +6,11 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/24 20:09:53 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/25 00:34:25 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-
-void	shortcut_between_link(int **matrix, int i, int *j, int save)
-{
-	if (i == (*j))
-		(*j)--;
-	while (matrix[i][(*j)] == 0 && (*j) >= 0)
-		(*j)--;
-	if ((*j) < 0 || matrix[i][(*j)] == -1 || matrix[i][(*j) - 1] == -1)
-	{
-		if (matrix[i][(*j) + 1] == 0)
-			matrix[i][(*j) + 1] = save - ((*j) + 1);
-	}
-	else
-	{
-		(*j) -= 2;
-		shortcut_between_link(matrix, i, j, save);
-	}
-}
-
-void	set_matrix_shortcut(int **matrix, int size)
-{
-	int i;
-	int	j;
-	int	save;
-	int	lim;
-
-	i = 0;
-	while (++i < size)
-	{
-		j = size - 1;
-		save = 0;
-		lim = matrix[i][i];
-		while (lim > 0)
-		{
-			while (matrix[i][j] != -1)
-				j--;
-			if ((j > 0 && matrix[i][j - 1] == 0) || (j - 1 == i && matrix[i][j - 2] == 0))
-			{
-				save = j--;
-				shortcut_between_link(matrix, i, &j, save);
-			}
-			else
-				j--;
-			lim--;
-		}
-	}
-}
 
 void	main4(t_path **best, t_path **new, int size, t_room *tab)
 {
@@ -135,7 +88,7 @@ void	main3(int **matrix, t_room *tab, int size)
 		}
 		j++;
 	}
-//	use_path(better, tab, size);
+	use_path(better, tab, size);
 	free_paths(&better);
 	free(wth_cpy);
 }
@@ -160,7 +113,7 @@ void	main2(t_room **roombeg, int ant_n, t_write **str, int size)
 	else
 	{
 		tab[0].taken = ant_n;
-//		write_data(str);
+		write_data(str);
 		set_matrix_shortcut(matrix, size);
 		main3(matrix, tab, size);
 	}

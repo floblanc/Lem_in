@@ -6,21 +6,11 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 11:24:49 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/24 18:06:42 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/25 00:43:32 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
-
-void	lets_search_match(int **matrix, int i, int *j)
-{
-	if ((*j) == i)
-		(*j)++;
-	if (matrix[i][(*j)] == -1)
-		return ;
-//	printf("%d += matrix[%d][%d](%d) --> %d\n", (*j), i, (*j), matrix[i][(*j)], matrix[i][(*j) + matrix[i][(*j)]]);
-	(*j) += matrix[i][(*j)] - 1;
-}
 
 void	add_to_queue(int **queue, int room, int add_or_push)
 {

@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/25 00:34:25 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/25 17:30:29 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ void	main3(int **matrix, t_room *tab, int size)
 {
 	t_path	*better;
 	t_path	*best_tmp;
-	int		*wth_cpy;
+	int		*wth_cpy;// vire si dans main2
 	int		i;
 	int		j;
 
-	wth_cpy = 0;
-	copy_wth(&wth_cpy, tab, size);
+	wth_cpy = 0;//vire si dans main2
+	copy_wth(&wth_cpy, tab, size);//vire si dans main2
 	better = 0;
 	i = matrix[0][0];
 	j = 2;
@@ -88,8 +88,8 @@ void	main3(int **matrix, t_room *tab, int size)
 		}
 		j++;
 	}
-	use_path(better, tab, size);
-	free_paths(&better);
+	use_path(better, tab, size);//on peut lancer les 3 lignes suivantes dans
+	free_paths(&better);// une autre fonction
 	free(wth_cpy);
 }
 
@@ -107,20 +107,20 @@ void	main2(t_room **roombeg, int ant_n, t_write **str, int size)
 		if (!(main2_onelink(matrix, tab, ant_n, str)))
 			return ;
 		put_wth(matrix, tab, size, 1);
-	}
+	}// on fait wth_copy ici et on l'envoi a main3 pour gagner des lignes
 	if (ant_n <= 0 || tab[0].wth <= 0)
 		write(2, "ERROR\n", 6);
 	else
 	{
 		tab[0].taken = ant_n;
-		write_data(str);
-		set_matrix_shortcut(matrix, size);
-		main3(matrix, tab, size);
-	}
-	free_room_tab(&tab, size);
-	free_matrix(&matrix, size);
-	free_lst_write(str);
-	return ;
+/* on lance ces|write_data(str);
+ *3ligne en une|set_matrix_shortcut(matrix, size);
+ *fonction		main3(matrix, tab, size);
+ */	}
+/*ici	free_room_tab(&tab, size);
+ *aussi	free_matrix(&matrix, size);
+ *	free_lst_write(str);
+ */	return ;// et on fait 
 }
 
 int		main(void)

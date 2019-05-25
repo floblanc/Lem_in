@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 00:29:39 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/25 00:43:15 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/25 17:14:46 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ void	shortcut_between_link(int **matrix, int i, int *j, int save)
 	}
 }
 
+void	make_j_run(int **matrix, int i, int *j)
+{
+	while (matrix[i][(*j)] != -1)
+		(*j)--;
+}
+
 void	set_matrix_shortcut(int **matrix, int size)
 {
 	int i;
@@ -54,9 +60,9 @@ void	set_matrix_shortcut(int **matrix, int size)
 		lim = matrix[i][i];
 		while (lim > 0)
 		{
-			while (matrix[i][j] != -1)
-				j--;
-			if ((j > 0 && matrix[i][j - 1] == 0)|| (j - 1 == i && matrix[i][j - 2] == 0))
+			make_j_run(matrix, i, &j);
+			if ((j > 0 && matrix[i][j - 1] == 0)
+				|| (j - 1 == i && matrix[i][j - 2] == 0))
 			{
 				save = j--;
 				shortcut_between_link(matrix, i, &j, save);

@@ -6,13 +6,13 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 11:24:49 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/25 00:43:32 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/25 18:37:23 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-void	add_to_queue(int **queue, int room, int add_or_push)
+int	add_to_queue(int **queue, int room, int add_or_push)
 {
 	int	i;
 
@@ -22,10 +22,11 @@ void	add_to_queue(int **queue, int room, int add_or_push)
 		while ((*queue)[i] != -1)
 		{
 			if ((*queue)[i] == room)
-				return ;
+				return (0);
 			i++;
 		}
 		(*queue)[i] = room;
+		return (0);	
 	}
 	else
 		while ((*queue)[i] != -1)
@@ -33,6 +34,7 @@ void	add_to_queue(int **queue, int room, int add_or_push)
 			(*queue)[i] = (*queue)[i + 1];
 			i++;
 		}
+	return (-1);
 }
 
 void	full_put_wth2(int *visited, int *queue, int **matrix, t_room *tab)
@@ -70,27 +72,23 @@ void	put_wth2(int *visited, int *queue, int **matrix, t_room *tab)
 	int			lim;
 	static int	size;
 
-	if (!(size))
-		size = calc_size(tab);
+	size = (!(size)) ? calc_size(tab) : size;
 	i = -1;
 	while (queue[0] != -1 && ++i < size)
 	{
 		visited[i] = queue[0];
-		add_to_queue(&queue, 0, 0);
+		j = add_to_queue(&queue, 0, 0);
 		lim = matrix[visited[i]][visited[i]];
-		j = 0;
-		while (lim > 0 && j < size)
+		while (lim > 0 && ++j < size)
 		{
 			lets_search_match(matrix, visited[i], &j);
 			if (matrix[visited[i]][j] == -1 && lim-- > 0 && matrix[j][j] > 1
 					&& visited[i] != 0 && tab[j].wth == 0 && j != 1)
 			{
 				tab[j].wth = tab[visited[i]].wth + 1;
-				if (j == 0)
+				if (j == add_to_queue(&queue, j, 1))
 					return ;
-				add_to_queue(&queue, j, 1);
 			}
-			j++;
 		}
 	}
 }

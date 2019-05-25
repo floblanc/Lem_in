@@ -6,11 +6,26 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 00:29:39 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/25 17:14:46 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/25 18:29:15 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
+
+void	lets_algo(int **matrix, t_write **str, t_room *tab, int ant_n)
+{
+	int	size;
+	int	*wth_cpy;
+
+	wth_cpy = 0;
+	size = calc_size(tab);
+	copy_wth(&wth_cpy, tab, size);
+	tab[0].taken = ant_n;
+	write_data(str);
+	set_matrix_shortcut(matrix, size);
+	main3(matrix, tab, wth_cpy, size);
+	free(wth_cpy);
+}
 
 void	lets_search_match(int **matrix, int i, int *j)
 {

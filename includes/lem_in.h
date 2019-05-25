@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/25 00:43:53 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/25 18:38:08 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void				put_wth(int **matrix, t_room *tab, int size, int full);
 int					calc_size(t_room *tab);
 void				main3_ter(int **matrix, t_room *tab, t_path **new
 		, t_path **best);
+void				main3(int **matrix, t_room *tab, int *wth_cpy
+, int size);
 void				free_paths(t_path **begin);
 void				use_path(t_path *best, t_room *tab, int size);
 void				write_path(t_path *best, t_room *tab, int j, int *first);
@@ -100,10 +102,11 @@ int					check_nodes(t_room *tab, t_path **n, t_path *b, int **mtrx);
 int					way_is_good(int **matrix, t_room *tab, t_path *new
 		, int way);
 void				clean_used(t_room *tab, int size);
-void				add_to_queue(int **queue, int room, int add_or_push);
 void				reset_wth(int *cpy, t_room *tab, int size);
 void				copy_wth(int **cpy, t_room *tab, int size);
 void				set_matrix_shortcut(int **matrix, int size);
 void				lets_search_match(int **matrix, int i, int *j);
+void				lets_algo(int **matrix, t_write **str
+, t_room *tab, int ant_n);
 
 #endif

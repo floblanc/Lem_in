@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/26 15:32:01 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/26 21:41:17 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,8 @@ int		main(void)
 	t_room	*roombeg;
 	t_write	*str;
 	int		size;
-
+// idee de bonus : -h/-help qui explique comment se servir du programme (tres simple a faire et a implementer)
+//		  -m/-matrix qui afficherai la matrice (faut envoyer autre chose que size a main 2 mais c'est jouable) et a definir si l'affichage se fait avec ou sans le reste des resultats ou on laisse le choix etc.. (et voir si on met des couleurs dans la matrice etc...)
 	ant_n = 0;
 	roombeg = 0;
 	str = 0;

@@ -6,13 +6,13 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 11:24:49 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/25 18:37:23 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/26 14:45:43 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lem_in.h"
 
-int	add_to_queue(int **queue, int room, int add_or_push)
+int		add_to_queue(int **queue, int room, int add_or_push)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ int	add_to_queue(int **queue, int room, int add_or_push)
 			i++;
 		}
 		(*queue)[i] = room;
-		return (0);	
+		return (0);
 	}
 	else
 		while ((*queue)[i] != -1)

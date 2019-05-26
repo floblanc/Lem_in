@@ -6,17 +6,12 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/25 18:38:08 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/26 15:09:19 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEM_IN_H
 # define LEM_IN_H
-
-/////////////////////
-# include <stdio.h>//
-/////////////////////
-
 # include "../libprintf/include/libprintf.h"
 
 typedef	struct		s_room
@@ -88,7 +83,7 @@ void				copy_best(t_path *best, t_path *new, int size, t_room *tab);
 void				clean_some_taken(t_room *tab, int size);
 void				onelink_startend(int ant_n);
 void				init_tab(t_room **tab, int i, t_room *current);
-void				init_tab(t_room **tab, int i, t_room * current);
+void				init_tab(t_room **tab, int i, t_room *current);
 void				sort_paths(t_path **new, int size, t_room *tab
 		, int **matrix);
 int					main_findpath(int **matrix, t_room *tab, t_path **new

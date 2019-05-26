@@ -122,6 +122,7 @@ int		main(void)
 	int		size;
 // idee de bonus : -h/-help qui explique comment se servir du programme (tres simple a faire et a implementer)
 //		  -m/-matrix qui afficherai la matrice (faut envoyer autre chose que size a main 2 mais c'est jouable) et a definir si l'affichage se fait avec ou sans le reste des resultats ou on laisse le choix etc.. (et voir si on met des couleurs dans la matrice etc...)
+//                -s/step(s) qui afficherait le nombre de step (si on met use_path et free_path du main3 dans une seule fonction on peut lancer une autre fonction qui stockera les step dans une statique qu’on récupèrera par la suite en relançant cette fonction depuis le main de base)
 	ant_n = 0;
 	roombeg = 0;
 	str = 0;

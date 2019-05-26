@@ -6,7 +6,7 @@
 #    By: maginist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/09 11:22:24 by maginist          #+#    #+#              #
-#    Updated: 2019/05/26 14:44:58 by floblanc         ###   ########.fr        #
+#    Updated: 2019/05/26 15:22:45 by floblanc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ LIB = libprintf/
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g3
 
 # Colors
 CK = $'\033[30m$'

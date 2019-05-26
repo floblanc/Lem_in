@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/25 00:29:39 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/25 18:29:15 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/26 15:43:52 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	shortcut_between_link(int **matrix, int i, int *j, int save)
 {
 	if (i == (*j))
 		(*j)--;
-	while (matrix[i][(*j)] == 0 && (*j) >= 0)
+	while ((*j) >= 0 && matrix[i][(*j)] == 0)
 		(*j)--;
 	if ((*j) < 0 || matrix[i][(*j)] == -1 || matrix[i][(*j) - 1] == -1)
 	{

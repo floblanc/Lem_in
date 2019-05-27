@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 13:58:32 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/22 12:01:50 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/27 11:59:39 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	use_path2(t_path *best, t_room *tab, int j, int *i)
 	(best->path[j][best->len[j]]) -= 1;
 }
 
-void	use_path(t_path *best, t_room *tab, int size)
+void	use_path(t_path **best, t_room *tab, int size)
 {
 	int	i;
 	int	j;
@@ -42,22 +42,23 @@ void	use_path(t_path *best, t_room *tab, int size)
 
 	i = 1;
 	j = 1;
-	if (!(best))
+	if (!(*best))
 		return ;
 	while (j < size)
 		tab[j++].taken = 0;
-	while ((best->step)-- > 0)
+	while (((*best)->step)-- > 0)
 	{
 		j = -1;
 		first = 1;
 		write(1, "\n", 1);
-		while (++j < best->path_n)
+		while (++j < (*best)->path_n)
 		{
-			use_path2(best, tab, j, &i);
-			write_path(best, tab, j, &first);
+			use_path2(*best, tab, j, &i);
+			write_path(*best, tab, j, &first);
 		}
 	}
 	write(1, "\n", 1);
+	free_paths(best);
 }
 
 int		calc_step(t_path *struc, int ant_n, int path_n)

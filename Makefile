@@ -6,7 +6,7 @@
 #    By: maginist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/09 11:22:24 by maginist          #+#    #+#              #
-#    Updated: 2019/05/26 15:22:45 by floblanc         ###   ########.fr        #
+#    Updated: 2019/05/27 15:08:00 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRC_NAME =already_exist.c\
 		  utils.c\
 		  write_data.c\
 		  nodes.c\
+		  gest_args.c\
 		  way_is.c\
 		  other_path.c\
 		  init_struct.c\
@@ -41,7 +42,7 @@ LIB = libprintf/
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -g3
+CFLAGS = -Wall -Werror -Wextra
 
 # Colors
 CK = $'\033[30m$'
@@ -60,24 +61,22 @@ SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
-all : lib $(NAME)
+all : $(NAME)
 
-lib :
+$(NAME) : $(SRC) $(OBJ_PATH) $(OBJ) $(LIB)
 	@make -C $(LIB) -j
 	@cp libprintf/libprintf.a .
 	@echo "$(_GREEN)[ LIBPRINTF DONE ]$(_END)"
-
-$(NAME) : lib $(SRC) $(OBJ_PATH) $(OBJ)
 	@echo "\n"
 	@echo "$(_RED)|_-_-_-_-_-_-_-_-_-_-_-_-|$(_END)"
 	@echo "|    COMPILING LEM_IN    |"
 	@echo "$(_RED)|_-_-_-_-_-_-_-_-_-_-_-_-|$(_END)"
 	@echo "\n"
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) libprintf/libprintf.a
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) libprintf/libprintf.a
 	@echo "$(_GREEN)[ LEM_IN DONE ]$(_END)"
 
 $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
-	@$(CC) $(CFLAGS) -c $? $(INC) -o $@
+	$(CC) $(CFLAGS) -c $? $(INC) -o $@
 
 $(OBJ_PATH):
 	@mkdir -p $(OBJ_PATH)

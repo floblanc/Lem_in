@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 11:56:50 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/27 11:59:57 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/27 14:24:16 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,9 @@ void				set_matrix_shortcut(int **matrix, int size);
 void				lets_search_match(int **matrix, int i, int *j);
 void				lets_algo(int **matrix, t_write **str
 , t_room *tab, int ant_n);
+void				stock_and_print_step(int write, int best_step);
+int					check_args(int ac, char **av, int *arg_used);
+int					print_matrix(int ***matrix, int size, t_write **str
+		, t_room **tab);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/27 12:07:25 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/27 14:35:03 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	main3(int **matrix, t_room *tab, int *wth_cpy, int size)
 	use_path(&better, tab, size);
 }
 
-void	main2(t_room **roombeg, int ant_n, t_write **str, int arg)
+int		main2(t_room **roombeg, int ant_n, t_write **str, int arg)
 {
 	int		**matrix;
 	t_room	*tab;
@@ -97,15 +97,15 @@ void	main2(t_room **roombeg, int ant_n, t_write **str, int arg)
 
 	tab = 0;
 	matrix = 0;
-	size = ft_lstlen(roombeg); 
+	size = ft_lstlen(roombeg);
 	if (ant_n > 0)
 	{
 		rooms_in_tab(&tab, roombeg);
 		set_matrix(tab, str, size, &matrix);
-		if (arg = 1)
-			return (print_matrix(matrix, size, str, tab));
+		if (arg == 1)
+			return (print_matrix(&matrix, size, str, &tab));
 		if (!(main2_onelink(matrix, tab, ant_n, str)))
-			return ;
+			return (0);
 		put_wth(matrix, tab, size, 1);
 	}
 	if (ant_n <= 0 || tab[0].wth <= 0)
@@ -115,24 +115,22 @@ void	main2(t_room **roombeg, int ant_n, t_write **str, int arg)
 	free_room_tab(&tab, size);
 	free_matrix(&matrix, size);
 	free_lst_write(str);
-	return ;
+	return (0);
 }
 
-int		main(int ac, int av)
+int		main(int ac, char **av)
 {
 	int		ant_n;
 	t_room	*roombeg;
 	t_write	*str;
 	int		arg_used;
-// idee de bonus : -h/-help qui explique comment se servir du programme (tres simple a faire et a implementer)
-//				   -m/-matrix qui afficherai la matrice (faut envoyer autre chose que size a main 2 mais c'est jouable) et a definir si l'affichage se fait avec ou sans le reste des resultats ou on laisse le choix etc.. (et voir si on met des couleurs dans la matrice etc...)
-//				   -s/step(s) qui afficherait le nombre de step (si on met use_path et free_path du main3 dans une seule fonction (ou plus simplement mettre free_path dans use_path y’a la place) on peut lancer une autre fonction qui stockera les step dans une statique qu’on récupèrera par la suite en relançant cette fonction depuis le main de base)
+
 	ant_n = 0;
 	roombeg = 0;
 	str = 0;
 	arg_used = 0;
-	if (ac > 2 || !(check_args(ac, av, &arg_used)))
-		return (0)
+	if (!(check_args(ac, av, &arg_used)))
+		return (0);
 	read_n_stock(&ant_n, &roombeg, &str);
 	main2(&roombeg, ant_n, &str, arg_used);
 	if (arg_used == 2)

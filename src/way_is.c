@@ -6,7 +6,7 @@
 /*   By: maginist <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/21 17:52:42 by maginist          #+#    #+#             */
-/*   Updated: 2019/05/24 13:20:10 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/27 15:02:13 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int		way_is_possible2(t_room *tab, int i, int way, int *best)
 {
-	if (i != 0 && (i == 1 ||
-			(tab[i].taken == 0 && tab[i].used != way + 1
+	if (i != 0 && (i == 1 || (tab[i].taken == 0 && tab[i].used != way + 1
 			&& ((*best) == 0 || tab[(*best)].wth > tab[i].wth)
 			&& tab[i].wth > 0)))
 		(*best) = i;
@@ -70,10 +69,10 @@ int		way_is_possible(int **matrix, t_room *tab, t_path *new, int way)
 	while (lim > 0)
 	{
 		if (matrix[new->path[way][pos]][++i] == -1 && lim-- > 0)
-			if (i != 0 && (i == 1 ||
-						(tab[i].taken == 0 && tab[i].used != way + 1
-						&& (!(best) || tab[best].wth > tab[i].wth)
-						&& tab[i].wth > 0)))
+			if (i != 0 && (i == 1 || (tab[i].taken == 0
+							&& tab[i].used != way + 1
+							&& (!(best) || tab[best].wth > tab[i].wth)
+							&& tab[i].wth > 0)))
 				best = i;
 		if (best == 1)
 			break ;

@@ -6,13 +6,13 @@
 #    By: maginist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/09 11:22:24 by maginist          #+#    #+#              #
-#    Updated: 2019/05/27 15:08:00 by maginist         ###   ########.fr        #
+#    Updated: 2019/05/27 16:59:53 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = lem-in
 
-SRC_NAME =already_exist.c\
+SRC_NAME = already_exist.c\
 		  extract_room.c\
 		  find_path.c\
 		  free_lst.c\
@@ -63,20 +63,20 @@ OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
 all : $(NAME)
 
-$(NAME) : $(SRC) $(OBJ_PATH) $(OBJ) $(LIB)
-	@make -C $(LIB) -j
-	@cp libprintf/libprintf.a .
-	@echo "$(_GREEN)[ LIBPRINTF DONE ]$(_END)"
-	@echo "\n"
-	@echo "$(_RED)|_-_-_-_-_-_-_-_-_-_-_-_-|$(_END)"
-	@echo "|    COMPILING LEM_IN    |"
-	@echo "$(_RED)|_-_-_-_-_-_-_-_-_-_-_-_-|$(_END)"
-	@echo "\n"
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) libprintf/libprintf.a
-	@echo "$(_GREEN)[ LEM_IN DONE ]$(_END)"
+$(NAME) : $(OBJ_PATH) $(OBJ)
+		@make -C $(LIB) -j
+		@cp libprintf/libprintf.a .
+		@echo "$(_GREEN)[ LIBPRINTF DONE ]$(_END)"
+		@echo "\n"
+		@echo "$(_RED)|_-_-_-_-_-_-_-_-_-_-_-_-|$(_END)"
+		@echo "|    COMPILING LEM_IN    |"
+		@echo "$(_RED)|_-_-_-_-_-_-_-_-_-_-_-_-|$(_END)"
+		@echo "\n"
+		@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) libprintf.a
+		@echo "$(_GREEN)[ LEM_IN DONE ]$(_END)"
 
 $(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
-	$(CC) $(CFLAGS) -c $? $(INC) -o $@
+		@$(CC) $(CFLAGS) -I $(LIB) -c $? -o $@
 
 $(OBJ_PATH):
 	@mkdir -p $(OBJ_PATH)
@@ -94,4 +94,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : clean all $(NAME) fclean re lib
+.PHONY : all clean fclean re

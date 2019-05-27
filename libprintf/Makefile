@@ -6,12 +6,13 @@
 #    By: maginist <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/13 09:46:56 by maginist          #+#    #+#              #
-#    Updated: 2019/05/27 14:46:21 by maginist         ###   ########.fr        #
+#    Updated: 2019/05/27 17:00:03 by maginist         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libprintf.a
-
+OBJ_PATH = ./obj
+SRC_PATH = ./src
 FILES = add_pre_flgs.c\
 	  analyse.c\
 	  fillbegin.c\
@@ -128,20 +129,11 @@ _YELLOW = $'\033[33m$'
 _BLUE = $'\033[34m$'
 _END=$'\033[0m$'
 
-OBJ_PATH = ./obj
-
-SRC_PATH = ./src
-
 OBJ_NAME = $(FILES:.c=.o)
-
 CC = gcc
-
 INC = -I./include
-
 CFLAGS = -Wall -Werror -Wextra
-
 SRC = $(addprefix $(SRC_PATH)/,$(FILES))
-
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
 all: $(NAME)
@@ -168,4 +160,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY : all $(NAME) clean fclean re
+.PHONY : all clean fclean re

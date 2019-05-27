@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 12:08:54 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/27 14:36:49 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/27 17:20:08 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	stock_and_print_step(int write, int best_step)
 		steps = 0;
 	if (best_step > 0)
 		steps = best_step;
-	if (write)
+	if (write && steps)
 		ft_printf("\nNumber of steps : %d\n", steps);
 }
 

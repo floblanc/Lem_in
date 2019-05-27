@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 10:08:54 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/02 13:19:43 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/27 17:37:41 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	free_room_tab(t_room **tab, int size)
 	int i;
 
 	i = 0;
+	if (!(*tab))
+		return ;
 	while (i < size)
 	{
 		ft_strdel(&((*tab)[i].name));
@@ -85,7 +87,7 @@ void	free_matrix(int ***matrix, int size)
 	int	i;
 
 	i = 0;
-	if (!(matrix))
+	if (!(*matrix))
 		return ;
 	while (i < size)
 		free((*matrix)[i++]);

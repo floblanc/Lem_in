@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/27 14:35:03 by maginist         ###   ########.fr       */
+/*   Updated: 2019/05/27 17:51:21 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,23 +98,22 @@ int		main2(t_room **roombeg, int ant_n, t_write **str, int arg)
 	tab = 0;
 	matrix = 0;
 	size = ft_lstlen(roombeg);
-	if (ant_n > 0)
+	if (ant_n > 0 && check_startend(roombeg))
 	{
 		rooms_in_tab(&tab, roombeg);
 		set_matrix(tab, str, size, &matrix);
-		if (arg == 1)
+		if (arg == 1 && matrix[0][0] != 0)
 			return (print_matrix(&matrix, size, str, &tab));
 		if (!(main2_onelink(matrix, tab, ant_n, str)))
 			return (0);
 		put_wth(matrix, tab, size, 1);
 	}
-	if (ant_n <= 0 || tab[0].wth <= 0)
+	if (ant_n <= 0 || !(tab) || tab[0].wth <= 0)
 		write(2, "ERROR\n", 6);
 	else
 		lets_algo(matrix, str, tab, ant_n);
 	free_room_tab(&tab, size);
 	free_matrix(&matrix, size);
-	free_lst_write(str);
 	return (0);
 }
 
@@ -132,9 +131,13 @@ int		main(int ac, char **av)
 	if (!(check_args(ac, av, &arg_used)))
 		return (0);
 	read_n_stock(&ant_n, &roombeg, &str);
-	main2(&roombeg, ant_n, &str, arg_used);
+	if (roombeg)
+		main2(&roombeg, ant_n, &str, arg_used);
+	else
+		write(2, "ERROR\n", 6);
 	if (arg_used == 2)
 		stock_and_print_step(1, 0);
+	free_lst_write(&str);
 	free_lst_room(&roombeg);
 	return (0);
 }

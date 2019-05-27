@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 11:24:49 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/27 12:07:29 by floblanc         ###   ########.fr       */
+/*   Updated: 2019/05/27 17:57:25 by maginist         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,9 @@ void	full_put_wth2(int *visited, int *queue, int **matrix, t_room *tab)
 		j = -1;
 		while (lim > 0 && j < size)
 		{
-			if (matrix[visited[i]][++j] == -1 && lim-- > 0 && matrix[j][j] > 1
-					&& visited[i] != 0 && tab[j].wth == 0 && j != 1)
+			if (matrix[visited[i]][++j] == -1 && lim-- > 0 && (matrix[j][j] > 1
+						|| j == 0) && visited[i] != 0 && tab[j].wth == 0
+						&& j != 1)
 			{
 				tab[j].wth = tab[visited[i]].wth + 1;
 				add_to_queue(&queue, j, 1);

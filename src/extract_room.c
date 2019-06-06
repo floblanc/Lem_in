@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 12:19:34 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/24 13:36:28 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/06 10:06:39 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	onelink_startend(int ant_n)
 		ft_printf("L%d-end ", i);
 		i++;
 	}
-	ft_printf("L%d-end", i);
+	ft_printf("L%d-end\n", i);
 }
 
 void	coord_is_valid(char *coord, int *error)

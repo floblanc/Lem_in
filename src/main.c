@@ -6,7 +6,7 @@
 /*   By: floblanc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/27 10:11:04 by floblanc          #+#    #+#             */
-/*   Updated: 2019/05/27 17:51:21 by maginist         ###   ########.fr       */
+/*   Updated: 2019/06/06 10:02:55 by floblanc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int		main2(t_room **roombeg, int ant_n, t_write **str, int arg)
 		if (arg == 1 && matrix[0][0] != 0)
 			return (print_matrix(&matrix, size, str, &tab));
 		if (!(main2_onelink(matrix, tab, ant_n, str)))
-			return (0);
+			return (1);
 		put_wth(matrix, tab, size, 1);
 	}
 	if (ant_n <= 0 || !(tab) || tab[0].wth <= 0)
@@ -132,7 +132,10 @@ int		main(int ac, char **av)
 		return (0);
 	read_n_stock(&ant_n, &roombeg, &str);
 	if (roombeg)
-		main2(&roombeg, ant_n, &str, arg_used);
+	{
+		if (main2(&roombeg, ant_n, &str, arg_used) == 1 && arg_used == 2)
+			ft_printf("\nNumber of steps : 1\n");
+	}
 	else
 		write(2, "ERROR\n", 6);
 	if (arg_used == 2)
